@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="nfG" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#A71930"/><stop offset="1" stop-color="#C8A04A"/>
+    </linearGradient>
+  </defs>
+  <circle cx="240" cy="170" r="130" stroke="rgba(200,160,74,.35)" stroke-width="1.5" stroke-dasharray="4 9" class="spin-slow" style="transform-origin:240px 170px"/>
+  <circle cx="240" cy="170" r="95" stroke="rgba(167,25,48,.22)" stroke-width="1.2" stroke-dasharray="3 7" class="spin-slow-rev" style="transform-origin:240px 170px"/>
+  <rect x="130" y="105" width="220" height="140" rx="14" fill="#fff" stroke="rgba(23,23,23,.1)"/>
+  <rect x="148" y="125" width="90" height="10" rx="5" fill="rgba(167,25,48,.16)"/>
+  <rect x="148" y="147" width="180" height="8" rx="4" fill="rgba(23,23,23,.08)"/>
+  <rect x="148" y="165" width="150" height="8" rx="4" fill="rgba(23,23,23,.08)"/>
+  <rect x="148" y="193" width="70" height="24" rx="12" fill="url(#nfG)"/>
+  <path d="M330 88 l14 14 m0 -14 l-14 14" stroke="#A71930" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M118 252 l12 12 m0 -12 l-12 12" stroke="#C8A04A" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="352" cy="240" r="5" fill="#E8D5A5"/>
+  <circle cx="112" cy="96" r="4" fill="rgba(167,25,48,.4)"/>
+  <path d="M240 278 v30 m-14 -14 h28" stroke="url(#nfG)" stroke-width="3" stroke-linecap="round"/>
+</svg>

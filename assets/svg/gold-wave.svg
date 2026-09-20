@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+  <path d="M0 60 C 240 0, 480 120, 720 60 S 1200 0, 1440 60" stroke="rgba(200,160,74,.5)" stroke-width="1.6" fill="none"/>
+  <path d="M0 80 C 240 30, 480 110, 720 80 S 1200 30, 1440 80" stroke="rgba(167,25,48,.22)" stroke-width="1.2" fill="none"/>
+</svg>

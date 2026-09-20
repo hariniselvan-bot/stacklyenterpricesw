@@ -1,0 +1,71 @@
+
+/* ==========================================================================
+   STACKLY — Animation Helpers (used with GSAP + AOS)
+   ========================================================================== */
+
+/* AOS custom feel */
+[data-aos] { pointer-events: auto; }
+
+/* Hero headline line reveal initial states (JS sets final) */
+.hero-title .line > span { transform: translateY(115%); }
+
+/* Preloader handoff */
+.preloader.done { pointer-events: none; }
+
+/* Gold shimmer for featured elements */
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+.gold-shimmer {
+  background: linear-gradient(100deg, var(--gold-2) 20%, var(--champagne) 40%, var(--gold-2) 60%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Floating animations for hero cards */
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+.float-anim { animation: floatY 6s ease-in-out infinite; }
+.float-anim.d1 { animation-delay: -1.6s; }
+.float-anim.d2 { animation-delay: -3.2s; }
+
+/* Slow rotation for decorative rings */
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spinSlow 26s linear infinite; }
+@keyframes spinSlowRev { to { transform: rotate(-360deg); } }
+.spin-slow-rev { animation: spinSlowRev 32s linear infinite; }
+
+/* Marquee for trusted logos (mobile) */
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Dashboard KPI pulse dot */
+@keyframes dotPulse { 0% { box-shadow: 0 0 0 0 rgba(167,25,48,.45); } 100% { box-shadow: 0 0 0 9px rgba(167,25,48,0); } }
+.pulse-dot { animation: dotPulse 1.8s ease-out infinite; }
+
+/* Live chart line draw */
+.chart-anim .line-path { stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+
+/* Notification bell swing */
+@keyframes bellSwing { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(12deg); } 40% { transform: rotate(-10deg); } 60% { transform: rotate(6deg); } }
+.bell-ring { animation: bellSwing 1.2s ease; transform-origin: top center; }
+
+/* Progress bars */
+@keyframes barGrow { from { width: 0; } }
+.bar-anim { animation: barGrow 1.4s var(--ease) both; }
+
+/* Gradient border sweep on featured price card */
+@keyframes borderFlow { to { background-position: 300% 0; } }
+.featured-border {
+  border: 1.5px solid transparent !important;
+  background-image: linear-gradient(#fffdf6, #fffdf6), linear-gradient(110deg, var(--gold-2), var(--champagne), var(--primary), var(--gold-2));
+  background-origin: border-box; background-clip: padding-box, border-box;
+  background-size: 100% 100%, 300% 100%;
+  animation: borderFlow 7s linear infinite;
+}
+
+/* Success check draw */
+@keyframes checkDraw { to { stroke-dashoffset: 0; } }
+.check-draw { stroke-dasharray: 40; stroke-dashoffset: 40; animation: checkDraw 0.7s 0.25s var(--ease) forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.15s !important; }
+  html { scroll-behavior: auto; }
+}

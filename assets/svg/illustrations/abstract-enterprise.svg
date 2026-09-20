@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" fill="none">
+  <defs>
+    <linearGradient id="ae1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#741020"/><stop offset="1" stop-color="#A71930"/></linearGradient>
+    <linearGradient id="ae2" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#C8A04A"/><stop offset="1" stop-color="#E8D5A5"/></linearGradient>
+  </defs>
+  <rect x="60" y="120" width="120" height="230" rx="10" fill="url(#ae1)" opacity=".92"/>
+  <rect x="200" y="70" width="120" height="280" rx="10" fill="#5E0B18" opacity=".9"/>
+  <rect x="340" y="150" width="120" height="200" rx="10" fill="url(#ae2)" opacity=".85"/>
+  <rect x="480" y="110" width="70" height="240" rx="10" fill="rgba(167,25,48,.55)"/>
+  <g stroke="rgba(255,255,255,.5)" stroke-width="2">
+    <line x1="80" y1="150" x2="160" y2="150"/><line x1="80" y1="172" x2="160" y2="172"/>
+    <line x1="220" y1="100" x2="300" y2="100"/><line x1="220" y1="122" x2="300" y2="122"/>
+    <line x1="360" y1="180" x2="440" y2="180"/><line x1="360" y1="202" x2="440" y2="202"/>
+  </g>
+  <circle cx="140" cy="290" r="26" stroke="rgba(255,255,255,.6)" stroke-width="2"/>
+  <circle cx="260" cy="250" r="26" stroke="rgba(232,213,165,.7)" stroke-width="2"/>
+  <path d="M40 370 H560" stroke="rgba(23,23,23,.14)" stroke-width="2" stroke-linecap="round"/>
+</svg>

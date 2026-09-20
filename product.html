@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stackly Products — One Platform for Every Team</title>
+<meta content="Explore Stackly products: Enterprise Suite, Analytics Cloud, Automation Engine and integrations in one connected enterprise platform." name="description"/>
+<link href="assets/img/logo.webp" rel="icon" type="image/webp"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
+<link href="assets/css/responsive.css" rel="stylesheet"/>
+<link href="assets/css/animations.css" rel="stylesheet"/>
+
+<style>
+.m-visual{width:100%;height:190px;border-radius:18px;overflow:hidden;margin-bottom:24px;background:#f4f0eb;border:1px solid rgba(120,100,90,.12);box-shadow:0 18px 45px rgba(45,30,25,.10)}
+.m-visual img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.product-card:hover .m-visual img,.module-card:hover .m-visual img{transform:scale(1.045)}
+@media(max-width:700px){.m-visual{height:165px}}
+
+.status-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:rgba(29,140,78,.09);color:#187443;border:1px solid rgba(29,140,78,.18);font:600 11px/1 Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#22a35a;box-shadow:0 0 0 4px rgba(34,163,90,.12);animation:statusPulse 1.8s ease-in-out infinite}
+.product-suite-card.dark .status-badge{background:rgba(255,255,255,.08);color:#bde8ce;border-color:rgba(255,255,255,.14)}
+@keyframes statusPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.82)}}
+
+/* Product image + live status controls */
+.m-visual{
+  width:100%;height:190px;border-radius:18px;overflow:hidden;margin-bottom:18px;
+  background:#f4f0eb;border:1px solid rgba(120,100,90,.12);
+  box-shadow:0 18px 45px rgba(45,30,25,.10)
+}
+.m-visual img{
+  width:100%;height:100%;display:block;object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1)
+}
+.product-card:hover .m-visual img,.module-card:hover .m-visual img,
+.product-suite-card:hover .m-visual img{transform:scale(1.045)}
+
+.status-btn{
+  display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border-radius:999px;
+  background:rgba(29,140,78,.09);color:#187443;border:1px solid rgba(29,140,78,.18);
+  font:600 11px/1 Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:14px;cursor:pointer;transition:all .25s ease
+}
+.status-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(29,140,78,.12)}
+.status-btn .status-dot{
+  width:7px;height:7px;border-radius:50%;background:#22a35a;
+  box-shadow:0 0 0 4px rgba(34,163,90,.12);
+  animation:statusPulse 1.8s ease-in-out infinite
+}
+.status-btn.is-paused{
+  background:rgba(167,25,48,.08);color:#a71930;border-color:rgba(167,25,48,.18)
+}
+.status-btn.is-paused .status-dot{
+  background:#a71930;box-shadow:0 0 0 4px rgba(167,25,48,.10)
+}
+.product-suite-card.dark .status-btn{
+  background:rgba(255,255,255,.08);color:#bde8ce;border-color:rgba(255,255,255,.14)
+}
+.product-suite-card.dark .status-btn.is-paused{color:#ffc0c9}
+@keyframes statusPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.82)}}
+@media(max-width:700px){.m-visual{height:165px}}
+
+</style>
+<style id="stackly-product-mobile-fix">
+
+/* =========================================================
+   STACKLY PRODUCT PAGE — MOBILE OVERLAP PROTECTION
+   Desktop design is untouched. Mobile-only corrections.
+   ========================================================= */
+@media (max-width: 767px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  .container {
+    width: min(100% - 32px, 1180px);
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+
+  .section,
+  .section.white,
+  .section.warm,
+  .page-hero,
+  .cta-section {
+    overflow: hidden;
+  }
+
+  /* Hero */
+  .page-hero {
+    min-height: auto;
+    padding: 108px 0 64px;
+  }
+
+  .page-hero .container {
+    padding: 0;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(38px, 11vw, 58px);
+    line-height: .98;
+    overflow-wrap: anywhere;
+  }
+
+  .page-hero .lead {
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .crumbs {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  /* Story section */
+  .story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 38px !important;
+  }
+
+  .story-grid > * {
+    min-width: 0 !important;
+    width: 100%;
+  }
+
+  .story-media {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .story-media .main-img {
+    min-height: 300px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .story-media .main-img > div:first-child {
+    width: 88% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .story-media .main-img > div:first-child > div {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+
+  .story-media .main-img > div:first-child > div > div {
+    height: 105px !important;
+  }
+
+  .story-float {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: calc(100% - 20px);
+    max-width: 100%;
+    margin: -10px auto 0;
+    box-sizing: border-box;
+  }
+
+  .story-grid .section-title {
+    font-size: clamp(30px, 8.5vw, 42px);
+    line-height: 1.08;
+  }
+
+  /* Product suite */
+  .product-suite-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-top: 0 !important;
+  }
+
+  .product-suite-grid + .product-suite-grid {
+    margin-top: 18px !important;
+  }
+
+  .product-suite-card,
+  .product-suite-card.dark {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 22px !important;
+  }
+
+  .m-visual {
+    width: 100%;
+    height: 165px !important;
+    margin-bottom: 16px;
+  }
+
+  .m-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .status-btn {
+    max-width: 100%;
+    white-space: nowrap;
+    margin-bottom: 12px;
+  }
+
+  .product-suite-card h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .product-suite-card p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .tech-list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .tech-list span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Workflow/value cards */
+  .product-workflow-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .product-workflow-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Team cards */
+  .product-team-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  .product-team-card {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .product-team-card b,
+  .product-team-card span {
+    overflow-wrap: anywhere;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+  }
+
+  .stat {
+    min-width: 0 !important;
+    box-sizing: border-box;
+    padding: 18px 10px !important;
+  }
+
+  .stat .num {
+    font-size: 27px;
+  }
+
+  .stat .lbl {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* Architecture */
+  .product-architecture {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .product-architecture > * {
+    min-width: 0 !important;
+    width: 100%;
+  }
+
+  .product-architecture .showcase-photo {
+    min-height: 290px !important;
+    width: 100%;
+  }
+
+  .product-architecture .showcase-photo > div {
+    width: 86% !important;
+    height: 78% !important;
+    box-sizing: border-box;
+    transform: none !important;
+  }
+
+  .product-architecture .showcase-photo > div > div {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-architecture .tech-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CTA */
+  .cta-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 34px 20px !important;
+    overflow: hidden;
+  }
+
+  .cta-box h2 {
+    font-size: clamp(30px, 8.5vw, 44px);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .cta-box p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .cta-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    gap: 10px !important;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .legal-links {
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .product-team-grid,
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-team-card {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    column-gap: 12px;
+    align-items: center;
+  }
+
+  .leader-photo {
+    grid-row: span 2;
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .product-team-card span {
+    display: block;
+  }
+
+  .story-media .main-img {
+    min-height: 275px !important;
+  }
+
+  .story-media .main-img > div:first-child {
+    width: 91% !important;
+    padding: 12px !important;
+  }
+
+  .story-media .main-img > div:first-child > div > div {
+    height: 88px !important;
+    padding: 11px !important;
+  }
+
+  .story-media .main-img > div:first-child > div > div div {
+    font-size: 24px !important;
+  }
+
+  .product-suite-card,
+  .product-suite-card.dark {
+    padding: 18px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-visual img {
+    transition: none !important;
+  }
+}
+
+</style>
+
+<style id="stackly-product-clean-fix">
+/* =========================================================
+   STACKLY PRODUCT — CLEAN LAYOUT / VISIBILITY FIX
+   Page-scoped so shared site CSS cannot break the sections.
+   ========================================================= */
+
+.product-page main {
+  width: 100%;
+  overflow: clip;
+}
+
+.product-page .product-suite-grid,
+.product-page .product-workflow-grid,
+.product-page .product-team-grid,
+.product-page .product-architecture {
+  width: 100%;
+  min-width: 0;
+}
+
+.product-page .product-suite-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 42px;
+}
+
+.product-page .product-suite-grid + .product-suite-grid {
+  margin-top: 24px;
+}
+
+.product-page .product-suite-card {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.product-page .product-suite-card .m-visual {
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.product-page .product-suite-card .m-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.product-page .product-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.product-page .product-workflow-card {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.product-page .product-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.product-page .product-team-card {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.product-page .product-architecture {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.product-page .product-architecture > * {
+  min-width: 0;
+}
+
+.product-page .showcase-photo {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Safe reveal: no element starts hidden, so broken animation JS
+   can never make a section disappear. */
+.product-page .product-reveal {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.product-page .status-btn {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .product-page .product-suite-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page .product-workflow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-page .product-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-page .product-architecture {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .product-page {
+    overflow-x: hidden;
+  }
+
+  .product-page main,
+  .product-page .section,
+  .product-page .section.white,
+  .product-page .section.warm,
+  .product-page .page-hero,
+  .product-page .cta-section {
+    overflow-x: clip;
+  }
+
+  .product-page .container {
+    width: min(100% - 32px, 1180px);
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
+
+  .product-page .page-hero {
+    min-height: auto;
+    padding: 108px 0 64px;
+  }
+
+  .product-page .page-hero h1 {
+    font-size: clamp(38px, 11vw, 58px);
+    line-height: .98;
+    overflow-wrap: anywhere;
+  }
+
+  .product-page .story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 38px !important;
+  }
+
+  .product-page .story-grid > * {
+    min-width: 0 !important;
+    width: 100%;
+  }
+
+  .product-page .story-media {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .product-page .story-media .main-img {
+    min-height: 300px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .product-page .story-media .main-img > div:first-child {
+    width: 88% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .product-page .story-media .main-img > div:first-child > div {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+
+  .product-page .story-media .main-img > div:first-child > div > div {
+    height: 105px !important;
+  }
+
+  .product-page .story-float {
+    position: relative !important;
+    inset: auto !important;
+    width: calc(100% - 20px);
+    max-width: 100%;
+    margin: -10px auto 0;
+    box-sizing: border-box;
+  }
+
+  .product-page .product-suite-grid,
+  .product-page .product-suite-grid + .product-suite-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-top: 18px !important;
+  }
+
+  .product-page .product-suite-card {
+    width: 100%;
+    min-width: 0;
+    padding: 22px !important;
+  }
+
+  .product-page .product-suite-card .m-visual {
+    height: 165px !important;
+    margin-bottom: 16px;
+  }
+
+  .product-page .product-suite-card h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .product-page .product-suite-card p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .product-page .product-suite-card .tech-list,
+  .product-page .product-architecture .tech-list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .product-page .product-workflow-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .product-page .product-workflow-card {
+    width: 100%;
+  }
+
+  .product-page .product-team-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  .product-page .product-team-card {
+    width: 100%;
+  }
+
+  .product-page .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .product-page .stat {
+    min-width: 0 !important;
+    padding: 18px 10px !important;
+    box-sizing: border-box;
+  }
+
+  .product-page .stat .num {
+    font-size: 27px;
+  }
+
+  .product-page .stat .lbl {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .product-page .product-architecture {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .product-page .product-architecture > * {
+    width: 100%;
+    min-width: 0 !important;
+  }
+
+  .product-page .product-architecture .showcase-photo {
+    min-height: 290px !important;
+    width: 100%;
+  }
+
+  .product-page .product-architecture .showcase-photo > div {
+    width: 86% !important;
+    height: 78% !important;
+    transform: none !important;
+    box-sizing: border-box;
+  }
+
+  .product-page .product-architecture .showcase-photo > div > div {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-page .cta-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 34px 20px !important;
+  }
+
+  .product-page .cta-box h2 {
+    font-size: clamp(30px, 8.5vw, 44px);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .product-page .cta-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    gap: 10px !important;
+  }
+
+  .product-page .cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .product-page .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .product-page .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 430px) {
+  .product-page .container {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .product-page .product-team-grid,
+  .product-page .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-page .product-team-card {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    column-gap: 12px;
+    align-items: center;
+  }
+
+  .product-page .product-team-card .leader-photo {
+    grid-row: span 2;
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .product-page .story-media .main-img {
+    min-height: 275px !important;
+  }
+
+  .product-page .story-media .main-img > div:first-child {
+    width: 91% !important;
+    padding: 12px !important;
+  }
+
+  .product-page .story-media .main-img > div:first-child > div > div {
+    height: 88px !important;
+    padding: 11px !important;
+  }
+
+  .product-page .story-media .main-img > div:first-child > div > div div {
+    font-size: 24px !important;
+  }
+
+  .product-page .product-suite-card {
+    padding: 18px !important;
+  }
+}
+</style>
+
+
+<style id="stackly-product-mobile-menu-isolated">
+/* =========================================================
+   STACKLY PRODUCTS — PREMIUM MOBILE MENU
+   Isolated class names prevent conflicts with shared menu JS/CSS.
+   Only Products is active on the Product page.
+   ========================================================= */
+@media (max-width:767px){
+  html.stk-product-menu-lock,
+  body.stk-product-menu-lock{
+    overflow:hidden !important;
+    touch-action:none;
+  }
+
+  .site-header{z-index:10020 !important}
+
+  .stk-product-trigger{
+    position:relative;
+    z-index:10031;
+    display:flex !important;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    border:0;
+    border-radius:12px;
+    background:rgba(255,255,255,.94);
+    color:#8d1228;
+    box-shadow:0 8px 22px rgba(44,24,18,.10);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .stk-product-trigger span{
+    position:absolute;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#8d1228;
+    transition:transform .28s ease,opacity .2s ease,top .28s ease;
+  }
+  .stk-product-trigger span:nth-child(1){top:14px}
+  .stk-product-trigger span:nth-child(2){top:21px}
+  .stk-product-trigger span:nth-child(3){top:28px}
+  .stk-product-trigger.is-open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .stk-product-trigger.is-open span:nth-child(2){opacity:0}
+  .stk-product-trigger.is-open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+  .stk-product-menu{
+    position:fixed !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    box-sizing:border-box;
+    padding:14px 12px !important;
+    display:block !important;
+    z-index:10040 !important;
+    background:rgba(31,18,15,.28);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .25s ease,visibility 0s linear .42s;
+  }
+
+  .stk-product-menu.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition:opacity .25s ease,visibility 0s linear 0s;
+  }
+
+  .stk-product-menu-card{
+    position:relative;
+    z-index:10041;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    padding:22px 18px 20px;
+    border:1px solid rgba(141,18,40,.13);
+    border-radius:20px;
+    background:
+      radial-gradient(circle at 88% 10%,rgba(200,160,74,.14),transparent 30%),
+      linear-gradient(145deg,#fffdf8 0%,#f8f1e7 58%,#f5eee6 100%);
+    box-shadow:0 24px 70px rgba(44,24,18,.25);
+    isolation:isolate;
+    transform:translateY(22px) scale(.985);
+    transition:transform .42s cubic-bezier(.22,.8,.2,1);
+  }
+
+  .stk-product-menu.is-open .stk-product-menu-card{
+    transform:translateY(0) scale(1);
+  }
+
+  .stk-product-menu-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex:0 0 auto;
+    margin-bottom:18px;
+  }
+
+  .stk-product-menu-brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    width:max-content;
+    color:#741020 !important;
+    text-decoration:none !important;
+  }
+
+  .stk-product-menu-mark{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+  }
+
+  .stk-product-menu-brand > span{
+    font-family:Fraunces,serif;
+    font-size:23px;
+    font-weight:600;
+    letter-spacing:-.03em;
+  }
+
+  .stk-product-menu-close{
+    position:relative;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    padding:0;
+    border:1px solid rgba(116,16,32,.12);
+    border-radius:13px;
+    background:rgba(255,255,255,.86);
+    box-shadow:0 8px 22px rgba(44,24,18,.09);
+    cursor:pointer;
+  }
+
+  .stk-product-menu-close span{
+    position:absolute;
+    left:12px;
+    top:20px;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#a71930;
+  }
+  .stk-product-menu-close span:first-child{transform:rotate(45deg)}
+  .stk-product-menu-close span:last-child{transform:rotate(-45deg)}
+
+  .stk-product-menu-nav{
+    display:flex !important;
+    flex:1 1 auto;
+    min-height:0;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .stk-product-menu-nav a{
+    position:relative;
+    display:flex !important;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    min-height:52px;
+    box-sizing:border-box;
+    padding:12px 13px !important;
+    border:1px solid transparent;
+    border-radius:12px;
+    color:#2a211e !important;
+    background:transparent;
+    font-family:Inter,sans-serif;
+    font-size:16px !important;
+    font-weight:600;
+    letter-spacing:-.01em;
+    text-decoration:none !important;
+    transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease;
+  }
+
+  .stk-product-menu-nav a > span{
+    color:#a71930;
+    font-size:18px;
+    font-weight:500;
+    opacity:.72;
+    transition:transform .2s ease;
+  }
+
+  .stk-product-menu-nav a:hover,
+  .stk-product-menu-nav a:focus-visible{
+    color:#8d1228 !important;
+    background:rgba(167,25,48,.07);
+    border-color:rgba(167,25,48,.10);
+    transform:translateX(3px);
+    outline:none;
+  }
+
+  .stk-product-menu-nav a:hover > span,
+  .stk-product-menu-nav a:focus-visible > span{
+    transform:translateX(3px);
+  }
+
+  /* ONLY PRODUCTS gets the permanent active state. */
+  .stk-product-menu-nav a.is-active{
+    color:#a71930 !important;
+    font-weight:700;
+    background:rgba(167,25,48,.08);
+    border-color:rgba(167,25,48,.12);
+    transform:translateX(3px);
+  }
+
+  .stk-product-menu-nav a.is-active::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    width:4px;
+    height:24px;
+    border-radius:10px;
+    transform:translateY(-50%);
+    background:linear-gradient(180deg,#a71930,#c8a04a);
+  }
+
+  .stk-product-menu-actions{
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:10px !important;
+    flex:0 0 auto;
+    margin:18px 0 0 !important;
+    padding-top:16px;
+    border-top:1px solid rgba(116,16,32,.10);
+  }
+
+  .stk-product-menu-actions a{
+    min-height:48px;
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    padding:11px 10px;
+    font:700 13px/1 Inter,sans-serif;
+    text-decoration:none;
+  }
+
+  .stk-product-demo-btn{
+    gap:8px;
+    color:#fff !important;
+    background:#a71930;
+    box-shadow:0 9px 22px rgba(167,25,48,.18);
+  }
+
+  .stk-product-demo-btn span{
+    font-size:17px;
+    line-height:1;
+    font-weight:500;
+  }
+
+  .stk-product-sign-btn{
+    color:#741020 !important;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(116,16,32,.18);
+  }
+
+  .stk-product-menu-foot{
+    flex:0 0 auto;
+    margin-top:14px;
+    text-align:center;
+    color:rgba(42,33,30,.48);
+    font:500 10px/1.4 Inter,sans-serif;
+    letter-spacing:.04em;
+  }
+
+  body:has(.stk-product-menu.is-open) .site-header{
+    pointer-events:none !important;
+  }
+}
+
+@media (max-width:390px){
+  .stk-product-menu{
+    padding:10px 9px !important;
+  }
+  .stk-product-menu-card{
+    padding:18px 15px 16px;
+    border-radius:18px;
+  }
+  .stk-product-menu-head{margin-bottom:16px}
+  .stk-product-menu-mark{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+  .stk-product-menu-brand > span{font-size:21px}
+  .stk-product-menu-nav a{
+    min-height:47px;
+    padding:10px 11px !important;
+    font-size:15px !important;
+  }
+  .stk-product-menu-actions{
+    margin-top:12px !important;
+    padding-top:12px;
+  }
+  .stk-product-menu-actions a{
+    min-height:45px;
+    font-size:12px;
+  }
+  .stk-product-menu-foot{
+    margin-top:10px;
+    font-size:9px;
+  }
+}
+
+@media (min-width:768px){
+  .stk-product-trigger,
+  .stk-product-menu{
+    display:none !important;
+  }
+}
+</style>
+
+
+<style id="stackly-about-logo-treatment">
+.stackly-logo-webp{
+  width:38px !important;
+  height:38px !important;
+  flex:0 0 38px !important;
+  display:block !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(17%)
+    sepia(78%)
+    saturate(2544%)
+    hue-rotate(340deg)
+    brightness(83%)
+    contrast(99%);
+}
+.pl-logo .stackly-logo-webp{
+  width:42px !important;
+  height:42px !important;
+  flex-basis:42px !important;
+}
+.site-header .brand .stackly-logo-webp,
+.site-footer .brand .stackly-logo-webp{
+  width:38px !important;
+  height:38px !important;
+  flex-basis:38px !important;
+}
+.stk-product-menu-mark.stackly-logo-webp{
+  width:38px !important;
+  height:38px !important;
+  flex-basis:38px !important;
+}
+@media (max-width:767px){
+  .site-header .brand .stackly-logo-webp{
+    width:34px !important;
+    height:34px !important;
+    flex-basis:34px !important;
+  }
+  .stk-product-menu-mark.stackly-logo-webp{
+    width:38px !important;
+    height:38px !important;
+    flex-basis:38px !important;
+  }
+}
+@media (max-width:390px){
+  .stk-product-menu-mark.stackly-logo-webp{
+    width:34px !important;
+    height:34px !important;
+    flex-basis:34px !important;
+  }
+}
+</style>
+</head>
+<body class="product-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg"><symbol id="i-shield" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></symbol><symbol id="i-chart" viewbox="0 0 24 24"><path d="M3 3v18h18"></path><path d="M7 15l4-5 3 3 5-7"></path></symbol><symbol id="i-bolt" viewbox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 11-13h-7l0-7z"></path></symbol><symbol id="i-users" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"></path><circle cx="17.5" cy="9" r="2.5"></circle><path d="M16 15.2c2.8.3 4.9 1.7 5.5 4.8"></path></symbol><symbol id="i-coins" viewbox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></symbol><symbol id="i-cloud" viewbox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9A6 6 0 0 0 6.2 8.6 5 5 0 0 0 7 19h10.5z"></path></symbol><symbol id="i-plug" viewbox="0 0 24 24"><path d="M9 2v5m6-5v5M6 7h12v4a6 6 0 0 1-12 0V7z"></path><path d="M12 17v5"></path></symbol><symbol id="i-headset" viewbox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"></path><rect height="6" rx="2" width="4" x="2.5" y="13"></rect><rect height="6" rx="2" width="4" x="17.5" y="13"></rect><path d="M20 19a3 3 0 0 1-3 3h-3"></path></symbol><symbol id="i-grid" viewbox="0 0 24 24"><rect height="7.5" rx="2" width="7.5" x="3" y="3"></rect><rect height="7.5" rx="2" width="7.5" x="13.5" y="3"></rect><rect height="7.5" rx="2" width="7.5" x="3" y="13.5"></rect><rect height="7.5" rx="2" width="7.5" x="13.5" y="13.5"></rect></symbol><symbol id="i-layers" viewbox="0 0 24 24"><path d="M12 2L2 8l10 6 10-6-10-6z"></path><path d="M2 14l10 6 10-6"></path></symbol><symbol id="i-search" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></symbol><symbol id="i-globe" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"></path></symbol><symbol id="i-bell" viewbox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"></path><path d="M10.3 21a2 2 0 0 0 3.4 0"></path></symbol><symbol id="i-check" viewbox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></symbol><symbol id="i-arrow" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></symbol><symbol id="i-chevron" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></symbol><symbol id="i-plus" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></symbol><symbol id="i-target" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" fill="currentColor" r="1.4" stroke="none"></circle></symbol><symbol id="i-doc" viewbox="0 0 24 24"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z"></path><path d="M14 2v5h5M9 13h6M9 17h6"></path></symbol><symbol id="i-gear" viewbox="0 0 24 24"><circle cx="12" cy="12" r="3.2"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87 1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"></path></symbol><symbol id="i-rocket" viewbox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.5 12.5 0 0 1 21.5 2.5c0 2.7-.8 7.5-5.6 10.5a22 22 0 0 1-3.9 2z"></path><path d="M9 12H4s.6-3.3 2-4.5c1.6-1.5 4 0 4 0M15 12v5s3.3-.6 4.5-2c1.5-1.6 0-4 0-4"></path></symbol><symbol id="i-truck" viewbox="0 0 24 24"><path d="M1 7h13v10H1zM14 10h4l3 3v4h-7V10z"></path><circle cx="5.5" cy="17.5" r="1.8"></circle><circle cx="17.5" cy="17.5" r="1.8"></circle></symbol><symbol id="i-heart" viewbox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path></symbol><symbol id="i-box" viewbox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"></path><path d="M3 8l9 5 9-5M12 13v8"></path></symbol><symbol id="i-cart" viewbox="0 0 24 24"><circle cx="9" cy="20" r="1.6"></circle><circle cx="18" cy="20" r="1.6"></circle><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"></path></symbol><symbol id="i-star" viewbox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8L12 2z" fill="currentColor" stroke="none"></path></symbol><symbol id="i-mail" viewbox="0 0 24 24"><rect height="16" rx="2.5" width="20" x="2" y="4"></rect><path d="M22 7l-10 7L2 7"></path></symbol><symbol id="i-phone" viewbox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.7 2.05z"></path></symbol><symbol id="i-pin" viewbox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol><symbol id="i-eye" viewbox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></symbol><symbol id="i-menu" viewbox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"></path></symbol><symbol id="i-briefcase" viewbox="0 0 24 24"><rect height="14" rx="2.5" width="20" x="2" y="7"></rect><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"></path></symbol><symbol id="i-cart2" viewbox="0 0 24 24"><circle cx="9" cy="20" r="1.6"></circle><circle cx="18" cy="20" r="1.6"></circle><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"></path></symbol><symbol id="i-dollar" viewbox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 2 2.7 5 3.5 5 1.5 5 3.5-2.2 3-5 3-5-1-5-3"></path></symbol><symbol id="i-wallet" viewbox="0 0 24 24"><path d="M20 7H4a2 2 0 0 1 0-4h14v4"></path><path d="M4 7v12a2 2 0 0 0 2 2h14V7"></path><circle cx="16.5" cy="14" fill="currentColor" r="1.3" stroke="none"></circle></symbol><symbol id="i-trend" viewbox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></symbol><symbol id="i-logout" viewbox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5M21 12H9"></path></symbol><symbol id="i-calendar" viewbox="0 0 24 24"><rect height="17" rx="2.5" width="18" x="3" y="4"></rect><path d="M8 2v4M16 2v4M3 9h18"></path></symbol><symbol id="i-home" viewbox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path><path d="M9 21v-6h6v6"></path></symbol></svg>
+<div aria-hidden="true" class="preloader">
+<div class="pl-ring">
+<svg viewbox="0 0 100 100">
+<defs><lineargradient id="plGrad" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#A71930"></stop><stop offset="1" stop-color="#C8A04A"></stop></lineargradient></defs>
+<circle class="ring-track" cx="50" cy="50" fill="none" r="46" stroke-width="2.5"></circle>
+<circle class="ring-fill" cx="50" cy="50" fill="none" r="46" stroke-width="2.5"></circle>
+</svg>
+<div class="pl-logo"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"></div>
+</div>
+<div class="pl-bar"><span></span></div>
+<div class="pl-num">00</div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
+    <nav aria-label="Primary">
+      <ul class="main-nav">
+        <li><a href="index.html" class="nav-home">Home</a></li>
+        <li>
+          <a href="product.html">Products <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li>
+          <a href="services.html">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li>
+          <a href="blog.html">Resources <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact </a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-select" aria-label="Change language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-globe"/></svg><b>EN</b><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></button>
+      <a href="login.html" class="btn btn-primary btn-sm"><span>Request a Demo</span><svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+      <button class="stk-product-trigger" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="stk-product-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="stk-product-menu-card">
+    <div class="stk-product-menu-head">
+      <a href="index.html" class="stk-product-menu-brand" aria-label="Stackly home">
+        <img class="stk-product-menu-mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true">
+        <span>Stackly</span>
+      </a>
+      <button class="stk-product-menu-close" type="button" aria-label="Close menu">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="stk-product-menu-nav" aria-label="Mobile primary navigation">
+      <a href="index.html">Home<span aria-hidden="true">→</span></a>
+      <a href="product.html" class="is-active" aria-current="page">Products<span aria-hidden="true">→</span></a>
+      <a href="services.html">Solutions<span aria-hidden="true">→</span></a>
+      <a href="blog.html">Resources<span aria-hidden="true">→</span></a>
+      <a href="pricing.html">Pricing<span aria-hidden="true">→</span></a>
+      <a href="about.html">About Us<span aria-hidden="true">→</span></a>
+      <a href="contact.html">Contact<span aria-hidden="true">→</span></a>
+    </nav>
+
+    <div class="stk-product-menu-actions">
+      <a href="login.html" class="stk-product-demo-btn">Request a Demo<span aria-hidden="true">→</span></a>
+      <a href="register.html" class="stk-product-sign-btn">Sign In</a>
+    </div>
+
+    <div class="stk-product-menu-foot">&copy; <span data-year>2026</span> Stackly Enterprise. All rights reserved.</div>
+  </div>
+</div>
+<div class="search-overlay" role="dialog" aria-label="Search Stackly">
+  <button class="icon-btn so-close" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></button>
+  <input type="text" placeholder="Search Stackly..." aria-label="Search query">
+  <p class="so-hint">Try &ldquo;pricing&rdquo;, &ldquo;dashboard&rdquo; or &ldquo;security&rdquo;</p>
+  <div class="search-results"></div>
+</div>
+
+<main id="main">
+<section class="page-hero">
+<div class="container" data-hero-particles="10">
+<span class="eyebrow">Stackly Products</span>
+<h1>One Platform.<br/><span class="accent">Every Team Moving Forward.</span></h1>
+<p class="lead">Bring operations, customer relationships, analytics and automation into one connected enterprise platform built to make complex work feel simple.</p>
+<div class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Products</span></div>
+</div>
+</section>
+<section class="section white">
+<div class="container">
+<div class="story-grid">
+<div class="story-media">
+<div class="main-img" style="min-height:420px;background:linear-gradient(145deg,#16080c,#741020 55%,#c8a04a);display:grid;place-items:center;overflow:hidden;position:relative;">
+<div style="width:82%;background:rgba(255,255,255,.96);border-radius:22px;padding:18px;box-shadow:0 30px 70px rgba(0,0,0,.35);transform:rotate(-2deg);">
+<div style="display:flex;gap:8px;margin-bottom:16px"><i style="width:9px;height:9px;border-radius:50%;background:#A71930"></i><i style="width:9px;height:9px;border-radius:50%;background:#C8A04A"></i><i style="width:9px;height:9px;border-radius:50%;background:#222"></i></div>
+<div style="display:grid;grid-template-columns:1.2fr .8fr;gap:12px">
+<div style="height:150px;border-radius:14px;background:linear-gradient(135deg,#f3e8e8,#fff);padding:16px"><b style="font-size:12px;color:#741020">OPERATIONS</b><div style="font-size:34px;font-weight:700;margin-top:25px">98.4%</div><small>workflow health</small></div>
+<div style="height:150px;border-radius:14px;background:#151515;color:#fff;padding:16px"><b style="font-size:12px;color:#C8A04A">REVENUE</b><div style="font-size:30px;font-weight:700;margin-top:28px">₹8.42M</div><small style="opacity:.65">this quarter</small></div>
+</div>
+<div style="height:80px;margin-top:12px;border-radius:14px;background:#f7f7f7;position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;bottom:18px;height:2px;background:#A71930;transform:skewY(-7deg)"></div><div style="position:absolute;left:12%;right:12%;bottom:34px;height:2px;background:#C8A04A;transform:skewY(8deg)"></div></div>
+</div>
+<div style="position:absolute;inset:auto 20px 20px auto;background:#fff;color:#741020;padding:12px 16px;border-radius:999px;font-weight:700;box-shadow:0 15px 30px rgba(0,0,0,.25)">Live workspace</div>
+</div>
+<div class="story-float"><span class="sf-num">01</span><small>Connected modules. One source of truth.</small></div>
+</div>
+<div>
+<span class="eyebrow">The Stackly Product</span>
+<h2 class="section-title">Everything your business needs, <span class="accent">working together.</span></h2>
+<p class="lead" style="margin-bottom:18px">Stackly replaces disconnected tools with a unified operating layer for the teams that keep your business moving.</p>
+<p class="lead" style="margin-bottom:18px">From finance and sales to operations and people, every module shares the same data model, permissions and automation engine.</p>
+<p class="lead">Start with one product, connect the rest when you're ready, and keep a consistent experience as your organization grows.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-head center">
+<span class="eyebrow center">The Product Suite</span>
+<h2 class="section-title">Powerful products. <span class="accent">One connected stack.</span></h2>
+</div>
+<div class="product-suite-grid">
+<div class="product-suite-card">
+<div class="m-visual"><img src="assets/img/blog/blog-analytics.webp" alt="Stackly Enterprise Suite dashboard" loading="lazy"></div>
+<button type="button" class="status-btn" aria-pressed="true"><span class="status-dot"></span><span class="status-label">Active</span></button><h3>Enterprise Suite</h3>
+<p>Core ERP and CRM capabilities for finance, sales, operations and customer management — connected in one workspace.</p>
+<div class="tech-list" style="margin-top:20px"><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Finance &amp; ERP</span><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>CRM &amp; pipeline</span></div>
+</div>
+<div class="product-suite-card dark">
+<div class="m-visual"><img src="assets/img/blog/blog-leadership.webp" alt="Stackly Analytics Cloud dashboard" loading="lazy"></div>
+<button type="button" class="status-btn" aria-pressed="true"><span class="status-dot"></span><span class="status-label">Active</span></button><h3>Analytics Cloud</h3>
+<p>Turn operational data into clear, real-time business intelligence with dashboards, metrics and decision-ready reporting.</p>
+<div class="tech-list" style="margin-top:20px"><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Live dashboards</span><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Custom metrics</span></div>
+</div>
+</div>
+<div class="product-suite-grid" style="margin-top:24px">
+<div class="product-suite-card dark">
+<div class="m-visual"><img src="assets/img/blog/blog-digital.webp" alt="Stackly Automation Engine dashboard" loading="lazy"></div>
+<button type="button" class="status-btn" aria-pressed="true"><span class="status-dot"></span><span class="status-label">Active</span></button><h3>Automation Engine</h3>
+<p>Design workflows that trigger actions, approvals, alerts and handoffs automatically — without turning every process into a custom project.</p>
+<div class="tech-list" style="margin-top:20px"><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Visual workflows</span><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Smart triggers</span></div>
+</div>
+<div class="product-suite-card">
+<div class="m-visual"><img src="assets/img/blog/blog-automation.webp" alt="Stackly Integrations and API dashboard" loading="lazy"></div>
+<button type="button" class="status-btn" aria-pressed="true"><span class="status-dot"></span><span class="status-label">Active</span></button><h3>Integrations &amp; API</h3>
+<p>Connect the systems you already use through open APIs, webhooks and reusable integrations while keeping data synchronized.</p>
+<div class="tech-list" style="margin-top:20px"><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>REST API</span><span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Webhooks</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section white">
+<div class="container">
+<div class="section-head center">
+<span class="eyebrow center">Built Around Your Workflow</span>
+<h2 class="section-title">From first action to <span class="accent">final outcome.</span></h2>
+</div>
+<div class="product-workflow-grid" data-stagger="">
+<div class="product-workflow-card"><span class="v-num">01</span><h4>Capture</h4><p>Bring requests, customer information, financial data and operational events into one structured system.</p></div>
+<div class="product-workflow-card"><span class="v-num">02</span><h4>Connect</h4><p>Link teams, records and external tools so work moves across departments without manual re-entry.</p></div>
+<div class="product-workflow-card"><span class="v-num">03</span><h4>Automate</h4><p>Turn repeatable processes into workflows with approvals, alerts, assignments and actions built in.</p></div>
+<div class="product-workflow-card"><span class="v-num">04</span><h4>Understand</h4><p>Use live analytics to see what is happening, identify bottlenecks and make decisions from shared data.</p></div>
+</div>
+</div>
+</section>
+<section class="section warm tight">
+<div class="container">
+<div class="stats-grid" style="background:#fff">
+<div class="stat"><div class="num"><span data-count="500">0</span><span class="suffix">+</span></div><div class="lbl">Businesses Worldwide</div></div>
+<div class="stat"><div class="num"><span data-count="40">0</span></div><div class="lbl">Countries Served</div></div>
+<div class="stat"><div class="num"><span data-count="1">0</span><span class="suffix">B+</span></div><div class="lbl">Workflow Events / Year</div></div>
+<div class="stat"><div class="num"><span data-count="99">0</span><span class="suffix">.9%</span></div><div class="lbl">Platform Availability</div></div>
+</div>
+</div>
+</section>
+<section class="section white">
+<div class="container">
+<div class="product-architecture">
+<div>
+<span class="eyebrow">Platform Architecture</span>
+<h2 class="section-title">Enterprise power without <span class="accent">enterprise friction.</span></h2>
+<p class="lead">Stackly is designed around secure, connected and scalable foundations so your teams can move quickly without sacrificing control.</p>
+<div class="tech-list">
+<span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Cloud-native architecture</span>
+<span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Role-based access</span>
+<span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Real-time event streaming</span>
+<span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>AI-assisted workflows</span>
+<span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Open REST API</span>
+<span><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><use href="#i-check"></use></svg>Zero-downtime deployment</span>
+</div>
+</div>
+<div class="showcase-photo" style="min-height:380px;background:radial-gradient(circle at 70% 30%,rgba(200,160,74,.5),transparent 28%),linear-gradient(145deg,#0d0d0d,#351018);display:grid;place-items:center;border-radius:24px;overflow:hidden;position:relative">
+<div style="width:76%;height:72%;border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:20px;background:rgba(255,255,255,.06);backdrop-filter:blur(14px);transform:perspective(900px) rotateY(-10deg) rotateX(5deg);box-shadow:0 40px 80px rgba(0,0,0,.35)">
+<div style="display:flex;justify-content:space-between;color:#fff;font-size:12px;opacity:.7"><span>STACKLY CORE</span><span>LIVE</span></div>
+<div style="height:1px;background:rgba(255,255,255,.12);margin:18px 0"></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><div style="height:90px;background:rgba(255,255,255,.08);border-radius:14px"></div><div style="height:90px;background:rgba(167,25,48,.35);border-radius:14px"></div><div style="height:90px;background:rgba(200,160,74,.3);border-radius:14px"></div></div>
+<div style="height:130px;margin-top:12px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));position:relative"><div style="position:absolute;left:8%;right:8%;top:58%;height:2px;background:#C8A04A;transform:rotate(-6deg)"></div><div style="position:absolute;left:12%;right:14%;top:45%;height:2px;background:#A71930;transform:rotate(9deg)"></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section cta-section">
+<div class="container">
+<div class="cta-box">
+<span class="cta-glow"></span>
+<span class="eyebrow center" style="justify-content:center">See Stackly in Action</span>
+<h2>Ready to Bring Your<br/><span class="gold-i">Whole Business Together?</span></h2>
+<p>Explore the platform, talk through your workflow, and see how Stackly can fit the way your organization works.</p>
+<div class="cta-actions"><a class="btn btn-gold" href="contact.html"><span>Request a Demo</span><svg class="arr" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="17"><use href="#i-arrow"></use></svg></a><a class="btn btn-white" href="pricing.html">View Pricing</a></div>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
+    <p class="footer-statement">Technology that moves <span class="accent">business</span> forward.</p>
+    <div class="footer-grid">
+      <div class="footer-col footer-about">
+        <h5>Stackly</h5>
+        <p>The all-in-one enterprise platform for operations, analytics and growth — trusted by 500+ businesses worldwide.</p>
+        <div class="social-row">
+          <a href="404.html" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.49 2.49 0 1 1 5 8.48a2.49 2.49 0 0 1-.02-4.98zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg></a>
+          <a href="404.html" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L6.5 3.9H4.7z"/></svg></a>
+          <a href="404.html" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.8c.2.9.9 1.6 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.8.4-4.8zM9.8 15.5v-7l6 3.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="404.html">Enterprise Suite</a></li><li><a href="404.html">Analytics Cloud</a></li><li><a href="404.html">Automation</a></li><li><a href="404.html">Integrations</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5>
+        <ul><li><a href="home.html">home</a></li><li><a href="product.html">products</a></li><li><a href="services.html">service</a></li><li><a href="pricing.html">pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">contact</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="404.html">Pricing</a></li><li><a href="404.html">FAQ</a></li><li><a href="404.html">Documentation</a></li><li><a href="404.html">Dashboard Demo</a></li></ul></div>
+      <div class="footer-col newsletter">
+        <h5>Stay Ahead</h5>
+        <p>Monthly insights on enterprise technology. No noise.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" placeholder="Your work email" aria-label="Email address" required>
+          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2025</span> Stackly Enterprise Software. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<button class="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/components.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        setTimeout(function () {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 0);
+      }
+
+      var mobileMenu = document.querySelector('.mobile-menu');
+      var hamburger = document.querySelector('.hamburger');
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+      }
+      if (hamburger) {
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+});
+</script>
+
+
+<script id="stackly-product-clean-js">
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.product-page .status-btn').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var paused = button.classList.toggle('is-paused');
+      button.setAttribute('aria-pressed', String(!paused));
+
+      var label = button.querySelector('.status-label');
+      if (label) label.textContent = paused ? 'Paused' : 'Active';
+    });
+  });
+
+  /* Refresh layout after lazy images finish loading. */
+  document.querySelectorAll('.product-page img[loading="lazy"]').forEach(function (img) {
+    img.addEventListener('load', function () {
+      window.dispatchEvent(new Event('resize'));
+    }, { once: true });
+  });
+});
+</script>
+
+
+<script id="stackly-product-mobile-menu-controller">
+(function(){
+  function initProductMenu(){
+    var trigger = document.querySelector('.stk-product-trigger');
+    var menu = document.querySelector('.stk-product-menu');
+    var closeButton = document.querySelector('.stk-product-menu-close');
+
+    if (!trigger || !menu || !closeButton || menu.dataset.stkBound === 'true') return;
+    menu.dataset.stkBound = 'true';
+
+    function setOpen(open){
+      trigger.classList.toggle('is-open', open);
+      menu.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+      document.documentElement.classList.toggle('stk-product-menu-lock', open);
+      document.body.classList.toggle('stk-product-menu-lock', open);
+    }
+
+    trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('is-open'));
+    });
+
+    closeButton.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+    });
+
+    menu.addEventListener('click', function(e){
+      if (e.target === menu) setOpen(false);
+    });
+
+    menu.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+        setOpen(false);
+      }
+    });
+
+    window.addEventListener('resize', function(){
+      if (window.innerWidth >= 768) setOpen(false);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductMenu);
+  } else {
+    initProductMenu();
+  }
+})();
+</script>
+
+</body>
+</html>

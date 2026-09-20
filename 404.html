@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Stackly</title>
+<meta name="description" content="The page you are looking for does not exist.">
+<link rel="icon" type="image/svg+xml" href="assets/svg/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+  :root{
+    --ink:#11100f;
+    --muted:#6f6a65;
+    --paper:#f7f4ef;
+    --line:rgba(17,16,15,.12);
+    --accent:#a71930;
+    --gold:#c8a04a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;overflow:hidden}
+  body{
+    min-height:100svh;
+    background:
+      radial-gradient(circle at 14% 12%,rgba(167,25,48,.07),transparent 30%),
+      radial-gradient(circle at 88% 86%,rgba(200,160,74,.10),transparent 28%),
+      var(--paper);
+    color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  a{text-decoration:none;color:inherit}
+  button{font:inherit}
+  .nf-page{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100svh;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .nf-page:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(17,16,15,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(17,16,15,.035) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent 85%);
+    pointer-events:none;
+    z-index:-2;
+  }
+  .nf-page:after{
+    content:"";
+    position:absolute;
+    width:52vw;height:52vw;
+    min-width:360px;min-height:360px;
+    border:1px solid rgba(167,25,48,.13);
+    border-radius:50%;
+    right:-22vw;top:-27vw;
+    box-shadow:0 0 0 38px rgba(167,25,48,.025),0 0 0 76px rgba(167,25,48,.018);
+    z-index:-1;
+  }
+  .nf-orb{
+    position:absolute;
+    border:1px solid rgba(200,160,74,.2);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
+  }
+  .nf-orb.one{width:360px;height:360px;left:-190px;bottom:-180px}
+  .nf-orb.two{width:150px;height:150px;right:10%;bottom:9%;border-color:rgba(167,25,48,.16)}
+  .nf-inner{
+    width:min(1080px,calc(100% - 40px));
+    height:100%;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:28px 0;
+  }
+  .nf-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(12px);
+    padding:8px 13px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:#4d4945;
+    box-shadow:0 8px 30px rgba(17,16,15,.04);
+    margin-bottom:12px;
+  }
+  .nf-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(167,25,48,.08)}
+  .nf-art{
+    width:min(360px,52vw);
+    max-height:24svh;
+    display:grid;
+    place-items:center;
+    margin:0 auto 2px;
+  }
+  .nf-art img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:24svh;
+    object-fit:contain;
+    filter:drop-shadow(0 22px 30px rgba(17,16,15,.10));
+  }
+  .nf-code{
+    font-family:Fraunces,Georgia,serif;
+    font-size:clamp(92px,15vw,170px);
+    line-height:.72;
+    letter-spacing:-.07em;
+    font-weight:600;
+    background:linear-gradient(120deg,var(--accent) 10%,#741020 52%,var(--gold) 92%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin:0 0 15px;
+    text-shadow:0 15px 45px rgba(167,25,48,.10);
+  }
+  .nf-title{
+    font-family:Fraunces,Georgia,serif;
+    font-size:clamp(27px,3.5vw,46px);
+    line-height:1.02;
+    letter-spacing:-.035em;
+    margin:0 0 10px;
+    max-width:700px;
+  }
+  .nf-copy{
+    color:var(--muted);
+    max-width:570px;
+    margin:0 auto;
+    font-size:15px;
+    line-height:1.65;
+  }
+  .nf-actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:24px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    min-height:48px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:0 20px;
+    border-radius:12px;
+    border:1px solid transparent;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.01em;
+    transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{
+    color:#fff;
+    background:linear-gradient(135deg,#a71930,#741020);
+    box-shadow:0 12px 28px rgba(167,25,48,.22);
+  }
+  .btn-primary:hover{box-shadow:0 16px 34px rgba(167,25,48,.28)}
+  .btn-outline{
+    color:var(--ink);
+    background:rgba(255,255,255,.58);
+    border-color:var(--line);
+    backdrop-filter:blur(10px);
+  }
+  .btn-outline:hover{background:#fff;border-color:rgba(17,16,15,.2);box-shadow:0 12px 28px rgba(17,16,15,.07)}
+  .nf-foot{
+    position:absolute;
+    left:0;right:0;bottom:24px;
+    display:flex;
+    justify-content:center;
+    gap:9px;
+    color:#8b857e;
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+  .nf-foot span:nth-child(2){color:var(--gold)}
+  @media(max-width:600px){
+    .nf-inner{width:min(100% - 28px,1080px);padding:20px 0}
+    .nf-art{width:min(300px,68vw);max-height:20svh}
+    .nf-art img{max-height:20svh}
+    .nf-code{font-size:clamp(88px,25vw,125px);margin-bottom:12px}
+    .nf-title{font-size:30px}
+    .nf-copy{font-size:13px;line-height:1.55;max-width:390px}
+    .nf-actions{margin-top:19px;width:100%;padding:0 8px}
+    .btn{flex:1;min-width:135px}
+    .nf-foot{bottom:14px;font-size:8px}
+  }
+  @media(max-height:700px){
+    .nf-art{width:min(250px,25vw);max-height:16svh}
+    .nf-art img{max-height:16svh}
+    .nf-code{font-size:clamp(74px,11vw,115px);margin-bottom:9px}
+    .nf-title{font-size:30px}
+    .nf-copy{font-size:12px}
+    .nf-actions{margin-top:15px}
+  }
+</style>
+
+<main class="nf-page" id="main">
+  <span class="nf-orb one"></span>
+  <span class="nf-orb two"></span>
+
+  <div class="nf-inner">
+    <div class="nf-badge"><span class="nf-dot"></span> Stackly · 404</div>
+
+    <div class="nf-art">
+      <img src="assets/svg/illustrations/404.svg" alt="Illustration of a missing page">
+    </div>
+
+    <div class="nf-code">404</div>
+    <h1 class="nf-title">This page took a wrong turn.</h1>
+    <p class="nf-copy">
+      The link may be outdated, or the page may have moved.
+      Let's get you back to productive territory.
+    </p>
+
+    <div class="nf-actions">
+      <a href="index.html" class="btn btn-primary">
+        <span>Go Home</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+      <button class="btn btn-outline" type="button" onclick="history.back()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M11 18l-6-6 6-6"/>
+        </svg>
+        <span>Go Back</span>
+      </button>
+    </div>
+
+    <div class="nf-foot"><span>Secure</span><span>•</span><span>Stackly</span><span>•</span><span>Page Not Found</span></div>
+  </div>
+</main>
+
+<script>
+  // Keep the 404 page completely static: no AOS, ScrollTrigger,
+  // site-header, navigation, preloader, or scroll-driven scripts.
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+</script>
+</body>
+</html>

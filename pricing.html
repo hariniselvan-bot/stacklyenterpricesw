@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Stackly Enterprise Plans</title>
+<meta name="description" content="Transparent per-user pricing for Starter, Business and Enterprise plans. 14-day free trial, no credit card required.">
+<link rel="icon" type="image/webp" href="assets/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+
+<style id="stackly-pricing-page-css">
+/* =========================================================
+   STACKLY PRICING PAGE — ISOLATED CSS
+   HERO IS UNTOUCHED. All rules below target pricing-* classes.
+   ========================================================= */
+
+.stackly-pricing-page{
+  --pricing-red:#A71930;
+  --pricing-deep:#741020;
+  --pricing-gold:#C8A04A;
+  --pricing-ink:#17171b;
+  --pricing-muted:#6b6970;
+  --pricing-line:rgba(23,23,27,.11);
+  --pricing-soft:#f7f3ed;
+  overflow-x:hidden;
+}
+
+/* ---------- Plans ---------- */
+.stackly-pricing-page .pricing-plans-section{
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 10% 8%,rgba(200,160,74,.08),transparent 25%),
+    radial-gradient(circle at 92% 60%,rgba(167,25,48,.05),transparent 28%),
+    #fff;
+}
+.stackly-pricing-page .pricing-plans-section::before{
+  content:"01 / PLANS";
+  position:absolute;
+  top:34px;
+  right:clamp(22px,6vw,90px);
+  color:rgba(23,23,27,.25);
+  font:700 .62rem/1 Inter,sans-serif;
+  letter-spacing:.22em;
+}
+.stackly-pricing-page .pricing-section-heading{
+  position:relative;
+  margin-bottom:45px;
+}
+.stackly-pricing-page .pricing-billing-toggle{
+  display:inline-flex;
+  padding:5px;
+  border:1px solid var(--pricing-line);
+  border-radius:999px;
+  background:#f6f4f1;
+  box-shadow:0 8px 25px rgba(20,16,16,.05);
+}
+.stackly-pricing-page .pricing-billing-toggle button{
+  border:0;
+  border-radius:999px;
+  padding:11px 18px;
+  background:transparent;
+  color:var(--pricing-muted);
+  font:700 .76rem/1 Inter,sans-serif;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.stackly-pricing-page .pricing-billing-toggle button.on{
+  color:#fff;
+  background:var(--pricing-ink);
+  box-shadow:0 7px 18px rgba(23,23,27,.15);
+}
+.stackly-pricing-page .pricing-billing-toggle .save{
+  margin-left:5px;
+  color:var(--pricing-gold);
+}
+
+.stackly-pricing-page .pricing-plan-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  padding:1px;
+  border:1px solid var(--pricing-line);
+  border-radius:28px;
+  overflow:hidden;
+  background:var(--pricing-line);
+  box-shadow:0 25px 75px rgba(25,18,18,.10);
+}
+.stackly-pricing-page .pricing-plan-card{
+  position:relative;
+  min-width:0;
+  min-height:575px;
+  display:flex;
+  flex-direction:column;
+  padding:36px 31px 30px;
+  border:0;
+  border-radius:0;
+  background:linear-gradient(145deg,#fff 0%,#fbfaf8 100%);
+  overflow:hidden;
+  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
+}
+.stackly-pricing-page .pricing-plan-card::before{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  top:-155px;
+  right:-135px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(200,160,74,.14),transparent 68%);
+  pointer-events:none;
+}
+.stackly-pricing-page .pricing-plan-card:hover{
+  z-index:2;
+  transform:translateY(-7px);
+  box-shadow:0 25px 55px rgba(22,17,17,.13);
+}
+.stackly-pricing-page .pricing-plan-card.pricing-featured-border{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(200,160,74,.18),transparent 26%),
+    linear-gradient(145deg,#201719,#2b171c);
+  color:#fff;
+}
+.stackly-pricing-page .pricing-plan-card.pricing-featured-border::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:1px;
+  border-radius:inherit;
+  background:linear-gradient(135deg,rgba(200,160,74,.65),rgba(167,25,48,.35),transparent);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+.stackly-pricing-page .pricing-plan-badge{
+  position:absolute;
+  top:0;
+  left:31px;
+  padding:8px 13px;
+  border-radius:0 0 10px 10px;
+  background:var(--pricing-gold);
+  color:#17120b;
+  font:800 .62rem/1 Inter,sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.stackly-pricing-page .pricing-plan-name{
+  position:relative;
+  margin-top:13px;
+  font:600 1.02rem/1.2 Inter,sans-serif;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.stackly-pricing-page .pricing-plan-price{
+  position:relative;
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:20px 0 10px;
+}
+.stackly-pricing-page .pricing-plan-amount{
+  font:500 clamp(2.5rem,4vw,4rem)/.95 Fraunces,serif;
+  letter-spacing:-.04em;
+}
+.stackly-pricing-page .pricing-plan-per{
+  color:var(--pricing-muted);
+  font-size:.73rem;
+}
+.stackly-pricing-page .pricing-featured-border .pricing-plan-per,
+.stackly-pricing-page .pricing-featured-border .pricing-plan-description{
+  color:rgba(255,255,255,.62);
+}
+.stackly-pricing-page .pricing-plan-description{
+  min-height:48px;
+  margin:0;
+  color:var(--pricing-muted);
+  font-size:.87rem;
+  line-height:1.65;
+}
+.stackly-pricing-page .pricing-plan-features{
+  list-style:none;
+  display:grid;
+  gap:12px;
+  margin:28px 0 30px;
+  padding:0;
+}
+.stackly-pricing-page .pricing-plan-features li{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  color:#444249;
+  font-size:.78rem;
+  line-height:1.4;
+}
+.stackly-pricing-page .pricing-featured-border .pricing-plan-features li{
+  color:rgba(255,255,255,.78);
+}
+.stackly-pricing-page .pricing-plan-features li svg{
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  margin-top:1px;
+  color:var(--pricing-red);
+}
+.stackly-pricing-page .pricing-featured-border .pricing-plan-features li svg{
+  color:#d9bd76;
+}
+.stackly-pricing-page .pricing-plan-features li.off{
+  opacity:.45;
+}
+.stackly-pricing-page .pricing-plan-card .btn-block{
+  margin-top:auto;
+}
+
+/* ---------- Comparison ---------- */
+.stackly-pricing-page .pricing-comparison-wrap{
+  margin-top:26px;
+  border:1px solid var(--pricing-line);
+  border-radius:24px;
+  background:#fff;
+  overflow:auto;
+  box-shadow:0 18px 55px rgba(22,17,17,.07);
+}
+.stackly-pricing-page .pricing-comparison-table{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+.stackly-pricing-page .pricing-comparison-table th,
+.stackly-pricing-page .pricing-comparison-table td{
+  padding:17px 19px;
+  border-bottom:1px solid rgba(23,23,27,.08);
+  text-align:center;
+  font-size:.78rem;
+}
+.stackly-pricing-page .pricing-comparison-table th:first-child,
+.stackly-pricing-page .pricing-comparison-table td:first-child{
+  width:34%;
+  text-align:left;
+}
+.stackly-pricing-page .pricing-comparison-table th{
+  padding-top:21px;
+  padding-bottom:21px;
+  background:#f7f3ed;
+  font-weight:700;
+}
+.stackly-pricing-page .pricing-comparison-table .hl{
+  background:rgba(167,25,48,.045);
+  box-shadow:inset 1px 0 rgba(167,25,48,.10),inset -1px 0 rgba(167,25,48,.10);
+}
+.stackly-pricing-page .pricing-comparison-plan{
+  color:var(--pricing-red);
+  font:700 .72rem/1 Inter,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.stackly-pricing-page .pricing-feature-yes,
+.stackly-pricing-page .pricing-feature-no{
+  display:inline-grid;
+  place-items:center;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+}
+.stackly-pricing-page .pricing-feature-yes{
+  color:#176b45;
+  background:rgba(23,107,69,.08);
+}
+.stackly-pricing-page .pricing-feature-no{
+  color:#999;
+  background:rgba(0,0,0,.045);
+}
+.stackly-pricing-page .pricing-feature-yes svg,
+.stackly-pricing-page .pricing-feature-no svg{
+  width:14px;
+  height:14px;
+}
+
+/* ---------- FAQ ---------- */
+.stackly-pricing-page .pricing-faq-section{
+  background:
+    linear-gradient(180deg,#f8f5f0 0%,#f4eee6 100%);
+}
+.stackly-pricing-page .pricing-faq-wrap{
+  max-width:920px;
+  margin:45px auto 0;
+  border-top:1px solid var(--pricing-line);
+}
+.stackly-pricing-page .pricing-faq-item{
+  border-bottom:1px solid var(--pricing-line);
+}
+.stackly-pricing-page .pricing-faq-question{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:25px 5px;
+  border:0;
+  background:transparent;
+  color:var(--pricing-ink);
+  text-align:left;
+  cursor:pointer;
+  font:600 1rem/1.4 Inter,sans-serif;
+}
+.stackly-pricing-page .pricing-faq-question > span:first-child{
+  display:flex;
+  align-items:center;
+  gap:17px;
+}
+.stackly-pricing-page .pricing-faq-number{
+  color:var(--pricing-red);
+  font:700 .66rem/1 Inter,sans-serif;
+  letter-spacing:.14em;
+}
+.stackly-pricing-page .pricing-faq-icon{
+  width:36px;
+  height:36px;
+  flex:0 0 36px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--pricing-line);
+  border-radius:50%;
+  transition:transform .3s ease,background .3s ease;
+}
+.stackly-pricing-page .pricing-faq-icon svg{
+  width:17px;
+  height:17px;
+}
+.stackly-pricing-page .pricing-faq-item.open .pricing-faq-icon{
+  transform:rotate(45deg);
+  color:#fff;
+  background:var(--pricing-red);
+  border-color:var(--pricing-red);
+}
+.stackly-pricing-page .pricing-faq-answer{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .35s ease;
+}
+.stackly-pricing-page .pricing-faq-item.open .pricing-faq-answer{
+  grid-template-rows:1fr;
+}
+.stackly-pricing-page .pricing-faq-answer-inner{
+  overflow:hidden;
+  max-width:780px;
+  padding:0 5px;
+  color:var(--pricing-muted);
+  font-size:.88rem;
+  line-height:1.75;
+}
+.stackly-pricing-page .pricing-faq-item.open .pricing-faq-answer-inner{
+  padding-bottom:25px;
+}
+
+/* ---------- CTA ---------- */
+.stackly-pricing-page .pricing-cta-section{
+  position:relative;
+  background:#fff;
+}
+.stackly-pricing-page .pricing-cta-box{
+  position:relative;
+  isolation:isolate;
+  min-height:430px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:70px 28px;
+  overflow:hidden;
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(200,160,74,.18),transparent 27%),
+    linear-gradient(135deg,#64101d,#851528 53%,#66101e);
+  color:#fff;
+  box-shadow:0 30px 85px rgba(116,16,32,.20);
+}
+.stackly-pricing-page .pricing-cta-box::before{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  pointer-events:none;
+}
+.stackly-pricing-page .pricing-cta-glow{
+  position:absolute;
+  width:400px;
+  height:400px;
+  left:50%;
+  top:-300px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.10),transparent 68%);
+}
+.stackly-pricing-page .pricing-cta-box h2,
+.stackly-pricing-page .pricing-cta-box p,
+.stackly-pricing-page .pricing-cta-actions{
+  position:relative;
+  z-index:2;
+}
+.stackly-pricing-page .pricing-cta-box h2{
+  max-width:820px;
+  margin:10px auto 18px;
+  color:#fff;
+  font-size:clamp(2.2rem,4.5vw,4.3rem);
+  line-height:1.03;
+  letter-spacing:-.045em;
+}
+.stackly-pricing-page .pricing-cta-box p{
+  max-width:650px;
+  margin:0 auto;
+  color:rgba(255,255,255,.74);
+  line-height:1.7;
+}
+.stackly-pricing-page .pricing-cta-actions{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:31px;
+}
+
+/* ---------- Local reveal ---------- */
+.stackly-pricing-page .pricing-local-reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.stackly-pricing-page .pricing-local-reveal.pricing-visible{
+  opacity:1;
+  transform:none;
+}
+.stackly-pricing-page .pricing-plan-card,
+.stackly-pricing-page .pricing-comparison-wrap,
+.stackly-pricing-page .pricing-faq-item,
+.stackly-pricing-page .pricing-cta-box{
+  visibility:visible;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1000px){
+  .stackly-pricing-page .pricing-plan-grid{
+    grid-template-columns:1fr;
+    max-width:680px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .stackly-pricing-page .pricing-plan-card{
+    min-height:0;
+  }
+}
+@media (max-width:700px){
+  .stackly-pricing-page .pricing-plans-section::before{
+    display:none;
+  }
+  .stackly-pricing-page .pricing-billing-toggle{
+    width:100%;
+    justify-content:stretch;
+  }
+  .stackly-pricing-page .pricing-billing-toggle button{
+    flex:1;
+  }
+  .stackly-pricing-page .pricing-plan-grid{
+    border-radius:21px;
+  }
+  .stackly-pricing-page .pricing-plan-card{
+    padding:30px 24px 25px;
+  }
+  .stackly-pricing-page .pricing-plan-badge{
+    left:24px;
+  }
+  .stackly-pricing-page .pricing-comparison-wrap{
+    border-radius:18px;
+    margin-left:-2px;
+    margin-right:-2px;
+  }
+  .stackly-pricing-page .pricing-faq-question{
+    padding:21px 2px;
+    font-size:.9rem;
+  }
+  .stackly-pricing-page .pricing-faq-question > span:first-child{
+    gap:11px;
+  }
+  .stackly-pricing-page .pricing-cta-box{
+    min-height:390px;
+    padding:55px 20px;
+    border-radius:23px;
+  }
+  .stackly-pricing-page .pricing-cta-box::before{
+    inset:11px;
+    border-radius:16px;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .stackly-pricing-page .pricing-local-reveal,
+  .stackly-pricing-page .pricing-plan-card,
+  .stackly-pricing-page .pricing-faq-answer,
+  .stackly-pricing-page .pricing-faq-icon{
+    transition:none !important;
+  }
+}
+</style>
+
+
+<style id="stackly-pricing-page-mobile-menu-isolated">
+/* =========================================================
+   STACKLY PRICING PAGE — SAME PREMIUM MOBILE MENU
+   Isolated class names prevent conflicts with shared menu JS/CSS.
+   Only Products is active here, exactly as requested.
+   ========================================================= */
+@media (max-width:767px){
+  html.stk-product-menu-lock,
+  body.stk-product-menu-lock{
+    overflow:hidden !important;
+    touch-action:none;
+  }
+
+  .site-header{z-index:10020 !important}
+
+  .stk-product-trigger{
+    position:relative;
+    z-index:10031;
+    display:flex !important;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    border:0;
+    border-radius:12px;
+    background:rgba(255,255,255,.94);
+    color:#8d1228;
+    box-shadow:0 8px 22px rgba(44,24,18,.10);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .stk-product-trigger span{
+    position:absolute;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#8d1228;
+    transition:transform .28s ease,opacity .2s ease,top .28s ease;
+  }
+  .stk-product-trigger span:nth-child(1){top:14px}
+  .stk-product-trigger span:nth-child(2){top:21px}
+  .stk-product-trigger span:nth-child(3){top:28px}
+  .stk-product-trigger.is-open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .stk-product-trigger.is-open span:nth-child(2){opacity:0}
+  .stk-product-trigger.is-open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+  .stk-product-menu{
+    position:fixed !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    box-sizing:border-box;
+    padding:14px 12px !important;
+    display:block !important;
+    z-index:10040 !important;
+    background:rgba(31,18,15,.28);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .25s ease,visibility 0s linear .42s;
+  }
+
+  .stk-product-menu.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition:opacity .25s ease,visibility 0s linear 0s;
+  }
+
+  .stk-product-menu-card{
+    position:relative;
+    z-index:10041;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    padding:22px 18px 20px;
+    border:1px solid rgba(141,18,40,.13);
+    border-radius:20px;
+    background:
+      radial-gradient(circle at 88% 10%,rgba(200,160,74,.14),transparent 30%),
+      linear-gradient(145deg,#fffdf8 0%,#f8f1e7 58%,#f5eee6 100%);
+    box-shadow:0 24px 70px rgba(44,24,18,.25);
+    isolation:isolate;
+    transform:translateY(22px) scale(.985);
+    transition:transform .42s cubic-bezier(.22,.8,.2,1);
+  }
+
+  .stk-product-menu.is-open .stk-product-menu-card{
+    transform:translateY(0) scale(1);
+  }
+
+  .stk-product-menu-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex:0 0 auto;
+    margin-bottom:18px;
+  }
+
+  .stk-product-menu-brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    width:max-content;
+    color:#741020 !important;
+    text-decoration:none !important;
+  }
+
+  .stk-product-menu-mark{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+  }
+
+  .stk-product-menu-brand > span{
+    font-family:Fraunces,serif;
+    font-size:23px;
+    font-weight:600;
+    letter-spacing:-.03em;
+  }
+
+  .stk-product-menu-close{
+    position:relative;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    padding:0;
+    border:1px solid rgba(116,16,32,.12);
+    border-radius:13px;
+    background:rgba(255,255,255,.86);
+    box-shadow:0 8px 22px rgba(44,24,18,.09);
+    cursor:pointer;
+  }
+
+  .stk-product-menu-close span{
+    position:absolute;
+    left:12px;
+    top:20px;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#a71930;
+  }
+  .stk-product-menu-close span:first-child{transform:rotate(45deg)}
+  .stk-product-menu-close span:last-child{transform:rotate(-45deg)}
+
+  .stk-product-menu-nav{
+    display:flex !important;
+    flex:1 1 auto;
+    min-height:0;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .stk-product-menu-nav a{
+    position:relative;
+    display:flex !important;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    min-height:52px;
+    box-sizing:border-box;
+    padding:12px 13px !important;
+    border:1px solid transparent;
+    border-radius:12px;
+    color:#2a211e !important;
+    background:transparent;
+    font-family:Inter,sans-serif;
+    font-size:16px !important;
+    font-weight:600;
+    letter-spacing:-.01em;
+    text-decoration:none !important;
+    transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease;
+  }
+
+  .stk-product-menu-nav a > span{
+    color:#a71930;
+    font-size:18px;
+    font-weight:500;
+    opacity:.72;
+    transition:transform .2s ease;
+  }
+
+  .stk-product-menu-nav a:hover,
+  .stk-product-menu-nav a:focus-visible{
+    color:#8d1228 !important;
+    background:rgba(167,25,48,.07);
+    border-color:rgba(167,25,48,.10);
+    transform:translateX(3px);
+    outline:none;
+  }
+
+  .stk-product-menu-nav a:hover > span,
+  .stk-product-menu-nav a:focus-visible > span{
+    transform:translateX(3px);
+  }
+
+  /* ONLY PRODUCTS gets the permanent active state. */
+  .stk-product-menu-nav a.is-active{
+    color:#a71930 !important;
+    font-weight:700;
+    background:rgba(167,25,48,.08);
+    border-color:rgba(167,25,48,.12);
+    transform:translateX(3px);
+  }
+
+  .stk-product-menu-nav a.is-active::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    width:4px;
+    height:24px;
+    border-radius:10px;
+    transform:translateY(-50%);
+    background:linear-gradient(180deg,#a71930,#c8a04a);
+  }
+
+  .stk-product-menu-actions{
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:10px !important;
+    flex:0 0 auto;
+    margin:18px 0 0 !important;
+    padding-top:16px;
+    border-top:1px solid rgba(116,16,32,.10);
+  }
+
+  .stk-product-menu-actions a{
+    min-height:48px;
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    padding:11px 10px;
+    font:700 13px/1 Inter,sans-serif;
+    text-decoration:none;
+  }
+
+  .stk-product-demo-btn{
+    gap:8px;
+    color:#fff !important;
+    background:#a71930;
+    box-shadow:0 9px 22px rgba(167,25,48,.18);
+  }
+
+  .stk-product-demo-btn span{
+    font-size:17px;
+    line-height:1;
+    font-weight:500;
+  }
+
+  .stk-product-sign-btn{
+    color:#741020 !important;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(116,16,32,.18);
+  }
+
+  .stk-product-menu-foot{
+    flex:0 0 auto;
+    margin-top:14px;
+    text-align:center;
+    color:rgba(42,33,30,.48);
+    font:500 10px/1.4 Inter,sans-serif;
+    letter-spacing:.04em;
+  }
+
+  body:has(.stk-product-menu.is-open) .site-header{
+    pointer-events:none !important;
+  }
+}
+
+@media (max-width:390px){
+  .stk-product-menu{
+    padding:10px 9px !important;
+  }
+  .stk-product-menu-card{
+    padding:18px 15px 16px;
+    border-radius:18px;
+  }
+  .stk-product-menu-head{margin-bottom:16px}
+  .stk-product-menu-mark{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+  .stk-product-menu-brand > span{font-size:21px}
+  .stk-product-menu-nav a{
+    min-height:47px;
+    padding:10px 11px !important;
+    font-size:15px !important;
+  }
+  .stk-product-menu-actions{
+    margin-top:12px !important;
+    padding-top:12px;
+  }
+  .stk-product-menu-actions a{
+    min-height:45px;
+    font-size:12px;
+  }
+  .stk-product-menu-foot{
+    margin-top:10px;
+    font-size:9px;
+  }
+}
+
+@media (min-width:768px){
+  .stk-product-trigger,
+  .stk-product-menu{
+    display:none !important;
+  }
+}
+</style>
+
+<style id="stackly-about-logo-treatment">
+/* Shared Stackly logo treatment — matched to the About page */
+.stackly-logo-webp{
+  width:38px !important;
+  height:38px !important;
+  flex:0 0 38px !important;
+  display:block !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(17%)
+    sepia(78%)
+    saturate(2544%)
+    hue-rotate(340deg)
+    brightness(83%)
+    contrast(99%);
+}
+.pl-logo .stackly-logo-webp{
+  width:42px !important;
+  height:42px !important;
+  flex-basis:42px !important;
+}
+.site-header .brand .stackly-logo-webp,
+.site-footer .brand .stackly-logo-webp{
+  width:38px !important;
+  height:38px !important;
+  flex-basis:38px !important;
+}
+.stk-product-menu-mark.stackly-logo-webp{
+  width:38px !important;
+  height:38px !important;
+  flex-basis:38px !important;
+}
+@media (max-width:767px){
+  .site-header .brand .stackly-logo-webp{
+    width:34px !important;
+    height:34px !important;
+    flex-basis:34px !important;
+  }
+  .stk-product-menu-mark.stackly-logo-webp{
+    width:38px !important;
+    height:38px !important;
+    flex-basis:38px !important;
+  }
+}
+@media (max-width:390px){
+  .stk-product-menu-mark.stackly-logo-webp{
+    width:34px !important;
+    height:34px !important;
+    flex-basis:34px !important;
+  }
+}
+</style>
+
+</head>
+<body class="stackly-pricing-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 11-13h-7l0-7z"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2c2.8.3 4.9 1.7 5.5 4.8"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9A6 6 0 0 0 6.2 8.6 5 5 0 0 0 7 19h10.5z"/></symbol><symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5m6-5v5M6 7h12v4a6 6 0 0 1-12 0V7z"/><path d="M12 17v5"/></symbol><symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="2"/><rect x="17.5" y="13" width="4" height="6" rx="2"/><path d="M20 19a3 3 0 0 1-3 3h-3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2L2 8l10 6 10-6-10-6z"/><path d="M2 14l10 6 10-6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z"/><path d="M14 2v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87 1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></symbol><symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.5 12.5 0 0 1 21.5 2.5c0 2.7-.8 7.5-5.6 10.5a22 22 0 0 1-3.9 2z"/><path d="M9 12H4s.6-3.3 2-4.5c1.6-1.5 4 0 4 0M15 12v5s3.3-.6 4.5-2c1.5-1.6 0-4 0-4"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 7h13v10H1zM14 10h4l3 3v4h-7V10z"/><circle cx="5.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol><symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8L12 2z" fill="currentColor" stroke="none"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M22 7l-10 7L2 7"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.7 2.05z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2.5"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-cart2" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-dollar" viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 2 2.7 5 3.5 5 1.5 5 3.5-2.2 3-5 3-5-1-5-3"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 1 0-4h14v4"/><path d="M4 7v12a2 2 0 0 0 2 2h14V7"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor" stroke="none"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M8 2v4M16 2v4M3 9h18"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></symbol></svg>
+<div class="preloader" aria-hidden="true">
+  <div class="pl-ring">
+    <svg viewBox="0 0 100 100">
+      <defs><linearGradient id="plGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#A71930"/><stop offset="1" stop-color="#C8A04A"/></linearGradient></defs>
+      <circle class="ring-track" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
+      <circle class="ring-fill" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
+    </svg>
+    <div class="pl-logo"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"></div>
+  </div>
+  <div class="pl-bar"><span></span></div>
+  <div class="pl-num">00</div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
+    <nav aria-label="Primary">
+      <ul class="main-nav">
+        <li><a href="index.html" class="nav-home">Home</a></li>
+        <li>
+          <a href="product.html">Products <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li>
+          <a href="services.html">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li>
+          <a href="blog.html">Resources <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact </a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-select" aria-label="Change language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-globe"/></svg><b>EN</b><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></button>
+      <a href="login.html" class="btn btn-primary btn-sm"><span>Request a Demo</span><svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+      <button class="stk-product-trigger" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="stk-product-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="stk-product-menu-card">
+    <div class="stk-product-menu-head">
+      <a href="index.html" class="stk-product-menu-brand" aria-label="Stackly home">
+        <img class="stk-product-menu-mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true">
+        <span>Stackly</span>
+      </a>
+      <button class="stk-product-menu-close" type="button" aria-label="Close menu">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="stk-product-menu-nav" aria-label="Mobile primary navigation">
+      <a href="index.html">Home<span aria-hidden="true">→</span></a>
+       <a href="product.html">product<span aria-hidden="true">→</span></a>    
+      <a href="services.html">Solutions<span aria-hidden="true">→</span></a>
+      <a href="blog.html">Resources<span aria-hidden="true">→</span></a>
+       <a href="pricing.html" class="is-active" aria-current="page">pricing<span aria-hidden="true">→</span></a>
+
+      <a href="about.html">About Us<span aria-hidden="true">→</span></a>
+      <a href="contact.html">Contact<span aria-hidden="true">→</span></a>
+    </nav>
+
+    <div class="stk-product-menu-actions">
+      <a href="login.html" class="stk-product-demo-btn">Request a Demo<span aria-hidden="true">→</span></a>
+      <a href="register.html" class="stk-product-sign-btn">Sign In</a>
+    </div>
+
+    <div class="stk-product-menu-foot">&copy; <span data-year>2026</span> Stackly Enterprise. All rights reserved.</div>
+  </div>
+</div>
+<div class="search-overlay" role="dialog" aria-label="Search Stackly">
+  <button class="icon-btn so-close" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></button>
+  <input type="text" placeholder="Search Stackly..." aria-label="Search query">
+  <p class="so-hint">Try &ldquo;pricing&rdquo;, &ldquo;dashboard&rdquo; or &ldquo;security&rdquo;</p>
+  <div class="search-results"></div>
+</div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container" data-hero-particles="10">
+      <span class="eyebrow">Pricing</span>
+      <h1>Premium Software.<br><span class="accent">Honest Pricing.</span></h1>
+      <p class="lead">Transparent per-user pricing with everything included. No hidden modules, no surprise invoices, no lock-in.</p>
+      <div class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Pricing</span></div>
+    </div>
+  </section>
+
+  <pricing-generic-section class="pricing-plans-section">
+    <div class="container">
+      <div class="pricing-section-heading">
+        <div class="pricing-billing-toggle" role="group" aria-label="Billing period">
+          <button class="on" data-bill="monthly">Monthly</button>
+          <button data-bill="annual">Annual <span class="save">-20%</span></button>
+        </div>
+      </div>
+      <div class="pricing-plan-grid">
+        <article class="pricing-plan-card">
+          <div class="pricing-plan-name">Starter</div>
+          <div class="pricing-plan-price"><span class="pricing-plan-amount" data-monthly="29" data-annual="24">$29</span><span class="pricing-plan-per">/user /month</span></div>
+          <p class="pricing-plan-description">For growing teams getting operations in order.</p>
+          <ul class="pricing-plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Up to 25 users</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Core ERP &amp; CRM</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>10 automation workflows</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Standard dashboards</li>
+            <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg>Advanced analytics</li><li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg>24/7 priority support</li>
+          </ul>
+          <a href="register.html" class="btn btn-outline btn-block">Start Free Trial</a>
+        </article>
+        <article class="pricing-plan-card featured pricing-featured-border">
+          <span class="pricing-plan-badge">Most Popular</span>
+          <div class="pricing-plan-name">Business</div>
+          <div class="pricing-plan-price"><span class="pricing-plan-amount" data-monthly="79" data-annual="64">$79</span><span class="pricing-plan-per">/user /month</span></div>
+          <p class="pricing-plan-description">For established companies scaling across departments.</p>
+          <ul class="pricing-plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Unlimited users</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>All modules + BI suite</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Unlimited automations</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Advanced analytics</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>24/7 priority support</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>200+ integrations</li>
+          </ul>
+          <a href="register.html" class="btn btn-primary btn-block"><span>Start Free Trial</span></a>
+        </article>
+        <article class="pricing-plan-card">
+          <div class="pricing-plan-name">Enterprise</div>
+          <div class="pricing-plan-price"><span class="pricing-plan-amount">Custom</span></div>
+          <p class="pricing-plan-description">For global organizations with advanced needs.</p>
+          <ul class="pricing-plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Everything in Business</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Dedicated infrastructure</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Custom compliance &amp; SLAs</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Named success manager</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>White-glove migration</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>On-prem connectors</li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold btn-block">Contact Sales</a>
+        </article>
+      </div>
+
+      <div class="pricing-section-heading" style="margin-top:100px">
+        <span class="eyebrow center">Compare</span>
+        <h2 class="section-title">Every Feature, <span class="accent">Side by Side</span></h2>
+      </div>
+      <div class="pricing-comparison-wrap">
+        <table class="pricing-comparison-table">
+          <thead><tr><th>Feature</th><th><span class="pricing-comparison-plan">Starter</span></th><th class="hl"><span class="pricing-comparison-plan">Business</span></th><th><span class="pricing-comparison-plan">Enterprise</span></th></tr></thead>
+          <tbody>
+            <tr><td>Users included</td><td>Up to 25</td><td class="hl">Unlimited</td><td>Unlimited</td></tr>
+            <tr><td>Core ERP &amp; CRM</td><td><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td><td class="hl"><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+            <tr><td>Automation workflows</td><td>10</td><td class="hl">Unlimited</td><td>Unlimited</td></tr>
+            <tr><td>Advanced analytics &amp; AI</td><td><span class="pricing-feature-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></td><td class="hl"><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+            <tr><td>Custom objects &amp; fields</td><td><span class="pricing-feature-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></td><td class="hl"><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+            <tr><td>Integrations marketplace</td><td>20+</td><td class="hl">200+</td><td>200+ + on-prem</td></tr>
+            <tr><td>SSO / SAML</td><td><span class="pricing-feature-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></td><td class="hl"><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td><td><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+            <tr><td>Data residency options</td><td><span class="pricing-feature-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></td><td class="hl"><span class="pricing-feature-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></td><td><span class="pricing-feature-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span></td></tr>
+            <tr><td>Uptime SLA</td><td>99.5%</td><td class="hl">99.9%</td><td>99.95%</td></tr>
+            <tr><td>Support</td><td>Business hours</td><td class="hl">24/7 priority</td><td>24/7 + named manager</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </pricing-generic-section>
+
+  <pricing-generic-section class="pricing-faq-section">
+    <div class="container">
+      <div class="pricing-section-heading"><span class="eyebrow center">FAQ</span><h2 class="section-title">Pricing <span class="accent">Questions</span></h2></div>
+      <div class="pricing-faq-wrap">
+        <div class="pricing-faq-item"><button class="pricing-faq-question" aria-expanded="false"><span><span class="pricing-faq-number">01</span>How does the 20% annual discount work?</span><span class="pricing-faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="pricing-faq-answer"><div class="pricing-faq-answer-inner">Annual plans are billed upfront at 20% less than the monthly equivalent. You can switch from monthly to annual at any time — we credit your remaining balance.</div></div></div>
+        <div class="pricing-faq-item"><button class="pricing-faq-question" aria-expanded="false"><span><span class="pricing-faq-number">02</span>Is there a free trial?</span><span class="pricing-faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="pricing-faq-answer"><div class="pricing-faq-answer-inner">Yes — every plan includes a full-featured 14-day trial with pricing-feature-no credit card required. Your data and configuration carry over if you subscribe.</div></div></div>
+        <div class="pricing-faq-item"><button class="pricing-faq-question" aria-expanded="false"><span><span class="pricing-faq-number">03</span>What counts as a user?</span><span class="pricing-faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="pricing-faq-answer"><div class="pricing-faq-answer-inner">Anyone with a login who can edit data. Read-only dashboard viewers and external portal guests are always free, on every plan.</div></div></div>
+        <div class="pricing-faq-item"><button class="pricing-faq-question" aria-expanded="false"><span><span class="pricing-faq-number">04</span>Can I change plans later?</span><span class="pricing-faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="pricing-faq-answer"><div class="pricing-faq-answer-inner">Upgrade instantly, downgrade at your next renewal. Everything is pro-rated automatically — you'll never pay for seats you don't use.</div></div></div>
+      </div>
+    </div>
+  </pricing-generic-section>
+
+  <pricing-generic-section class="pricing-cta-section">
+    <div class="container">
+      <div class="pricing-cta-box">
+        <span class="pricing-cta-glow"></span>
+        <h2>Still Deciding?<br><span class="gold-i">Let's Talk It Through.</span></h2>
+        <p>Our sales engineers will right-size a plan for your team in one call — with transparent pricing you can take to your CFO.</p>
+        <div class="pricing-cta-actions">
+          <a href="contact.html" class="btn btn-gold"><span>Talk to Sales</span><svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+          <a href="register.html" class="btn btn-white">Start Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </pricing-generic-section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
+    <p class="footer-statement">Technology that moves <span class="accent">business</span> forward.</p>
+    <div class="footer-grid">
+      <div class="footer-col footer-about">
+        <h5>Stackly</h5>
+        <p>The all-in-one enterprise platform for operations, analytics and growth — trusted by 500+ businesses worldwide.</p>
+        <div class="social-row">
+          <a href="404.html" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.49 2.49 0 1 1 5 8.48a2.49 2.49 0 0 1-.02-4.98zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg></a>
+          <a href="404.html" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L6.5 3.9H4.7z"/></svg></a>
+          <a href="404.html" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.8c.2.9.9 1.6 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.8.4-4.8zM9.8 15.5v-7l6 3.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="404.html">Enterprise Suite</a></li><li><a href="404.html">Analytics Cloud</a></li><li><a href="404.html">Automation</a></li><li><a href="404.html">Integrations</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5>
+        <ul><li><a href="index.html">home</a></li><li><a href="product.html">products</a></li><li><a href="services.html">service</a></li><li><a href="pricing.html">pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">contact</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="404.html">Pricing</a></li><li><a href="404.html">FAQ</a></li><li><a href="404.html">Documentation</a></li><li><a href="404.html">Dashboard Demo</a></li></ul></div>
+      <div class="footer-col newsletter">
+        <h5>Stay Ahead</h5>
+        <p>Monthly insights on enterprise technology. No noise.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" placeholder="Your work email" aria-label="Email address" required>
+          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2025</span> Stackly Enterprise Software. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<button class="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/components.js"></script>
+
+
+
+
+
+
+<script id="stackly-pricing-page-js">
+(function(){
+  'use strict';
+
+  function initStacklyPricing(){
+    var root=document.querySelector('.stackly-pricing-page');
+    if(!root) return;
+
+    /* Billing toggle */
+    var billingButtons=root.querySelectorAll('.pricing-billing-toggle [data-bill]');
+    var amounts=root.querySelectorAll('.pricing-plan-amount[data-monthly]');
+
+    billingButtons.forEach(function(button){
+      button.addEventListener('click',function(){
+        billingButtons.forEach(function(item){item.classList.remove('on');});
+        button.classList.add('on');
+
+        var period=button.getAttribute('data-bill');
+        amounts.forEach(function(amount){
+          var value=amount.getAttribute('data-'+period);
+          if(value){
+            amount.textContent='$'+value;
+          }
+        });
+      });
+    });
+
+    /* FAQ accordion */
+    var faqItems=root.querySelectorAll('.pricing-faq-item');
+    faqItems.forEach(function(item){
+      var question=item.querySelector('.pricing-faq-question');
+      if(!question) return;
+
+      question.addEventListener('click',function(){
+        var isOpen=item.classList.contains('open');
+
+        faqItems.forEach(function(other){
+          other.classList.remove('open');
+          var q=other.querySelector('.pricing-faq-question');
+          if(q) q.setAttribute('aria-expanded','false');
+        });
+
+        if(!isOpen){
+          item.classList.add('open');
+          question.setAttribute('aria-expanded','true');
+        }
+      });
+    });
+
+    /* Safe local reveal. Hero is explicitly excluded. */
+    var revealTargets=root.querySelectorAll(
+      '.pricing-section-heading, .pricing-plan-card, .pricing-comparison-wrap, ' +
+      '.pricing-faq-section .pricing-section-heading, .pricing-faq-item, .pricing-cta-box'
+    );
+
+    revealTargets.forEach(function(el,index){
+      el.classList.add('pricing-local-reveal');
+      el.style.transitionDelay=Math.min(index*45,280)+'ms';
+    });
+
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      revealTargets.forEach(function(el){el.classList.add('pricing-visible');});
+      return;
+    }
+
+    if('IntersectionObserver' in window){
+      var observer=new IntersectionObserver(function(entries,obs){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('pricing-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },{threshold:.06,rootMargin:'0px 0px -45px 0px'});
+
+      revealTargets.forEach(function(el){observer.observe(el);});
+
+      /* Safety fallback: animation can never leave content invisible. */
+      window.setTimeout(function(){
+        revealTargets.forEach(function(el){el.classList.add('pricing-visible');});
+      },1800);
+    }else{
+      revealTargets.forEach(function(el){el.classList.add('pricing-visible');});
+    }
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initStacklyPricing,{once:true});
+  }else{
+    initStacklyPricing();
+  }
+})();
+</script>
+
+
+<script id="stackly-pricing-page-mobile-menu-controller">
+(function(){
+  function initPricingPageMenu(){
+    var trigger = document.querySelector('.stk-product-trigger');
+    var menu = document.querySelector('.stk-product-menu');
+    var closeButton = document.querySelector('.stk-product-menu-close');
+
+    if (!trigger || !menu || !closeButton || menu.dataset.stkBound === 'true') return;
+    menu.dataset.stkBound = 'true';
+
+    function setOpen(open){
+      trigger.classList.toggle('is-open', open);
+      menu.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+      document.documentElement.classList.toggle('stk-product-menu-lock', open);
+      document.body.classList.toggle('stk-product-menu-lock', open);
+    }
+
+    trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('is-open'));
+    });
+
+    closeButton.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+    });
+
+    menu.addEventListener('click', function(e){
+      if (e.target === menu) setOpen(false);
+    });
+
+    menu.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+        setOpen(false);
+      }
+    });
+
+    window.addEventListener('resize', function(){
+      if (window.innerWidth >= 768) setOpen(false);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPricingPageMenu, {once:true});
+  } else {
+    initPricingPageMenu();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly — Enterprise Software That Moves You Forward</title>
+<meta name="description" content="Stackly is the all-in-one enterprise platform: ERP, CRM, analytics, automation and collaboration in one premium product.">
+<link rel="icon" type="image/webp" href="assets/img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+
+<style>
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+  [id] {
+    scroll-margin-top: 96px;
+  }
+  .nav-anchor {
+    position: relative;
+    height: 0;
+    scroll-margin-top: 96px;
+  }
+</style>
+
+
+<style id="stackly-mobile-fix">
+/* =========================================================
+   STACKLY — MOBILE POLISH
+   Keeps every section readable, balanced and touch-friendly
+   ========================================================= */
+@media (max-width: 767px){
+  html{scroll-padding-top:78px}
+  [id]{scroll-margin-top:78px}
+  body{overflow-x:hidden}
+  .container{width:min(100% - 32px, 1180px);margin-inline:auto}
+
+  /* Header */
+  .site-header{height:72px}
+  .header-inner{min-height:72px;padding:0}
+  .brand .mark{width:36px;height:36px}
+  .wordmark{font-size:20px}
+  .header-actions{gap:8px}
+  .lang-select,.header-actions>.btn{display:none}
+  .hamburger{display:flex;width:44px;height:44px;align-items:center;justify-content:center}
+
+  /* Mobile menu */
+  .mobile-menu{padding:22px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .mobile-menu .mm-brand{margin-bottom:26px}
+  .mobile-menu nav{gap:2px}
+  .mobile-menu nav a{padding:13px 4px;font-size:17px}
+  .mm-actions{gap:10px;margin-top:20px}
+  .mm-actions .btn{width:100%;justify-content:center}
+
+  /* Global section spacing */
+  .section{padding:68px 0}
+  .section.white{padding:68px 0}
+  .section.warm{padding:68px 0}
+  .section-head{margin-bottom:34px}
+  .section-head.center{max-width:100%}
+  .section-title{font-size:clamp(30px,8.4vw,42px);line-height:1.08;letter-spacing:-.035em}
+  .lead{font-size:15px;line-height:1.7}
+  .eyebrow{font-size:11px;letter-spacing:.16em}
+
+  /* Hero */
+  .hero{min-height:auto;padding:94px 0 0;overflow:hidden}
+  .hero-bg{inset:0}
+  .hero-photo{min-height:100%;object-position:center}
+  .hero-lines{opacity:.55}
+  .hero-words{font-size:9px;letter-spacing:.15em;top:105px;white-space:nowrap}
+  .hero-grid{display:flex;flex-direction:column;gap:42px}
+  .hero-copy{width:100%;padding-top:18px}
+  .hero-title{font-size:clamp(42px,12.5vw,64px);line-height:.94;letter-spacing:-.055em}
+  .hero-title .line{display:block}
+  .hero-sub{font-size:15px;line-height:1.65;max-width:100%;margin-top:22px}
+  .hero-ctas{display:flex;flex-direction:column;align-items:stretch;gap:12px;margin-top:26px}
+  .hero-ctas .btn{width:100%;justify-content:center}
+  .video-cta{justify-content:center;width:100%;padding:10px}
+
+  /* Dashboard mockup: scale without horizontal page overflow */
+  .hero-visual{width:100%;min-width:0;padding:0 0 32px}
+  .laptop{width:100%;transform:none}
+  .laptop-screen{width:100%;overflow:hidden;border-radius:10px}
+  .mdash{min-width:520px;transform-origin:top left;transform:scale(.62);width:161.3%;margin-bottom:-38%}
+  .laptop-base{width:86%;margin-inline:auto}
+  .float-card{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:calc(100% - 12px);margin:10px auto 0}
+  .fc-1,.fc-2,.fc-3{transform:none}
+
+  /* Stats */
+  .stats-strip{margin-top:0;padding:20px 0}
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+  .stat{padding:15px 8px;min-width:0}
+  .stat:nth-child(odd){border-left:0}
+  .stat .num{font-size:27px}
+  .stat .lbl{font-size:11px;line-height:1.35}
+  .stars{font-size:11px}
+
+  /* Trust */
+  .trust{padding:38px 0}
+  .trust-head{gap:14px;align-items:flex-end}
+  .trust-head h3{font-size:16px;line-height:1.25}
+  .trust-head .link-arrow{font-size:12px;white-space:nowrap}
+  .logo-row{grid-template-columns:repeat(2,1fr);gap:0}
+  .logo-cell{min-height:66px;padding:12px 8px;font-size:13px}
+
+  /* Platform/services */
+  .services-grid{grid-template-columns:1fr;gap:14px}
+  .service-card{min-height:0;padding:25px 22px}
+  .service-card h3{font-size:20px;line-height:1.2}
+  .service-card p{font-size:14px;line-height:1.65}
+  .sc-num{font-size:11px}
+
+  /* Showcase */
+  .showcase-grid{grid-template-columns:1fr;gap:34px}
+  .showcase-photo{order:2;width:100%;overflow:hidden;border-radius:16px}
+  .showcase-photo img{width:100%;height:auto;display:block;transform:none!important}
+  .showcase-grid>div:last-child{order:1}
+  .feature-list{gap:10px}
+  .feature-item{padding:14px 0;gap:13px}
+  .feature-item h4{font-size:16px}
+  .feature-item p{font-size:13px;line-height:1.55}
+  .fi-ic{width:40px;height:40px;min-width:40px}
+  .showcase-grid .btn{width:100%;justify-content:center;margin-top:10px}
+
+  /* Industries */
+  .section-head.split{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+  .section-head.split .btn{width:100%;justify-content:center}
+  .industries-grid{grid-template-columns:1fr;gap:14px}
+  .ind-card{min-height:390px;border-radius:16px}
+  .ind-content{padding:22px}
+  .ind-content h3{font-size:24px;line-height:1.08}
+  .ind-content p{font-size:13px;line-height:1.55}
+  .ind-stat{font-size:11px}
+
+  /* Automation flow */
+  .flow-wrap{overflow:visible}
+  .flow-line-svg{display:none}
+  .flow-steps{display:flex;flex-direction:column;gap:0}
+  .flow-step{display:grid;grid-template-columns:1fr 50px;gap:18px;position:relative;padding:0 0 28px}
+  .flow-step:not(:last-child)::after{content:"";position:absolute;right:24px;top:50px;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(167,25,48,.5),rgba(200,160,74,.15))}
+  .flow-node{width:50px;height:50px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+  .flow-step h4{font-size:19px;margin:5px 0 6px}
+  .flow-step p{font-size:13px;line-height:1.6}
+  .fs-num{font-size:10px;letter-spacing:.13em}
+
+  /* Case study */
+  .case-study{grid-template-columns:1fr;gap:30px}
+  .case-media{min-height:280px;border-radius:16px}
+  .case-media img{height:100%;min-height:280px;object-fit:cover}
+  .case-study .section-title{font-size:30px}
+  .case-study .lead{font-size:14px}
+  .case-beforeafter{grid-template-columns:1fr;gap:10px}
+  .ba-chip{font-size:13px;line-height:1.55;padding:15px}
+  .case-metrics{grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+  .case-metric{padding:14px 8px}
+  .case-metric b{font-size:24px}
+  .case-metric span{font-size:11px;line-height:1.35}
+
+  /* Why Stackly */
+  .why-grid{grid-template-columns:1fr;gap:12px}
+  .why-card{padding:20px;gap:14px}
+  .why-card h4{font-size:17px}
+  .why-card p{font-size:13px;line-height:1.6}
+  .wc-ic{width:42px;height:42px;min-width:42px}
+
+  /* Generic grids / cards appearing in later sections */
+  .cards-grid,.feature-grid,.benefits-grid,.testimonials-grid,.pricing-grid,.blog-grid,.faq-grid{grid-template-columns:1fr!important}
+  .card,.feature-card,.benefit-card,.testimonial-card,.price-card,.blog-card,.faq-item{width:100%;min-width:0}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* Typography and media safety */
+  img,video,svg{max-width:100%}
+  .section img{height:auto}
+  .btn{min-height:46px;padding:12px 18px}
+  a,.btn,button{touch-action:manipulation}
+
+  /* Footer */
+  footer{padding-top:58px}
+  .footer-statement{font-size:30px;line-height:1.08;max-width:100%}
+  .footer-grid{grid-template-columns:1fr;gap:30px;margin-top:34px}
+  .footer-col h5{font-size:12px}
+  .footer-about p,.footer-col li,.newsletter p{font-size:13px;line-height:1.6}
+  .newsletter-form{width:100%}
+  .footer-bottom{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .legal-links{flex-wrap:wrap;gap:12px 18px}
+
+  /* Back-to-top */
+  .to-top{width:44px;height:44px;right:16px;bottom:16px}
+}
+
+@media (max-width: 380px){
+  .container{width:min(100% - 24px,1180px)}
+  .hero-title{font-size:39px}
+  .section-title{font-size:29px}
+  .ind-card{min-height:350px}
+  .case-metrics{gap:8px}
+  .stat .num{font-size:24px}
+}
+
+/* Tablet */
+@media (min-width:768px) and (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{max-width:760px;margin:auto;text-align:center}
+  .hero-ctas{justify-content:center}
+  .hero-visual{max-width:850px;margin:auto}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .industries-grid{grid-template-columns:repeat(2,1fr)}
+  .showcase-grid,.case-study{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+
+<style id="stackly-visibility-fix">
+
+/* =========================================================
+   STACKLY VISIBILITY FIX
+   Uses independent reveal classes instead of AOS visibility
+   so no section can remain hidden when an animation script
+   fails, loads late, or targets an old class.
+   ========================================================= */
+.stackly-section,
+.stackly-section > .container,
+.stackly-products,
+.stackly-pricing,
+.stackly-testimonials,
+.stackly-faq,
+.stackly-cta {
+  position: relative;
+  visibility: visible !important;
+}
+
+[data-stackly-reveal] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity .75s ease,
+    transform .75s cubic-bezier(.2,.65,.2,1);
+  transition-delay: 0ms;
+}
+
+[data-stackly-reveal][data-reveal-delay="100"] { transition-delay: .10s; }
+[data-stackly-reveal][data-reveal-delay="150"] { transition-delay: .15s; }
+[data-stackly-reveal][data-reveal-delay="200"] { transition-delay: .20s; }
+[data-stackly-reveal][data-reveal-delay="250"] { transition-delay: .25s; }
+[data-stackly-reveal][data-reveal-delay="300"] { transition-delay: .30s; }
+
+.stackly-reveal-ready [data-stackly-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.stackly-reveal-ready [data-stackly-reveal].stackly-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+/* Never allow the important content sections to be hidden by
+   stale animation rules from old CSS/JS files. */
+.stackly-products,
+.stackly-pricing,
+.stackly-testimonials,
+.stackly-faq,
+.stackly-cta,
+.stackly-section .container {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-stackly-reveal],
+  .stackly-reveal-ready [data-stackly-reveal],
+  .stackly-reveal-ready [data-stackly-reveal].stackly-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+</style>
+
+<style id="stackly-mobile-menu-final-fix">
+/* =========================================================
+   STACKLY — MOBILE MENU FINAL FIX
+   The mobile navigation is an independent full-screen layer.
+   It must never expose the hero/content behind the menu.
+   ========================================================= */
+@media (max-width: 767px){
+  body{overflow-x:hidden}
+  body.stackly-menu-open{overflow:hidden;touch-action:none}
+
+  .site-header{z-index:10020}
+
+  .hamburger{
+    position:relative;
+    z-index:10030;
+    flex:0 0 44px;
+    border:0;
+    border-radius:12px;
+    background:rgba(255,255,255,.92);
+    color:#8d1228;
+    box-shadow:0 8px 22px rgba(44,24,18,.10);
+    cursor:pointer;
+  }
+  .hamburger span{
+    position:absolute;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#8d1228;
+    transition:transform .28s ease, opacity .2s ease, top .28s ease;
+  }
+  .hamburger span:nth-child(1){top:14px}
+  .hamburger span:nth-child(2){top:21px}
+  .hamburger span:nth-child(3){top:28px}
+  .hamburger.is-open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .hamburger.is-open span:nth-child(2){opacity:0}
+  .hamburger.is-open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+  /* Backdrop behind the actual panel */
+  .mobile-menu::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(31,18,15,.26);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .28s ease;
+    z-index:-1;
+  }
+
+  .mobile-menu{
+    position:fixed !important;
+    inset:14px 12px 14px 12px !important;
+    width:auto !important;
+    height:auto !important;
+    max-height:none !important;
+    margin:0 !important;
+    padding:22px 18px 20px !important;
+    box-sizing:border-box;
+    display:flex !important;
+    flex-direction:column;
+    overflow:hidden !important;
+    z-index:10010 !important;
+    background:
+      radial-gradient(circle at 88% 12%,rgba(200,160,74,.14),transparent 30%),
+      linear-gradient(145deg,#fffdf8 0%,#f8f1e7 58%,#f5eee6 100%);
+    border:1px solid rgba(141,18,40,.13);
+    border-radius:20px;
+    box-shadow:0 24px 70px rgba(44,24,18,.25);
+    transform:translate3d(0,110%,0) !important;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:transform .42s cubic-bezier(.22,.8,.2,1),opacity .25s ease,visibility 0s linear .42s;
+  }
+
+  .mobile-menu.open,
+  body.stackly-menu-open .mobile-menu{
+    transform:translate3d(0,0,0) !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+    transition:transform .42s cubic-bezier(.22,.8,.2,1),opacity .25s ease,visibility 0s linear 0s;
+  }
+  body.stackly-menu-open .mobile-menu::before,
+  .mobile-menu.open::before{opacity:1}
+
+  .mobile-menu .mm-brand{
+    display:flex !important;
+    align-items:center;
+    gap:9px;
+    flex:0 0 auto;
+    width:max-content;
+    margin:0 0 24px !important;
+    padding:2px 0 !important;
+    color:#741020;
+    text-decoration:none;
+  }
+  .mobile-menu .mm-brand .mark{width:38px;height:38px;flex:0 0 38px}
+  .mobile-menu .mm-brand .wordmark{
+    font-family:Fraunces,serif;
+    font-size:23px;
+    font-weight:600;
+    letter-spacing:-.03em;
+  }
+
+  .mobile-menu nav{
+    display:flex !important;
+    flex:1 1 auto;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px !important;
+    min-height:0;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  .mobile-menu nav a{
+    position:relative;
+    display:flex !important;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    min-height:52px;
+    padding:12px 13px !important;
+    box-sizing:border-box;
+    border:1px solid transparent;
+    border-radius:12px;
+    color:#2a211e !important;
+    background:transparent;
+    font-family:Inter,sans-serif;
+    font-size:16px !important;
+    font-weight:600;
+    letter-spacing:-.01em;
+    text-decoration:none !important;
+    transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease;
+  }
+  .mobile-menu nav a::after{
+    content:"→";
+    color:#a71930;
+    font-size:18px;
+    font-weight:500;
+    opacity:.7;
+    transition:transform .2s ease;
+  }
+  .mobile-menu nav a:hover,
+  .mobile-menu nav a:focus-visible{
+    color:#8d1228 !important;
+    background:rgba(167,25,48,.07);
+    border-color:rgba(167,25,48,.10);
+    transform:translateX(3px);
+    outline:none;
+  }
+  .mobile-menu nav a:hover::after,
+  .mobile-menu nav a:focus-visible::after{transform:translateX(3px)}
+
+  .mm-actions{
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:10px !important;
+    flex:0 0 auto;
+    margin:18px 0 0 !important;
+    padding-top:16px;
+    border-top:1px solid rgba(116,16,32,.10);
+  }
+  .mm-actions .btn{
+    width:100% !important;
+    min-height:48px;
+    padding:11px 10px !important;
+    justify-content:center;
+    border-radius:12px;
+    font-size:13px;
+  }
+  .mm-actions .btn-outline{
+    background:rgba(255,255,255,.65);
+    border-color:rgba(116,16,32,.20);
+    color:#741020;
+  }
+  .mm-foot{
+    flex:0 0 auto;
+    margin-top:14px;
+    text-align:center;
+    color:rgba(42,33,30,.48);
+    font:500 10px/1.4 Inter,sans-serif;
+    letter-spacing:.04em;
+  }
+
+  /* The page remains completely underneath the menu. */
+  body.stackly-menu-open > main,
+  body.stackly-menu-open > footer,
+  body.stackly-menu-open > .to-top{
+    pointer-events:none;
+  }
+}
+
+@media (max-width:390px){
+  .mobile-menu{inset:10px 9px 10px !important;padding:18px 15px 16px !important;border-radius:18px}
+  .mobile-menu .mm-brand{margin-bottom:16px !important}
+  .mobile-menu .mm-brand .mark{width:34px;height:34px;flex-basis:34px}
+  .mobile-menu .mm-brand .wordmark{font-size:21px}
+  .mobile-menu nav a{min-height:47px;padding:10px 11px !important;font-size:15px !important}
+  .mm-actions{margin-top:12px !important;padding-top:12px}
+  .mm-actions .btn{min-height:45px;font-size:12px}
+  .mm-foot{margin-top:10px;font-size:9px}
+}
+
+@media (min-width:768px){
+  .mobile-menu{display:none !important}
+}
+</style>
+
+
+<style id="stackly-active-nav-fix">
+/* =========================================================
+   STACKLY — ACTIVE NAVIGATION
+   Automatically highlights the current page.
+   ========================================================= */
+.main-nav a.active,
+.mobile-menu nav a.active {
+  color:#A71930 !important;
+  font-weight:700;
+}
+
+.main-nav a.active{
+  position:relative;
+}
+
+.main-nav a.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  border-radius:10px;
+  background:linear-gradient(90deg,#A71930,#C8A04A);
+}
+
+.mobile-menu nav a.active{
+  background:rgba(167,25,48,.08);
+  border-color:rgba(167,25,48,.12);
+  color:#8D1228 !important;
+  transform:translateX(3px);
+}
+
+.mobile-menu nav a.active::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:4px;
+  height:24px;
+  border-radius:10px;
+  transform:translateY(-50%);
+  background:linear-gradient(180deg,#A71930,#C8A04A);
+}
+</style>
+
+
+<style id="stackly-home-mobile-menu-isolated">
+/* =========================================================
+   STACKLY HOME — PREMIUM MOBILE MENU
+   Isolated class names prevent conflicts with old menu JS/CSS.
+   Same menu design used on the fixed Contact page.
+   ========================================================= */
+@media (max-width:767px){
+
+  html.stk-home-menu-lock,
+  body.stk-home-menu-lock{
+    overflow:hidden !important;
+    touch-action:none;
+  }
+
+  .site-header{
+    z-index:10020 !important;
+  }
+
+  .stk-home-trigger{
+    position:relative;
+    z-index:10031;
+    display:flex !important;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    border:0;
+    border-radius:12px;
+    background:rgba(255,255,255,.94);
+    color:#8d1228;
+    box-shadow:0 8px 22px rgba(44,24,18,.10);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .stk-home-trigger span{
+    position:absolute;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#8d1228;
+    transition:transform .28s ease,opacity .2s ease,top .28s ease;
+  }
+
+  .stk-home-trigger span:nth-child(1){top:14px}
+  .stk-home-trigger span:nth-child(2){top:21px}
+  .stk-home-trigger span:nth-child(3){top:28px}
+
+  .stk-home-trigger.is-open span:nth-child(1){
+    top:21px;
+    transform:rotate(45deg);
+  }
+  .stk-home-trigger.is-open span:nth-child(2){opacity:0}
+  .stk-home-trigger.is-open span:nth-child(3){
+    top:21px;
+    transform:rotate(-45deg);
+  }
+
+  .stk-home-menu{
+    position:fixed !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    box-sizing:border-box;
+    padding:14px 12px !important;
+    display:block !important;
+    z-index:10040 !important;
+    background:rgba(31,18,15,.28);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .25s ease,visibility 0s linear .42s;
+  }
+
+  .stk-home-menu.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition:opacity .25s ease,visibility 0s linear 0s;
+  }
+
+  .stk-home-menu-card{
+    position:relative;
+    z-index:10041;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    padding:22px 18px 20px;
+    border:1px solid rgba(141,18,40,.13);
+    border-radius:20px;
+    background:
+      radial-gradient(circle at 88% 10%,rgba(200,160,74,.14),transparent 30%),
+      linear-gradient(145deg,#fffdf8 0%,#f8f1e7 58%,#f5eee6 100%);
+    box-shadow:0 24px 70px rgba(44,24,18,.25);
+    isolation:isolate;
+    transform:translateY(22px) scale(.985);
+    transition:transform .42s cubic-bezier(.22,.8,.2,1);
+  }
+
+  .stk-home-menu.is-open .stk-home-menu-card{
+    transform:translateY(0) scale(1);
+  }
+
+  .stk-home-menu-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex:0 0 auto;
+    margin-bottom:18px;
+  }
+
+  .stk-home-menu-brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    width:max-content;
+    color:#741020 !important;
+    text-decoration:none !important;
+  }
+
+  .stk-home-menu-mark{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+  }
+
+  .stk-home-menu-brand > span{
+    font-family:Fraunces,serif;
+    font-size:23px;
+    font-weight:600;
+    letter-spacing:-.03em;
+  }
+
+  .stk-home-menu-close{
+    position:relative;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    padding:0;
+    border:1px solid rgba(116,16,32,.12);
+    border-radius:13px;
+    background:rgba(255,255,255,.86);
+    box-shadow:0 8px 22px rgba(44,24,18,.09);
+    cursor:pointer;
+  }
+
+  .stk-home-menu-close span{
+    position:absolute;
+    left:12px;
+    top:20px;
+    width:20px;
+    height:2px;
+    border-radius:10px;
+    background:#a71930;
+  }
+
+  .stk-home-menu-close span:first-child{transform:rotate(45deg)}
+  .stk-home-menu-close span:last-child{transform:rotate(-45deg)}
+
+  .stk-home-menu-nav{
+    display:flex !important;
+    flex:1 1 auto;
+    min-height:0;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .stk-home-menu-nav a{
+    position:relative;
+    display:flex !important;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    min-height:52px;
+    box-sizing:border-box;
+    padding:12px 13px !important;
+    border:1px solid transparent;
+    border-radius:12px;
+    color:#2a211e !important;
+    background:transparent;
+    font-family:Inter,sans-serif;
+    font-size:16px !important;
+    font-weight:600;
+    letter-spacing:-.01em;
+    text-decoration:none !important;
+    transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease;
+  }
+
+  .stk-home-menu-nav a > span{
+    color:#a71930;
+    font-size:18px;
+    font-weight:500;
+    opacity:.72;
+    transition:transform .2s ease;
+  }
+
+  .stk-home-menu-nav a:hover,
+  .stk-home-menu-nav a:focus-visible{
+    color:#8d1228 !important;
+    background:rgba(167,25,48,.07);
+    border-color:rgba(167,25,48,.10);
+    transform:translateX(3px);
+    outline:none;
+  }
+
+  .stk-home-menu-nav a:hover > span,
+  .stk-home-menu-nav a:focus-visible > span{
+    transform:translateX(3px);
+  }
+
+  .stk-home-menu-nav a.is-active{
+    color:#a71930 !important;
+    font-weight:700;
+    background:rgba(167,25,48,.08);
+    border-color:rgba(167,25,48,.12);
+    transform:translateX(3px);
+  }
+
+  .stk-home-menu-nav a.is-active::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    width:4px;
+    height:24px;
+    border-radius:10px;
+    transform:translateY(-50%);
+    background:linear-gradient(180deg,#a71930,#c8a04a);
+  }
+
+  .stk-home-menu-actions{
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:10px !important;
+    flex:0 0 auto;
+    margin:18px 0 0 !important;
+    padding-top:16px;
+    border-top:1px solid rgba(116,16,32,.10);
+  }
+
+  .stk-home-menu-actions a{
+    min-height:48px;
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    padding:11px 10px;
+    font:700 13px/1 Inter,sans-serif;
+    text-decoration:none;
+  }
+
+  .stk-home-demo-btn{
+    gap:8px;
+    color:#fff !important;
+    background:#a71930;
+    box-shadow:0 9px 22px rgba(167,25,48,.18);
+  }
+
+  .stk-home-demo-btn span{
+    font-size:17px;
+    line-height:1;
+    font-weight:500;
+  }
+
+  .stk-home-sign-btn{
+    color:#741020 !important;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(116,16,32,.18);
+  }
+
+  .stk-home-menu-foot{
+    flex:0 0 auto;
+    margin-top:14px;
+    text-align:center;
+    color:rgba(42,33,30,.48);
+    font:500 10px/1.4 Inter,sans-serif;
+    letter-spacing:.04em;
+  }
+
+  /* Old desktop/header layers cannot intercept the open menu. */
+  body:has(.stk-home-menu.is-open) .site-header{
+    pointer-events:none !important;
+  }
+}
+
+@media (max-width:390px){
+  .stk-home-menu{
+    padding:10px 9px !important;
+  }
+
+  .stk-home-menu-card{
+    padding:18px 15px 16px;
+    border-radius:18px;
+  }
+
+  .stk-home-menu-head{
+    margin-bottom:16px;
+  }
+
+  .stk-home-menu-mark{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+
+  .stk-home-menu-brand > span{
+    font-size:21px;
+  }
+
+  .stk-home-menu-nav a{
+    min-height:47px;
+    padding:10px 11px !important;
+    font-size:15px !important;
+  }
+
+  .stk-home-menu-actions{
+    margin-top:12px !important;
+    padding-top:12px;
+  }
+
+  .stk-home-menu-actions a{
+    min-height:45px;
+    font-size:12px;
+  }
+
+  .stk-home-menu-foot{
+    margin-top:10px;
+    font-size:9px;
+  }
+}
+
+@media (min-width:768px){
+  .stk-home-trigger,
+  .stk-home-menu{
+    display:none !important;
+  }
+}
+<style id="stackly-home-active-only-final">
+@media (max-width:767px){
+  /* HOME PAGE: only Home is allowed to have active styling. */
+  .stk-home-menu-nav a.is-active{
+    color:#a71930 !important;
+    font-weight:700 !important;
+    background:rgba(167,25,48,.08) !important;
+    border-color:rgba(167,25,48,.12) !important;
+    transform:translateX(3px) !important;
+  }
+  .stk-home-menu-nav a:not(:first-child){
+    color:#2a211e !important;
+    font-weight:600 !important;
+    background:transparent !important;
+    border-color:transparent !important;
+    transform:none !important;
+  }
+  .stk-home-menu-nav a:not(:first-child)::before{
+    display:none !important;
+  }
+}
+</style>
+
+</style>
+
+
+<style id="stackly-home-hamburger-final-fix">
+/* =========================================================
+   HOME PAGE MOBILE MENU — FINAL ACTIVE-STATE FIX
+   Only Home is allowed to look active.
+   Other menu items must never look like an active card on
+   hover/focus either.
+   ========================================================= */
+
+/* Home: the only active item */
+.stk-home-menu-nav a[href="index.html"].is-active,
+.stk-home-menu-nav a[href="index.html"][aria-current="page"]{
+  color:#a71930 !important;
+  font-weight:700 !important;
+  background:rgba(167,25,48,.08) !important;
+  border-color:rgba(167,25,48,.12) !important;
+  transform:translateX(3px) !important;
+}
+
+/* Absolutely neutralize active states on every other item. */
+.stk-home-menu-nav a:not([href="index.html"]).is-active,
+.stk-home-menu-nav a:not([href="index.html"])[aria-current="page"]{
+  color:#2a211e !important;
+  font-weight:600 !important;
+  background:transparent !important;
+  border-color:transparent !important;
+  transform:none !important;
+}
+
+.stk-home-menu-nav a:not([href="index.html"]).is-active::before,
+.stk-home-menu-nav a:not([href="index.html"])[aria-current="page"]::before{
+  display:none !important;
+  content:none !important;
+}
+
+/* IMPORTANT: hover/focus on Products, Solutions, Resources, etc.
+   must NOT imitate the Home active card. */
+.stk-home-menu-nav a:not([href="index.html"]):hover,
+.stk-home-menu-nav a:not([href="index.html"]):focus-visible{
+  color:#2a211e !important;
+  background:transparent !important;
+  border-color:transparent !important;
+  transform:none !important;
+  outline:none !important;
+}
+
+/* Keep only the arrow's small movement on non-home items. */
+.stk-home-menu-nav a:not([href="index.html"]):hover > span,
+.stk-home-menu-nav a:not([href="index.html"]):focus-visible > span{
+  transform:translateX(3px) !important;
+}
+
+/* Home may still have its intended hover/focus treatment. */
+.stk-home-menu-nav a[href="index.html"]:hover,
+.stk-home-menu-nav a[href="index.html"]:focus-visible{
+  color:#a71930 !important;
+}
+</style>
+
+<style id="stackly-customer-stories-people-fix">
+/* =========================================================
+   STACKLY — CUSTOMER STORIES PEOPLE IMAGES
+   Replaces initials with premium circular customer portraits.
+   ========================================================= */
+.t-ava{width:68px!important;height:68px!important;min-width:68px!important;border-radius:50%!important;overflow:hidden!important;position:relative;flex:0 0 68px;background:linear-gradient(135deg,#a71930,#c8a04a);border:2px solid rgba(200,160,74,.42);box-shadow:0 10px 26px rgba(74,18,30,.16)}
+.t-ava img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center top!important;transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .35s ease}
+.t-card:hover .t-ava img{transform:scale(1.07);filter:saturate(1.05) contrast(1.02)}
+.t-ava::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.24);pointer-events:none}
+@media(max-width:767px){.t-ava{width:58px!important;height:58px!important;min-width:58px!important;flex-basis:58px}}
+</style>
+
+
+<style id="stackly-webp-logo-final">
+/* =========================================================
+   STACKLY — ONE LOGO EVERYWHERE
+   Put your WebP at: assets/images/logo.webp
+   The same logo is used in the header, mobile menu,
+   dashboard mockup, preloader and footer.
+   Color matches the Request Demo button: #A71930.
+   ========================================================= */
+.stackly-logo-webp{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(18%)
+    sepia(55%)
+    saturate(2814%)
+    hue-rotate(337deg)
+    brightness(83%)
+    contrast(94%);
+}
+
+/* Header / footer logo mark */
+.site-header .brand .stackly-logo-webp,
+.site-footer .brand .stackly-logo-webp{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+}
+
+/* Preloader */
+.preloader .pl-logo .stackly-logo-webp{
+  width:48px;
+  height:48px;
+}
+
+/* Dashboard mockup */
+.ms-logo .stackly-logo-webp{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+}
+
+/* Mobile menu */
+.stk-home-menu-mark.stackly-logo-webp{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+}
+
+@media(max-width:390px){
+  .stk-home-menu-mark.stackly-logo-webp{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 11-13h-7l0-7z"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2c2.8.3 4.9 1.7 5.5 4.8"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9A6 6 0 0 0 6.2 8.6 5 5 0 0 0 7 19h10.5z"/></symbol><symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5m6-5v5M6 7h12v4a6 6 0 0 1-12 0V7z"/><path d="M12 17v5"/></symbol><symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="2"/><rect x="17.5" y="13" width="4" height="6" rx="2"/><path d="M20 19a3 3 0 0 1-3 3h-3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2L2 8l10 6 10-6-10-6z"/><path d="M2 14l10 6 10-6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z"/><path d="M14 2v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87 1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></symbol><symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.5 12.5 0 0 1 21.5 2.5c0 2.7-.8 7.5-5.6 10.5a22 22 0 0 1-3.9 2z"/><path d="M9 12H4s.6-3.3 2-4.5c1.6-1.5 4 0 4 0M15 12v5s3.3-.6 4.5-2c1.5-1.6 0-4 0-4"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 7h13v10H1zM14 10h4l3 3v4h-7V10z"/><circle cx="5.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol><symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8L12 2z" fill="currentColor" stroke="none"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M22 7l-10 7L2 7"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.7 2.05z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2.5"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-cart2" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-dollar" viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 2 2.7 5 3.5 5 1.5 5 3.5-2.2 3-5 3-5-1-5-3"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 1 0-4h14v4"/><path d="M4 7v12a2 2 0 0 0 2 2h14V7"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor" stroke="none"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M8 2v4M16 2v4M3 9h18"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></symbol></svg>
+<div class="preloader" aria-hidden="true">
+  <div class="pl-ring">
+    <svg viewBox="0 0 100 100">
+      <defs><linearGradient id="plGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#A71930"/><stop offset="1" stop-color="#C8A04A"/></linearGradient></defs>
+      <circle class="ring-track" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
+      <circle class="ring-fill" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
+    </svg>
+    <div class="pl-logo"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly"></div>
+  </div>
+  <div class="pl-bar"><span></span></div>
+  <div class="pl-num">00</div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly"><span class="wordmark">Stackly</span></a>
+    <nav aria-label="Primary">
+      <ul class="main-nav">
+        <li><a href="index.html" class="nav-home">Home</a></li>
+        <li>
+          <a href="product.html">Products <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li>
+          <a href="services.html">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li>
+          <a href="blog.html">Resources <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+        </li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact </a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-select" aria-label="Change language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-globe"/></svg><b>EN</b><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></button>
+      <a href="login.html" class="btn btn-primary btn-sm"><span>Request a Demo</span><svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+      <button class="stk-home-trigger" type="button" aria-label="Open menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+    </div>
+  </div>
+</header>
+<div class="stk-home-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="stk-home-menu-card">
+    <div class="stk-home-menu-head">
+      <a href="index.html" class="stk-home-menu-brand" aria-label="Stackly home">
+        <img class="stk-home-menu-mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly">
+        <span>Stackly</span>
+      </a>
+
+      <button class="stk-home-menu-close" type="button" aria-label="Close menu">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="stk-home-menu-nav" aria-label="Mobile primary navigation">
+      <a href="index.html" class="is-active" aria-current="page">Home<span aria-hidden="true">→</span></a>
+      <a href="product.html">Products<span aria-hidden="true">→</span></a>
+      <a href="services.html">Solutions<span aria-hidden="true">→</span></a>
+      <a href="blog.html">Resources<span aria-hidden="true">→</span></a>
+      <a href="pricing.html">Pricing<span aria-hidden="true">→</span></a>
+      <a href="about.html">About Us<span aria-hidden="true">→</span></a>
+      <a href="contact.html">Contact<span aria-hidden="true">→</span></a>
+    </nav>
+
+    <div class="stk-home-menu-actions">
+      <a href="login.html" class="stk-home-demo-btn">Request a Demo<span aria-hidden="true">→</span></a>
+      <a href="register.html" class="stk-home-sign-btn">Sign In</a>
+    </div>
+
+    <div class="stk-home-menu-foot">&copy; <span data-year>2026</span> Stackly Enterprise. All rights reserved.</div>
+  </div>
+</div>
+<div class="search-overlay" role="dialog" aria-label="Search Stackly">
+  <button class="icon-btn so-close" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></button>
+  <input type="text" placeholder="Search Stackly..." aria-label="Search query">
+  <p class="so-hint">Try &ldquo;pricing&rdquo;, &ldquo;dashboard&rdquo; or &ldquo;security&rdquo;</p>
+  <div class="search-results"></div>
+</div>
+
+<main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="hero stackly-hero">
+    <div class="hero-bg">
+      <img class="hero-photo" src="assets/img/hero/hero-enterprise.webp" alt="" aria-hidden="true">
+      <div class="halo h1"></div><div class="halo h2"></div>
+      <svg class="hero-lines" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><linearGradient id="hg1" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#C8A04A" stop-opacity=".7"/><stop offset="1" stop-color="#A71930" stop-opacity=".15"/></linearGradient></defs>
+        <path class="draw-path" d="M-60 640 C 320 520, 520 760, 860 600 S 1300 380, 1520 470" stroke="url(#hg1)" stroke-width="1.6" fill="none"/>
+        <path class="draw-path" d="M-60 560 C 300 460, 640 700, 940 540 S 1320 320, 1520 400" stroke="rgba(167,25,48,.25)" stroke-width="1.2" fill="none"/>
+      </svg>
+    </div>
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <div class="hero-words" aria-hidden="true">Ideas · Systems · Growth · Together</div>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Built for what's next</span>
+          <h1 class="hero-title">
+            <span class="line"><span>Enterprise</span></span>
+            <span class="line"><span>Software</span></span>
+            <span class="line"><span class="red">That Moves</span></span>
+            <span class="line"><span class="deep">You <em class="gold-i">Forward</em></span></span>
+          </h1>
+          <p class="hero-sub">Streamline operations, empower teams, and scale your business with Stackly's all-in-one enterprise platform.</p>
+          <div class="hero-ctas">
+            <a href="register.html" class="btn btn-primary"><span>Get Started</span><svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+            <a href="#showcase" class="video-cta">
+              <span class="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+              <span class="vt"><strong>Watch Video</strong><small>See Stackly in action</small></span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="laptop">
+            <div class="laptop-screen">
+              <div class="mdash">
+                <aside class="mdash-side">
+                  <div class="ms-logo"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly"><span>Stackly</span></div>
+                  <div class="ms-item on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-grid"/></svg><span>Dashboard</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Projects</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg><span>Tasks</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-users"/></svg><span>Team</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chart"/></svg><span>Analytics</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plug"/></svg><span>Integrations</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-doc"/></svg><span>Reports</span></div>
+                  <div class="ms-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-gear"/></svg><span>Settings</span></div>
+                </aside>
+                <div class="mdash-main">
+                  <div class="mdash-top">
+                    <div class="mdash-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-search"/></svg><span>Search anything...</span></div>
+                    <div class="mdash-icons">
+                      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bell"/></svg><span class="dot"></span></span>
+                      <span class="mdash-ava">H</span>
+                    </div>
+                  </div>
+                  <div class="mdash-hello">Good Morning, Harini <small>Here's what's happening today.</small></div>
+                  <div class="mdash-kpis">
+                    <div class="mkpi"><div class="k-label">TOTAL PROJECTS</div><div class="k-val">124</div><div class="k-delta up">&#8593; 12%</div></div>
+                    <div class="mkpi"><div class="k-label">ACTIVE USERS</div><div class="k-val">1.2K</div><div class="k-delta up">&#8593; 16%</div></div>
+                    <div class="mkpi"><div class="k-label">REVENUE</div><div class="k-val">$248K</div><div class="k-delta up">&#8593; 25%</div></div>
+                  </div>
+                  <div class="mdash-chart">
+                    <div class="c-head"><b>Project Performance</b><span>This Month</span></div>
+                    <svg viewBox="0 0 400 110" preserveAspectRatio="none" aria-hidden="true">
+                      <defs><linearGradient id="heroArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A71930" stop-opacity=".22"/><stop offset="1" stop-color="#A71930" stop-opacity="0"/></linearGradient></defs>
+                      <line class="gridline" x1="0" y1="30" x2="400" y2="30"/><line class="gridline" x1="0" y1="60" x2="400" y2="60"/><line class="gridline" x1="0" y1="90" x2="400" y2="90"/>
+                      <path class="chart-fill" d="M0 88 C 40 80, 55 55, 90 62 S 150 40, 185 48 250 20, 290 34 360 12, 400 18 L400 110 L0 110 Z"/>
+                      <path class="chart-line" d="M0 88 C 40 80, 55 55, 90 62 S 150 40, 185 48 250 20, 290 34 360 12, 400 18"/>
+                      <circle class="chart-dot chart-dot-live" cx="400" cy="18" r="4" opacity="0"/>
+                    </svg>
+                    <div class="mdash-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="laptop-base"></div>
+          </div>
+          <div class="float-card fc-1 float-anim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bolt"/></svg><div><b>Automate Workflows</b><small>Save time, reduce effort</small></div></div>
+          <div class="float-card fc-2 float-anim d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-users"/></svg><div><b>Empower Your Team</b><small>Collaborate seamlessly</small></div></div>
+          <div class="float-card fc-3 float-anim d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-trend"/></svg><div><b>Scale Without Limits</b><small>Ready for tomorrow</small></div></div>
+        </div>
+      </div>
+      <div class="stats-strip">
+        <div class="stats-grid">
+          <div class="stat"><div class="num"><span data-count="500">0</span><span class="suffix">+</span></div><div class="lbl">Global Businesses</div></div>
+          <div class="stat"><div class="num"><span data-count="10">0</span><span class="suffix">K+</span></div><div class="lbl">Active Users</div></div>
+          <div class="stat"><div class="num"><span data-count="99.9" data-decimals="1">0</span><span class="suffix">%</span></div><div class="lbl">Uptime Guarantee</div></div>
+          <div class="stat"><div class="num"><span data-count="4.9" data-decimals="1">0</span></div><div class="lbl">Customer Rating</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST ============ -->
+  <section class="trust stackly-section stackly-trust">
+    <div class="container">
+      <div class="trust-head" data-stackly-reveal="fade-up">
+        <h3>Trusted by Innovative Businesses</h3>
+        <a href="about.html" class="link-arrow">View all <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="logo-row" data-stackly-reveal="fade-up" data-reveal-delay="100">
+        <div class="logo-cell"><span>NOVA</span></div>
+        <div class="logo-cell l-alt"><span>Vertex</span></div>
+        <div class="logo-cell"><svg viewBox="0 0 90 28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="14" cy="14" r="9"/><ellipse cx="14" cy="14" rx="9" ry="3.5"/><circle cx="70" cy="14" r="9" fill="currentColor" stroke="none" opacity=".9"/></svg></div>
+        <div class="logo-cell"><span>NEXORA</span></div>
+        <div class="logo-cell l-alt"><span>Axiom</span></div>
+        <div class="logo-cell"><span>ZENITH</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section white stackly-section stackly-products" id="products">
+    <div class="container">
+      <div class="section-head center" data-stackly-reveal="fade-up">
+        <span class="eyebrow center">The Platform</span>
+        <h2 class="section-title">One Platform.<br><span class="accent">Every Business Need.</span></h2>
+        <p class="lead">Six tightly-integrated modules replace a dozen disconnected tools — one login, one source of truth, one elegant experience.</p>
+      </div>
+      <div class="services-grid" data-stagger>
+        <article class="service-card" data-stackly-reveal="fade-up">
+      <span class="sc-num">01</span>
+      <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-layers"/></svg></div>
+      <h3>Enterprise Resource Planning</h3>
+      <p>Unify finance, inventory, HR and supply chain in a single real-time system of record built for scale.</p>
+      <a href="services.html" class="link-arrow">Explore <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+    </article>
+        <article class="service-card" data-stackly-reveal="fade-up">
+      <span class="sc-num">02</span>
+      <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chart"/></svg></div>
+      <h3>Business Intelligence</h3>
+      <p>Turn raw data into board-ready insight with live dashboards, forecasting and self-serve analytics.</p>
+      <a href="services.html" class="link-arrow">Explore <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+    </article>
+        <article class="service-card" data-stackly-reveal="fade-up">
+      <span class="sc-num">03</span>
+      <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bolt"/></svg></div>
+      <h3>Workflow Automation</h3>
+      <p>Design, deploy and monitor automated processes across every department — no code required.</p>
+      <a href="services.html" class="link-arrow">Explore <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+    </article>
+        <article class="service-card" data-stackly-reveal="fade-up">
+      <span class="sc-num">04</span>
+      <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-users"/></svg></div>
+      <h3>Customer Management</h3>
+      <p>A complete 360&deg; view of every customer relationship, from first touch to renewal.</p>
+      <a href="services.html" class="link-arrow">Explore <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+    </article>
+        <article class="service-card" data-stackly-reveal="fade-up">
+      <span class="sc-num">05</span>
+      <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-coins"/></svg></div>
+      <h3>Financial Operations</h3>
+      <p>Close books faster with automated invoicing, multi-entity consolidation and audit-ready trails.</p>
+      <a href="services.html" class="link-arrow">Explore <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+    </article>
+        <article class="service-card" data-stackly-reveal="fade-up">
+      <span class="sc-num">06</span>
+      <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cloud"/></svg></div>
+      <h3>Team Collaboration</h3>
+      <p>Projects, docs and conversations in one place — purpose-built for distributed enterprise teams.</p>
+      <a href="services.html" class="link-arrow">Explore <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+    </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD SHOWCASE ============ -->
+  <section class="section warm showcase stackly-section stackly-showcase" id="showcase">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-photo" data-stackly-reveal="fade-right">
+          <img src="assets/img/dashboard/showcase-laptop.webp" alt="Stackly analytics dashboard running on a laptop in a sunlit office" loading="lazy" data-parallax="30">
+        </div>
+        <div>
+          <span class="eyebrow" data-stackly-reveal="fade-left">Live Product</span>
+          <h2 class="section-title" data-stackly-reveal="fade-left">Everything Your Business Needs. <span class="accent">In One Place.</span></h2>
+          <div class="feature-list">
+            <div class="feature-item" data-stackly-reveal="fade-left">
+      <div class="fi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chart"/></svg></div>
+      <div><h4>Real-time Analytics</h4><p>Every KPI updates the moment your data does — no exports, no waiting.</p></div>
+    </div>
+            <div class="feature-item" data-stackly-reveal="fade-left">
+      <div class="fi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bolt"/></svg></div>
+      <div><h4>Smart Automation</h4><p>Repetitive approvals, alerts and hand-offs run themselves in the background.</p></div>
+    </div>
+            <div class="feature-item" data-stackly-reveal="fade-left">
+      <div class="fi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg></div>
+      <div><h4>Enterprise Security</h4><p>SOC 2 Type II, end-to-end encryption and granular role-based access.</p></div>
+    </div>
+            <div class="feature-item" data-stackly-reveal="fade-left">
+      <div class="fi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-users"/></svg></div>
+      <div><h4>Team Collaboration</h4><p>Comment, assign and share from anywhere inside the product.</p></div>
+    </div>
+            <div class="feature-item" data-stackly-reveal="fade-left">
+      <div class="fi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-doc"/></svg></div>
+      <div><h4>Advanced Reporting</h4><p>Board decks and regulatory reports generated in one click.</p></div>
+    </div>
+          </div>
+          <a href="dashboard.html" class="btn btn-primary" data-stackly-reveal="fade-left"><span>Open Live Dashboard</span><svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INDUSTRIES ============ -->
+  <section class="section stackly-section">
+    <div class="container">
+      <div class="section-head split" data-stackly-reveal="fade-up">
+        <div>
+          <span class="eyebrow">Industries</span>
+          <h2 class="section-title">Purpose-Built for <span class="accent">Your World</span></h2>
+        </div>
+        <a href="services.html" class="btn btn-outline">Explore Solutions</a>
+      </div>
+      <div class="industries-grid">
+        <article class="ind-card" data-stackly-reveal="fade-up">
+      <div class="ind-art art-finance"><img src="assets/img/industries/finance.webp" alt="Financial trading analytics screens" loading="lazy"></div>
+      <div class="ind-overlay"></div>
+      <span class="ind-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></span>
+      <div class="ind-content">
+        <span class="ind-tag">Finance</span>
+        <h3>Banking & Capital Markets</h3>
+        <p>Risk, compliance and reporting engineered for regulated financial institutions.</p>
+        <span class="ind-stat">40% faster close cycles</span>
+      </div>
+    </article>
+        <article class="ind-card" data-stackly-reveal="fade-up">
+      <div class="ind-art art-health"><img src="assets/img/industries/healthcare.webp" alt="Healthcare professionals in a modern facility" loading="lazy"></div>
+      <div class="ind-overlay"></div>
+      <span class="ind-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></span>
+      <div class="ind-content">
+        <span class="ind-tag">Healthcare</span>
+        <h3>Providers & Life Sciences</h3>
+        <p>Secure patient operations and supply chains with full audit traceability.</p>
+        <span class="ind-stat">HIPAA-ready workflows</span>
+      </div>
+    </article>
+        <article class="ind-card" data-stackly-reveal="fade-up">
+      <div class="ind-art art-manuf"><img src="assets/img/industries/manufacturing.webp" alt="Robotic arm on an automated production line" loading="lazy"></div>
+      <div class="ind-overlay"></div>
+      <span class="ind-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></span>
+      <div class="ind-content">
+        <span class="ind-tag">Manufacturing</span>
+        <h3>Smart Factories</h3>
+        <p>Connect the shop floor to the boardroom with live production intelligence.</p>
+        <span class="ind-stat">-32% unplanned downtime</span>
+      </div>
+    </article>
+        <article class="ind-card" data-stackly-reveal="fade-up">
+      <div class="ind-art art-retail"><img src="assets/img/industries/retail.webp" alt="Minimal luxury retail store interior" loading="lazy"></div>
+      <div class="ind-overlay"></div>
+      <span class="ind-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></span>
+      <div class="ind-content">
+        <span class="ind-tag">Retail</span>
+        <h3>Omnichannel Commerce</h3>
+        <p>One inventory, one customer view — from flagship store to doorstep.</p>
+        <span class="ind-stat">+28% omnichannel revenue</span>
+      </div>
+    </article>
+        <article class="ind-card" data-stackly-reveal="fade-up">
+      <div class="ind-art art-tech"><img src="assets/img/industries/technology.webp" alt="Software engineers collaborating at their workstations" loading="lazy"></div>
+      <div class="ind-overlay"></div>
+      <span class="ind-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></span>
+      <div class="ind-content">
+        <span class="ind-tag">Technology</span>
+        <h3>SaaS & Software</h3>
+        <p>Scale product, billing and revenue operations on infrastructure that keeps pace.</p>
+        <span class="ind-stat">10x faster reporting</span>
+      </div>
+    </article>
+        <article class="ind-card" data-stackly-reveal="fade-up">
+      <div class="ind-art art-logi"><img src="assets/img/industries/logistics.webp" alt="Modern automated logistics hub" loading="lazy"></div>
+      <div class="ind-overlay"></div>
+      <span class="ind-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></span>
+      <div class="ind-content">
+        <span class="ind-tag">Logistics</span>
+        <h3>Supply Chain & Freight</h3>
+        <p>End-to-end visibility from dock to delivery, with predictive ETAs.</p>
+        <span class="ind-stat">99.2% on-time delivery</span>
+      </div>
+    </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AUTOMATION FLOW ============ -->
+  <div id="use-cases" class="nav-anchor" aria-hidden="true"></div>
+  <section class="section white flow-section" id="automation">
+    <div class="container">
+      <div class="section-head center" data-stackly-reveal="fade-up">
+        <span class="eyebrow center">How It Works</span>
+        <h2 class="section-title">From Trigger to <span class="gold">Done</span> — Automatically</h2>
+        <p class="lead">Model any business process once. Stackly runs it flawlessly, every time, and shows you exactly where value moves.</p>
+      </div>
+      <div class="flow-wrap">
+        <svg class="flow-line-svg" viewBox="0 0 1200 4" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#A71930"/><stop offset="1" stop-color="#C8A04A"/></linearGradient></defs>
+          <path class="track" d="M0 2 H1200"/>
+          <path class="draw" d="M0 2 H1200"/>
+        </svg>
+        <div class="flow-steps">
+          <div class="flow-step"><div><span class="fs-num">Step 01</span><h4>Trigger</h4><p>A purchase order, form, email or API call kicks things off.</p></div><div class="flow-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bolt"/></svg></div></div>
+          <div class="flow-step"><div><span class="fs-num">Step 02</span><h4>Automation</h4><p>Stackly routes data, validates it and executes the workflow.</p></div><div class="flow-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-gear"/></svg></div></div>
+          <div class="flow-step"><div><span class="fs-num">Step 03</span><h4>Approval</h4><p>The right people approve in one tap — from any device.</p></div><div class="flow-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></div></div>
+          <div class="flow-step"><div><span class="fs-num">Step 04</span><h4>Analytics</h4><p>Every event feeds live dashboards and forecasts instantly.</p></div><div class="flow-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chart"/></svg></div></div>
+          <div class="flow-step"><div><span class="fs-num">Step 05</span><h4>Completed</h4><p>Audit-ready records, notified teams, measurable outcomes.</p></div><div class="flow-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-rocket"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY ============ -->
+  <section class="section warm">
+    <div class="container">
+      <div class="case-study">
+        <div class="case-media" data-stackly-reveal="fade-right">
+          <img src="assets/img/industries/retail.webp" alt="Premium retail environment rebuilt with Stackly operations" loading="lazy">
+          <span class="case-badge">Case Study · Retail</span>
+        </div>
+        <div data-stackly-reveal="fade-left">
+          <span class="eyebrow">Proof, Not Promises</span>
+          <h2 class="section-title">How a Global Retail Network Rebuilt Its Operations With Stackly</h2>
+          <p class="lead">A 240-store retail group replaced 9 legacy systems with Stackly in 14 weeks — one inventory, one customer view, one truth.</p>
+          <div class="case-beforeafter">
+            <div class="ba-chip before"><small>Before</small>9 disconnected systems, 6-day reporting lag, manual stock counts.</div>
+            <div class="ba-chip after"><small>After</small>One platform, real-time inventory, same-day board reporting.</div>
+          </div>
+          <div class="case-metrics">
+            <div class="case-metric"><b><span data-count="38">0</span>%</b><span>lower operating costs</span></div>
+            <div class="case-metric"><b><span data-count="14">0</span> wks</b><span>to full migration</span></div>
+            <div class="case-metric"><b><span data-count="240">0</span></b><span>stores unified</span></div>
+            <div class="case-metric"><b><span data-count="99.9" data-decimals="1">0</span>%</b><span>data accuracy</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY STACKLY ============ -->
+  <section class="section stackly-section">
+    <div class="container">
+      <div class="section-head center" data-stackly-reveal="fade-up">
+        <span class="eyebrow center">Why Stackly</span>
+        <h2 class="section-title">Enterprise Strength. <span class="accent">Human Simplicity.</span></h2>
+      </div>
+      <div class="why-grid" data-stagger>
+        <div class="why-card" data-stackly-reveal="fade-up">
+      <div class="wc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg></div>
+      <div><h4>Enterprise-Grade Security</h4><p>SOC 2 Type II certified with encryption at rest and in transit. Your data stays protected.</p></div>
+    </div>
+        <div class="why-card" data-stackly-reveal="fade-up">
+      <div class="wc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cloud"/></svg></div>
+      <div><h4>99.9% Uptime</h4><p>Redundant, multi-region infrastructure with a contractual uptime guarantee.</p></div>
+    </div>
+        <div class="why-card" data-stackly-reveal="fade-up">
+      <div class="wc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-headset"/></svg></div>
+      <div><h4>24/7 Support</h4><p>Real engineers on call around the clock — median first response under 4 minutes.</p></div>
+    </div>
+        <div class="why-card" data-stackly-reveal="fade-up">
+      <div class="wc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plug"/></svg></div>
+      <div><h4>Seamless Integrations</h4><p>200+ native connectors for the tools your teams already love.</p></div>
+    </div>
+        <div class="why-card" data-stackly-reveal="fade-up">
+      <div class="wc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-layers"/></svg></div>
+      <div><h4>Scalable Infrastructure</h4><p>From ten users to ten thousand — no re-architecture, no drama.</p></div>
+    </div>
+        <div class="why-card" data-stackly-reveal="fade-up">
+      <div class="wc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-target"/></svg></div>
+      <div><h4>Advanced Analytics</h4><p>Predictive models and anomaly detection built into every module.</p></div>
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section white testi-section stackly-section stackly-testimonials">
+    <div class="container">
+      <div class="section-head center" data-stackly-reveal="fade-up">
+        <span class="eyebrow center">Customer Stories</span>
+        <h2 class="section-title">Loved by Teams <span class="accent">Everywhere</span></h2>
+      </div>
+      <div class="t-slider" data-stackly-reveal="fade-up">
+        <div class="t-track">
+          <div class="t-slide"><div class="t-card">
+            <div class="t-ava"><img src="assets/img/ppl.webp" alt="Amara Chen" loading="lazy" decoding="async"></div>
+            <div>
+              <p class="t-quote">&ldquo;Stackly replaced four tools on day one. Our finance team closes the month in two days instead of nine — I've never seen adoption this fast.&rdquo;</p>
+              <div class="t-meta">
+                <div class="t-who"><b>Amara Chen</b><span>Chief Operating Officer, Novar Retail Group</span></div>
+                <div class="t-metric"><b>+38%</b><span>efficiency</span></div>
+              </div>
+            </div>
+          </div></div>
+          <div class="t-slide"><div class="t-card">
+            <div class="t-ava"><img src="assets/img/ppl2.webp" alt="David Okafor" loading="lazy" decoding="async"></div>
+            <div>
+              <p class="t-quote">&ldquo;The automation engine paid for itself in a quarter. Approvals that took a week now finish before lunch — our auditors actually smiled.&rdquo;</p>
+              <div class="t-meta">
+                <div class="t-who"><b>David Okafor</b><span>VP of Operations, Helix Financial Services</span></div>
+                <div class="t-metric"><b>-72%</b><span>approval time</span></div>
+              </div>
+            </div>
+          </div></div>
+          <div class="t-slide"><div class="t-card">
+            <div class="t-ava"><img src="assets/img/ppl3.webp" alt="Sofia Reyes" loading="lazy" decoding="async"></div>
+            <div>
+              <p class="t-quote">&ldquo;We run 240 stores on Stackly. Real-time inventory alone saved us millions in shrinkage — and the dashboards make board meetings effortless.&rdquo;</p>
+              <div class="t-meta">
+                <div class="t-who"><b>Sofia Reyes</b><span>Chief Technology Officer, Meridian Stores</span></div>
+                <div class="t-metric"><b>$2.1M</b><span>saved annually</span></div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+      <div class="t-nav">
+        <div class="t-dots"></div>
+        <div class="t-arrows">
+          <button class="t-arrow prev" aria-label="Previous testimonial"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+          <button class="t-arrow next" aria-label="Next testimonial"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section white stackly-section stackly-faq">
+    <div class="container">
+      <div class="section-head center" data-stackly-reveal="fade-up">
+        <span class="eyebrow center">FAQ</span>
+        <h2 class="section-title">Questions, <span class="accent">Answered</span></h2>
+      </div>
+      <div class="faq-wrap" data-stackly-reveal="fade-up">
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span><span class="fq-num">01</span>What is Stackly?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Stackly is an all-in-one enterprise platform combining ERP, CRM, analytics, automation and collaboration. Instead of stitching together five vendors, your teams work from a single, real-time source of truth.</div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span><span class="fq-num">02</span>Who is Stackly designed for?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Mid-market and enterprise organizations — typically 50 to 10,000 employees — in finance, healthcare, manufacturing, retail, technology and logistics. If your teams juggle disconnected tools, Stackly is built for you.</div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span><span class="fq-num">03</span>Can Stackly integrate with existing tools?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Yes. We ship 200+ native connectors — Salesforce, SAP, Slack, Teams, NetSuite, Workday and more — plus a full REST API and webhooks for anything custom.</div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span><span class="fq-num">04</span>Is Stackly secure?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Security is foundational: SOC 2 Type II certified, ISO 27001 aligned, AES-256 encryption at rest, TLS 1.3 in transit, SSO/SAML, and granular role-based access controls.</div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span><span class="fq-num">05</span>Can I scale my plan?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Absolutely. Upgrade, downgrade or add modules at any time — billing adjusts pro-rata automatically. Enterprise plans include custom terms and volume pricing.</div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span><span class="fq-num">06</span>Do you offer enterprise support?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Every plan includes 24/7 support. Enterprise adds a named success manager, a private Slack channel with our engineering team, and a contractual 4-minute first-response SLA.</div></div></div>
+      </div>
+      <div class="text-center mt-40" data-stackly-reveal="fade-up"><a href="faq.html" class="btn btn-outline">View All FAQs</a></div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="section cta-section stackly-section stackly-cta">
+    <div class="container">
+      <div class="cta-box photo" data-stackly-reveal="zoom-in">
+        <span class="cta-glow"></span><span class="cta-glow g2"></span>
+        <span class="cta-ring" style="width:560px;height:560px;left:-160px;top:-180px"></span>
+        <span class="cta-ring" style="width:420px;height:420px;right:-120px;bottom:-140px"></span>
+        <span class="eyebrow center" style="justify-content:center">Ready When You Are</span>
+        <h2>Build Smarter.<br><span class="gold-i">Scale Without Limits.</span></h2>
+        <p>Join 500+ businesses running on Stackly. Get a personalized demo from our enterprise team — or start exploring right now.</p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn btn-gold"><span>Start Your Journey</span><svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+          <a href="contact.html" class="btn btn-white">Request a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly"><span class="wordmark">Stackly</span></a>
+    <p class="footer-statement">Technology that moves <span class="accent">business</span> forward.</p>
+    <div class="footer-grid">
+      <div class="footer-col footer-about">
+        <h5>Stackly</h5>
+        <p>The all-in-one enterprise platform for operations, analytics and growth — trusted by 500+ businesses worldwide.</p>
+        <div class="social-row">
+          <a href="404.html" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.49 2.49 0 1 1 5 8.48a2.49 2.49 0 0 1-.02-4.98zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg></a>
+          <a href="404.html" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L6.5 3.9H4.7z"/></svg></a>
+          <a href="404.html" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.8c.2.9.9 1.6 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.8.4-4.8zM9.8 15.5v-7l6 3.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="404.html">Enterprise Suite</a></li><li><a href="404.html">Analytics Cloud</a></li><li><a href="404.html">Automation</a></li><li><a href="404.html">Integrations</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5>
+        <ul><li><a href="home.html">home</a></li><li><a href="product.html">products</a></li><li><a href="services.html">service</a></li><li><a href="pricing.html">pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">contact</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="404.html">Pricing</a></li><li><a href="404.html">FAQ</a></li><li><a href="404.html">Documentation</a></li><li><a href="404.html">Dashboard Demo</a></li></ul></div>
+      <div class="footer-col newsletter">
+        <h5>Stay Ahead</h5>
+        <p>Monthly insights on enterprise technology. No noise.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" placeholder="Your work email" aria-label="Email address" required>
+          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2025</span> Stackly Enterprise Software. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<button class="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/components.js"></script>
+
+<script>if(window.AOS)AOS.init({duration:900,easing:'ease-out-cubic',once:true,offset:70});</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        setTimeout(function () {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 0);
+      }
+
+      var mobileMenu = document.querySelector('.mobile-menu');
+      var hamburger = document.querySelector('.hamburger');
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+      }
+      if (hamburger) {
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+});
+</script>
+
+<script id="stackly-visibility-fix-js">
+
+/* =========================================================
+   STACKLY SECTION VISIBILITY CONTROLLER
+   ========================================================= */
+(function () {
+  'use strict';
+
+  function revealStacklyContent() {
+    document.documentElement.classList.add('stackly-reveal-ready');
+
+    var items = document.querySelectorAll('[data-stackly-reveal]');
+    if (!items.length) return;
+
+    var show = function (el) {
+      el.classList.add('stackly-visible');
+    };
+
+    // Show anything already visible immediately.
+    var initialCheck = function () {
+      var viewport = window.innerHeight || document.documentElement.clientHeight;
+      items.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top < viewport + 120) show(el);
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            show(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      items.forEach(function (el) {
+        observer.observe(el);
+      });
+
+      // Safety fallback: reveal anything the observer may miss.
+      setTimeout(initialCheck, 250);
+      setTimeout(function () {
+        document.querySelectorAll('.stackly-section').forEach(function (section) {
+          section.style.visibility = 'visible';
+          section.style.opacity = '1';
+        });
+      }, 1200);
+    } else {
+      items.forEach(show);
+    }
+  }
+
+  function makeCriticalSectionsVisible() {
+    [
+      '.stackly-products',
+      '.stackly-showcase',
+      '.stackly-pricing',
+      '.stackly-faq',
+      '.stackly-testimonials',
+      '.stackly-cta'
+    ].forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (section) {
+        section.style.visibility = 'visible';
+        section.style.opacity = '1';
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      revealStacklyContent();
+      makeCriticalSectionsVisible();
+    });
+  } else {
+    revealStacklyContent();
+    makeCriticalSectionsVisible();
+  }
+
+  window.addEventListener('load', function () {
+    revealStacklyContent();
+    makeCriticalSectionsVisible();
+  });
+})();
+
+</script>
+
+<script id="stackly-mobile-menu-controller">
+(function(){
+  'use strict';
+  function initStacklyMobileMenu(){
+    var menu=document.querySelector('.mobile-menu');
+    var button=document.querySelector('.hamburger');
+    if(!menu || !button || button.dataset.stacklyMenuBound==='1') return;
+    button.dataset.stacklyMenuBound='1';
+
+    function setOpen(open){
+      menu.classList.toggle('open',open);
+      button.classList.toggle('is-open',open);
+      button.setAttribute('aria-expanded',open?'true':'false');
+      button.setAttribute('aria-label',open?'Close menu':'Open menu');
+      document.body.classList.toggle('stackly-menu-open',open);
+    }
+
+    /* Capture phase prevents older navigation.js handlers from creating
+       a second, conflicting mobile-menu state. */
+    button.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('open'));
+    },true);
+
+    menu.querySelectorAll('nav a, .mm-brand, .mm-actions a').forEach(function(link){
+      link.addEventListener('click',function(){
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape' && menu.classList.contains('open')){
+        setOpen(false);
+        button.focus({preventScroll:true});
+      }
+    });
+
+    window.addEventListener('resize',function(){
+      if(window.innerWidth>=768) setOpen(false);
+    });
+
+    /* Start closed even if another script left an old class behind. */
+    setOpen(false);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initStacklyMobileMenu);
+  else initStacklyMobileMenu();
+})();
+</script>
+
+
+<script id="stackly-active-nav-controller">
+(function(){
+  'use strict';
+
+  function forceHomeOnlyActive(){
+    /* Clear ALL active states first. */
+    document.querySelectorAll(
+      '.main-nav a, .mobile-menu nav a, .stk-home-menu-nav a'
+    ).forEach(function(link){
+      link.classList.remove('active', 'is-active');
+      link.removeAttribute('aria-current');
+    });
+
+    /* Home is the ONLY active navigation item on index.html. */
+    document.querySelectorAll(
+      '.main-nav a[href="index.html"], .mobile-menu nav a[href="index.html"], .stk-home-menu-nav a[href="index.html"]'
+    ).forEach(function(link){
+      link.classList.add('active');
+
+      if(link.closest('.stk-home-menu-nav')){
+        link.classList.add('is-active');
+      }
+
+      link.setAttribute('aria-current','page');
+    });
+
+    /* Safety: never allow another mobile item to retain an active state. */
+    document.querySelectorAll('.stk-home-menu-nav a:not([href="index.html"])').forEach(function(link){
+      link.classList.remove('active', 'is-active');
+      link.removeAttribute('aria-current');
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', forceHomeOnlyActive);
+  }else{
+    forceHomeOnlyActive();
+  }
+
+  /* Re-apply after other page scripts finish changing classes. */
+  window.addEventListener('load', forceHomeOnlyActive);
+})();
+</script>
+
+
+<script id="stackly-home-mobile-menu-controller">
+(function(){
+  'use strict';
+
+  function initStacklyHomeMobileMenu(){
+    var trigger=document.querySelector('.stk-home-trigger');
+    var menu=document.querySelector('.stk-home-menu');
+    var closeButton=document.querySelector('.stk-home-menu-close');
+
+    if(!trigger || !menu || !closeButton) return;
+
+    function openMenu(){
+      menu.classList.add('is-open');
+      menu.setAttribute('aria-hidden','false');
+      trigger.classList.add('is-open');
+      trigger.setAttribute('aria-expanded','true');
+      trigger.setAttribute('aria-label','Close menu');
+      document.documentElement.classList.add('stk-home-menu-lock');
+      document.body.classList.add('stk-home-menu-lock');
+    }
+
+    function closeMenu(){
+      menu.classList.remove('is-open');
+      menu.setAttribute('aria-hidden','true');
+      trigger.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded','false');
+      trigger.setAttribute('aria-label','Open menu');
+      document.documentElement.classList.remove('stk-home-menu-lock');
+      document.body.classList.remove('stk-home-menu-lock');
+    }
+
+    trigger.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(menu.classList.contains('is-open')) closeMenu();
+      else openMenu();
+    });
+
+    closeButton.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+    });
+
+    menu.addEventListener('click',function(e){
+      if(e.target===menu) closeMenu();
+    });
+
+    menu.querySelectorAll('.stk-home-menu-nav a, .stk-home-menu-brand, .stk-home-menu-actions a')
+      .forEach(function(link){
+        link.addEventListener('click',function(){
+          closeMenu();
+        });
+      });
+
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape' && menu.classList.contains('is-open')){
+        closeMenu();
+      }
+    });
+
+    window.addEventListener('resize',function(){
+      if(window.innerWidth>=768) closeMenu();
+    });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initStacklyHomeMobileMenu,{once:true});
+  }else{
+    initStacklyHomeMobileMenu();
+  }
+})();
+</script>
+
+
+<script id="stackly-home-active-state-guard">
+(function(){
+  'use strict';
+
+  document.addEventListener('click', function(){
+    document.querySelectorAll('.stk-home-menu-nav a:not([href="index.html"])').forEach(function(link){
+      link.classList.remove('is-active', 'active');
+      link.removeAttribute('aria-current');
+    });
+
+    var home=document.querySelector('.stk-home-menu-nav a[href="index.html"]');
+    if(home){
+      home.classList.add('is-active');
+      home.setAttribute('aria-current','page');
+    }
+  }, true);
+})();
+</script>
+
+</body>
+</html>

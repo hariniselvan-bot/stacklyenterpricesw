@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/webp" href="assets/img/logo.webp">
+<title>Register — Stackly</title>
+<meta name="description" content="Create your Stackly entrepreneur or customer account.">
+
+<style>
+:root{
+  --cream:#f6efe5;
+  --paper:#fffdf9;
+  --burgundy:#7d1628;
+  --burgundy-deep:#4b0d19;
+  --red:#a71930;
+  --gold:#c8a04a;
+  --ink:#2a211e;
+  --muted:#786b62;
+  --line:#e5d9cd;
+  --shadow:0 30px 90px rgba(67,30,24,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;width:100%;max-width:100%;}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+.stackly-register-page{
+  min-height:100vh;
+  padding:28px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  isolation:isolate;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+.stackly-register-page::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(200,160,74,.18),transparent 22%),
+    radial-gradient(circle at 94% 92%,rgba(167,25,48,.12),transparent 28%),
+    var(--cream);
+}
+.stackly-register-page::after{
+  content:"";
+  position:absolute;
+  width:560px;height:560px;
+  right:-280px;top:-280px;
+  border:1px solid rgba(125,22,40,.12);
+  border-radius:50%;
+  box-shadow:0 0 0 90px rgba(125,22,40,.025),0 0 0 180px rgba(125,22,40,.018);
+  z-index:-2;
+}
+.register-orb{display:none}
+
+.register-shell{
+  width:min(1240px,100%);
+  max-width:100%;
+  min-width:0;
+  min-height:730px;
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  background:var(--paper);
+  border:1px solid rgba(125,22,40,.12);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+
+/* BRAND */
+.register-brand{
+  position:relative;
+  overflow:hidden;
+  min-height:730px;
+  padding:48px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 84% 18%,rgba(200,160,74,.20),transparent 24%),
+    radial-gradient(circle at 8% 90%,rgba(167,25,48,.42),transparent 34%),
+    linear-gradient(145deg,var(--burgundy-deep),#721326 52%,#8e182e);
+}
+.register-brand::before{
+  content:"";
+  position:absolute;
+  width:620px;height:620px;
+  right:-330px;bottom:-330px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:50%;
+  box-shadow:0 0 0 72px rgba(255,255,255,.025),0 0 0 145px rgba(255,255,255,.018);
+}
+.register-brand::after{
+  content:"";
+  position:absolute;
+  width:620px;height:1px;
+  left:-110px;bottom:150px;
+  transform:rotate(-28deg);
+  background:linear-gradient(90deg,transparent,rgba(200,160,74,.8),transparent);
+}
+.brand-inner{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+.brand-logo{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  width:max-content;
+  font-family:Fraunces,Georgia,serif;
+  font-size:28px;
+  font-weight:600;
+  letter-spacing:-.04em;
+}
+.brand-mark{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-family:Fraunces,Georgia,serif;
+  font-size:23px;
+  font-weight:600;
+}
+.brand-copy{
+  margin:auto 0;
+  max-width:620px;
+}
+.brand-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:#eadfd6;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.brand-eyebrow i{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 18px rgba(200,160,74,.8);
+}
+.brand-copy h1{
+  margin-top:22px;
+  font-family:Fraunces,Georgia,serif;
+  font-size:clamp(52px,5.4vw,78px);
+  font-weight:500;
+  line-height:.92;
+  letter-spacing:-.055em;
+  max-width:650px;
+}
+.brand-copy h1 span{color:#e5c77f}
+.brand-copy p{
+  margin-top:27px;
+  max-width:500px;
+  color:#d7c8c0;
+  line-height:1.8;
+  font-size:14px;
+}
+.brand-points{
+  display:grid;
+  gap:10px;
+  margin-top:34px;
+  max-width:510px;
+}
+.brand-point{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#d7c8c0;
+  font-size:11px;
+}
+.brand-point b{
+  width:25px;height:25px;
+  display:grid;place-items:center;
+  border-radius:8px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  color:#e5c77f;
+  font-size:9px;
+}
+.brand-foot{color:#b9aaa2;font-size:10px;letter-spacing:.08em}
+
+/* FORM */
+.register-panel{
+  padding:48px clamp(34px,5vw,72px);
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(200,160,74,.10),transparent 30%),
+    var(--paper);
+}
+.register-content{width:min(100%,480px);margin:auto}
+.register-topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+.register-kicker{
+  color:var(--burgundy);
+  font-size:10px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+}
+.back-home{font-size:11px;color:#8a7c73;transition:.2s}
+.back-home:hover{color:var(--burgundy)}
+.register-content h2{
+  margin-top:15px;
+  font-family:Fraunces,Georgia,serif;
+  font-size:44px;
+  font-weight:500;
+  letter-spacing:-.045em;
+  line-height:1;
+}
+.register-intro{
+  margin-top:11px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+.role-label{
+  display:block;
+  margin:29px 0 11px;
+  color:#44352e;
+  font-size:11px;
+  font-weight:800;
+}
+.role-switch{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.role-option{position:relative}
+.role-option input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+.role-card{
+  display:block;
+  min-height:88px;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#fffaf4;
+  transition:.25s ease;
+}
+.role-card:hover{
+  border-color:#c9aa93;
+  transform:translateY(-2px);
+}
+.role-option input:checked + .role-card{
+  border-color:var(--burgundy);
+  background:linear-gradient(135deg,rgba(125,22,40,.075),rgba(200,160,74,.06));
+  box-shadow:0 12px 30px rgba(125,22,40,.10);
+}
+.role-icon{
+  width:30px;height:30px;
+  display:grid;place-items:center;
+  border-radius:9px;
+  color:var(--burgundy);
+  background:#fff;
+  border:1px solid #eadfd4;
+  font-size:12px;
+}
+.role-card strong{display:block;margin-top:9px;font-size:12px}
+.role-card span:last-child{display:block;margin-top:2px;color:#96887f;font-size:10px}
+
+.register-form{margin-top:22px}
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.field{margin-top:13px}
+.form-row .field{margin-top:0}
+.field label{
+  display:block;
+  margin-bottom:7px;
+  font-size:10px;
+  font-weight:800;
+  color:#44352e;
+}
+.field label span{color:#a09289;font-weight:500}
+.input-wrap{position:relative}
+.control{
+  width:100%;
+  height:50px;
+  border:1px solid #ddd1c6;
+  border-radius:12px;
+  background:#fffaf5;
+  padding:0 14px;
+  outline:none;
+  color:var(--ink);
+  font-size:12px;
+  transition:.25s ease;
+}
+.control::placeholder{color:#ad9f96}
+.control:focus{
+  border-color:var(--burgundy);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(125,22,40,.07);
+}
+.control.invalid{border-color:var(--red)}
+.password-toggle{
+  position:absolute;
+  right:9px;top:50%;
+  transform:translateY(-50%);
+  padding:5px 7px;
+  border:0;
+  background:transparent;
+  color:#8b7d74;
+  font-size:10px;
+  font-weight:750;
+}
+.password-meter{
+  height:3px;
+  margin-top:7px;
+  background:#eee4da;
+  border-radius:99px;
+  overflow:hidden;
+}
+.password-meter i{
+  display:block;
+  width:0%;
+  height:100%;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--burgundy),var(--gold));
+  transition:.25s ease;
+}
+.password-help{
+  margin-top:5px;
+  color:#9b8d84;
+  font-size:9px;
+}
+.terms{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  margin-top:15px;
+  color:#7e7169;
+  font-size:10px;
+  line-height:1.5;
+}
+.terms input{margin-top:2px;accent-color:var(--burgundy)}
+.terms a{color:var(--burgundy);font-weight:800}
+.register-error{
+  min-height:17px;
+  margin-top:7px;
+  color:var(--red);
+  font-size:10px;
+  font-weight:650;
+}
+.register-button{
+  width:100%;
+  height:53px;
+  margin-top:9px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(110deg,#641020,#9b1b33);
+  color:#fff;
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.03em;
+  box-shadow:0 14px 28px rgba(100,16,32,.18);
+  transition:.3s ease;
+}
+.register-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 34px rgba(100,16,32,.24);
+}
+.register-button.loading{opacity:.7;pointer-events:none}
+.login-note{
+  display:block;
+  text-align:center;
+  margin:22px 0 4px;
+  padding:12px 14px;
+  color:#6f625b;
+  font-size:14px;
+  line-height:1.5;
+  font-weight:500;
+  opacity:1;
+  visibility:visible;
+}
+.login-note a{
+  color:var(--burgundy);
+  font-weight:850;
+  text-decoration:underline;
+  text-decoration-thickness:1.5px;
+  text-underline-offset:3px;
+  display:inline-block;
+  margin-left:3px;
+}
+.login-note a:hover{color:var(--gold);}
+@media(max-width:560px){
+  .login-note{font-size:13px;margin-top:18px;padding:10px 8px 16px}
+}
+
+/* RESPONSIVE LAYOUT — rebuilt for reliable mobile width */
+@media (max-width:920px){
+  html,body{width:100%;min-width:0}
+  .stackly-register-page{
+    width:100%;
+    min-width:0;
+    min-height:100svh;
+    padding:16px;
+    display:block;
+    overflow-x:hidden;
+    overflow-y:auto;
+  }
+  .register-shell{
+    width:100%;
+    max-width:none;
+    min-width:0;
+    margin:0 auto;
+    grid-template-columns:1fr;
+    min-height:0;
+    border-radius:25px;
+  }
+  .register-brand{
+    width:100%;
+    min-width:0;
+    min-height:480px;
+    padding:34px;
+  }
+  .brand-copy{margin:75px 0 0}
+  .brand-copy h1{font-size:clamp(48px,9vw,68px)}
+  .register-panel{
+    width:100%;
+    min-width:0;
+    padding:42px 30px 50px;
+  }
+  .register-content{
+    width:100%;
+    max-width:480px;
+    min-width:0;
+  }
+}
+
+@media (max-width:560px){
+  html,body{
+    width:100%;
+    min-width:0;
+    overflow-x:hidden;
+  }
+  .stackly-register-page{
+    width:100%;
+    min-width:0;
+    min-height:100svh;
+    padding:0;
+    display:block;
+    overflow-x:hidden;
+    overflow-y:auto;
+  }
+  .register-shell{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:none;
+    min-width:0;
+    min-height:100svh;
+    margin:0;
+    border-radius:0;
+    border:0;
+    box-shadow:none;
+    overflow:visible;
+  }
+  .register-brand{
+    width:100%;
+    min-width:0;
+    min-height:390px;
+    height:auto;
+    padding:25px 21px 27px;
+  }
+  .brand-inner{width:100%;min-width:0}
+  .brand-logo{
+    max-width:100%;
+    font-size:24px;
+  }
+  .brand-mark{width:36px;height:36px;font-size:20px;flex:0 0 auto}
+  .brand-copy{
+    width:100%;
+    max-width:none;
+    min-width:0;
+    margin:62px 0 0;
+  }
+  .brand-copy h1{
+    width:100%;
+    max-width:none;
+    font-size:clamp(39px,11vw,52px);
+    letter-spacing:-.045em;
+    overflow-wrap:anywhere;
+  }
+  .brand-copy p{
+    width:100%;
+    max-width:100%;
+    font-size:11px;
+    line-height:1.65;
+    margin-top:18px;
+  }
+  .brand-points{display:none}
+  .brand-foot{display:none}
+
+  .register-panel{
+    width:100%;
+    min-width:0;
+    padding:30px 20px 34px;
+    display:block;
+  }
+  .register-content{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    margin:0;
+  }
+  .register-topline{
+    width:100%;
+    min-width:0;
+  }
+  .register-kicker,.back-home{
+    min-width:0;
+  }
+  .back-home{
+    white-space:nowrap;
+  }
+  .register-content h2{
+    font-size:38px;
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+  .register-intro{
+    max-width:100%;
+  }
+  .role-switch{
+    width:100%;
+    min-width:0;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  }
+  .role-option{min-width:0}
+  .role-card{
+    width:100%;
+    min-width:0;
+    min-height:82px;
+    padding:13px;
+    overflow:hidden;
+  }
+  .role-card strong,
+  .role-card span:last-child{
+    overflow-wrap:anywhere;
+  }
+  .register-form,
+  .form-row,
+  .field,
+  .input-wrap{
+    width:100%;
+    min-width:0;
+  }
+  .form-row{
+    grid-template-columns:minmax(0,1fr);
+    gap:13px;
+  }
+  .form-row .field{margin-top:0}
+  .control{
+    width:100%;
+    max-width:100%;
+    height:51px;
+    min-width:0;
+  }
+  .terms{
+    width:100%;
+    min-width:0;
+  }
+  .terms span{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+  .register-button{
+    width:100%;
+    max-width:100%;
+  }
+  .login-note{
+    width:100%;
+    max-width:100%;
+  }
+}
+
+@media (max-width:380px){
+  .register-panel{padding-left:16px;padding-right:16px}
+  .register-content h2{font-size:34px}
+  .brand-copy h1{font-size:36px}
+  .role-switch{gap:7px}
+  .role-card{padding:11px}
+  .role-card strong{font-size:11px}
+  .role-card span:last-child{font-size:9px}
+}
+
+@media (max-width:330px){
+  .register-panel{padding-left:13px;padding-right:13px}
+  .register-content h2{font-size:31px}
+  .brand-copy h1{font-size:33px}
+  .register-topline{gap:8px}
+  .register-kicker,.back-home{font-size:9px}
+}
+/* FINAL SCROLL + LOGO SAFETY */
+html{
+  min-height:100%;
+  overflow-y:auto;
+}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+.stackly-register-page{
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+}
+.brand-mark.stackly-about-logo{
+  filter:brightness(0) invert(1) !important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+
+<style id="stackly-about-logo-treatment">
+.brand-mark.stackly-about-logo{
+  width:42px;height:42px;display:block;object-fit:contain;border:0;border-radius:0;background:transparent;
+  filter:brightness(0) invert(1);
+
+}
+@media(max-width:560px){.brand-mark.stackly-about-logo{width:36px;height:36px}}
+</style>
+</head>
+
+<body class="stackly-register-page">
+
+<div class="register-orb one"></div>
+<div class="register-orb two"></div>
+
+<main class="register-shell">
+
+<section class="register-brand">
+  <div class="brand-inner">
+    <a href="index.html" class="brand-logo">
+      <img class="brand-mark stackly-about-logo" src="assets/img/logo.webp" alt="Stackly">
+      <span>Stackly</span>
+    </a>
+
+    <div class="brand-copy">
+      <div class="brand-eyebrow"><i></i> Build. Connect. Grow.</div>
+      <h1>Create your <span>Stackly</span> account.</h1>
+      <p>
+        Join the platform built to connect entrepreneurs and customers
+        through one modern digital workspace.
+      </p>
+
+      <div class="brand-points">
+        <div class="brand-point"><b>01</b> One account, one connected workspace</div>
+        <div class="brand-point"><b>02</b> Purpose-built dashboards for every role</div>
+        <div class="brand-point"><b>03</b> A cleaner way to manage your Stackly journey</div>
+      </div>
+    </div>
+
+    <div class="brand-foot">© 2026 Stackly. All rights reserved.</div>
+  </div>
+</section>
+
+<section class="register-panel">
+  <div class="register-content">
+
+    <div class="register-topline">
+      <span class="register-kicker">Create account</span>
+      <a href="index.html" class="back-home">← Back to home</a>
+    </div>
+
+    <h2>Let's get you started.</h2>
+    <p class="register-intro">Select your account type and create your Stackly profile.</p>
+
+    <span class="role-label">I am registering as</span>
+
+    <div class="role-switch" role="radiogroup" aria-label="Registration type">
+      <label class="role-option">
+        <input type="radio" name="accountRole" value="entrepreneur" checked>
+        <span class="role-card">
+          <span class="role-icon">◆</span>
+          <strong>Entrepreneur</strong>
+          <span>Business account</span>
+        </span>
+      </label>
+
+      <label class="role-option">
+        <input type="radio" name="accountRole" value="customer">
+        <span class="role-card">
+          <span class="role-icon">◇</span>
+          <strong>Customer</strong>
+          <span>Customer account</span>
+        </span>
+      </label>
+    </div>
+
+    <form class="register-form" id="stacklyRegisterForm" novalidate>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="regName">Full name <span>Required</span></label>
+          <input class="control" id="regName" type="text" autocomplete="name" placeholder="Your full name" required>
+        </div>
+
+        <div class="field">
+          <label for="regEmail">Email address <span>Required</span></label>
+          <input class="control" id="regEmail" type="email" autocomplete="email" placeholder="you@company.com" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="regCompany">Company / Business name <span id="companyHint">Required for entrepreneurs</span></label>
+        <input class="control" id="regCompany" type="text" autocomplete="organization" placeholder="Your company name">
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="regPassword">Password <span>Required</span></label>
+          <div class="input-wrap">
+            <input class="control" id="regPassword" type="password" autocomplete="new-password" placeholder="Create password" required>
+            <button class="password-toggle" type="button" data-target="regPassword">Show</button>
+          </div>
+          <div class="password-meter"><i id="passwordMeter"></i></div>
+          <div class="password-help">Use 8+ characters with a number and symbol.</div>
+        </div>
+
+        <div class="field">
+          <label for="regConfirm">Confirm password <span>Required</span></label>
+          <div class="input-wrap">
+            <input class="control" id="regConfirm" type="password" autocomplete="new-password" placeholder="Repeat password" required>
+            <button class="password-toggle" type="button" data-target="regConfirm">Show</button>
+          </div>
+        </div>
+      </div>
+
+      <label class="terms">
+        <input type="checkbox" id="regTerms">
+        <span>I agree to Stackly's <a href="404.html">Terms</a> and <a href="404.html">Privacy Policy</a>.</span>
+      </label>
+
+      <div class="register-error" id="registerError" role="alert" aria-live="polite"></div>
+
+      <button class="register-button" id="registerButton" type="submit">
+        <span id="registerButtonText">Create Entrepreneur Account →</span>
+      </button>
+    </form>
+
+    <p class="login-note">Already have an account? <a href="login.html">Sign in</a></p>
+
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  const form = document.getElementById("stacklyRegisterForm");
+  const name = document.getElementById("regName");
+  const email = document.getElementById("regEmail");
+  const company = document.getElementById("regCompany");
+  const password = document.getElementById("regPassword");
+  const confirm = document.getElementById("regConfirm");
+  const terms = document.getElementById("regTerms");
+  const error = document.getElementById("registerError");
+  const button = document.getElementById("registerButton");
+  const buttonText = document.getElementById("registerButtonText");
+  const companyHint = document.getElementById("companyHint");
+  const meter = document.getElementById("passwordMeter");
+  const roles = document.querySelectorAll('input[name="accountRole"]');
+
+  const dashboardRoutes = {
+    entrepreneur: "entrepreneur-dashboard.html",
+    customer: "customer-dashboard.html"
+  };
+
+  function role(){
+    return document.querySelector('input[name="accountRole"]:checked')?.value || "entrepreneur";
+  }
+
+  function updateRole(){
+    const current = role();
+    const entrepreneur = current === "entrepreneur";
+    buttonText.textContent = entrepreneur
+      ? "Create Entrepreneur Account →"
+      : "Create Customer Account →";
+
+    company.placeholder = entrepreneur ? "Your company / business name" : "Optional";
+    companyHint.textContent = entrepreneur ? "Required for entrepreneurs" : "Optional for customers";
+  }
+
+  roles.forEach(r => r.addEventListener("change", updateRole));
+
+  document.querySelectorAll(".password-toggle").forEach(btn => {
+    btn.addEventListener("click", function(){
+      const target = document.getElementById(btn.dataset.target);
+      const visible = target.type === "text";
+      target.type = visible ? "password" : "text";
+      btn.textContent = visible ? "Show" : "Hide";
+    });
+  });
+
+  password.addEventListener("input", function(){
+    const value = password.value;
+    let strength = 0;
+    if(value.length >= 8) strength += 25;
+    if(/[A-Z]/.test(value)) strength += 20;
+    if(/[0-9]/.test(value)) strength += 25;
+    if(/[^A-Za-z0-9]/.test(value)) strength += 30;
+    meter.style.width = strength + "%";
+  });
+
+  [name,email,company,password,confirm].forEach(input => {
+    input.addEventListener("input", () => {
+      input.classList.remove("invalid");
+      error.textContent = "";
+    });
+  });
+
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    const currentRole = role();
+    const nameValue = name.value.trim();
+    const emailValue = email.value.trim();
+    const companyValue = company.value.trim();
+    const passwordValue = password.value;
+    const confirmValue = confirm.value;
+
+    function invalid(field, message){
+      field.classList.add("invalid");
+      error.textContent = message;
+      field.focus();
+    }
+
+    if(!nameValue) return invalid(name, "Please enter your full name.");
+
+    if(!emailValue || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)){
+      return invalid(email, "Please enter a valid email address.");
+    }
+
+    if(currentRole === "entrepreneur" && !companyValue){
+      return invalid(company, "Please enter your company or business name.");
+    }
+
+    if(passwordValue.length < 8){
+      return invalid(password, "Password must contain at least 8 characters.");
+    }
+
+    if(!/[0-9]/.test(passwordValue) || !/[^A-Za-z0-9]/.test(passwordValue)){
+      return invalid(password, "Add at least one number and one special character to your password.");
+    }
+
+    if(passwordValue !== confirmValue){
+      return invalid(confirm, "Passwords do not match.");
+    }
+
+    if(!terms.checked){
+      error.textContent = "Please accept the Terms and Privacy Policy to continue.";
+      terms.focus();
+      return;
+    }
+
+    const account = {
+      name: nameValue,
+      email: emailValue,
+      company: companyValue,
+      role: currentRole,
+      registered: true,
+      registeredAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("stacklyRegisteredUser", JSON.stringify(account));
+
+    // The login page can use this email/role as the active front-end session.
+    localStorage.setItem("stacklyUser", JSON.stringify({
+      email: emailValue,
+      name: nameValue,
+      company: companyValue,
+      role: currentRole,
+      loggedIn: true,
+      loginTime: new Date().toISOString()
+    }));
+
+    button.classList.add("loading");
+    buttonText.textContent = "Creating your account…";
+
+    setTimeout(function(){
+      window.location.href = dashboardRoutes[currentRole];
+    }, 500);
+  });
+
+  updateRole();
+})();
+</script>
+
+</body>
+</html>

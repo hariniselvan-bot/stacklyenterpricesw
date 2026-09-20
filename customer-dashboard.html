@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Customer Dashboard — Stackly</title>
+<meta name="description" content="Stackly customer dashboard for orders, payments, wishlist and support.">
+
+<style>
+:root{
+  --db-bg:#f4f5f8;
+  --db-panel:#fff;
+  --db-text:#17181d;
+  --db-muted:#7b7e88;
+  --db-line:#e7e8ed;
+  --db-pink:#ff2f92;
+  --db-pink-dark:#d81d77;
+  --db-green:#20a66a;
+  --db-orange:#e99a25;
+  --db-red:#e45867;
+  --db-blue:#5671e9;
+  --db-sidebar:250px;
+  --db-radius:18px;
+  --db-shadow:0 12px 35px rgba(20,22,28,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--db-bg);
+  color:var(--db-text);
+  overflow:hidden;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+.stackly-customer-dashboard{
+  height:100vh;
+  display:flex;
+  overflow:hidden;
+}
+
+/* SIDEBAR */
+.dashboard-sidebar{
+  width:var(--db-sidebar);
+  flex:0 0 var(--db-sidebar);
+  height:100vh;
+  padding:22px 14px;
+  background:#101114;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  border-right:1px solid #24252a;
+  z-index:30;
+}
+.dashboard-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:5px 10px 24px;
+}
+.dashboard-brand-mark{
+  width:36px;height:36px;
+  display:grid;place-items:center;
+  border-radius:11px;
+  color:#111;
+  background:#fff;
+  font-weight:950;
+}
+.dashboard-brand strong{font-size:20px;letter-spacing:-.8px}
+.dashboard-role{
+  margin:0 8px 18px;
+  padding:11px 12px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:13px;
+  background:rgba(255,255,255,.045);
+}
+.dashboard-role small{
+  display:block;
+  color:#777982;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+}
+.dashboard-role b{
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+}
+.dashboard-nav{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:2px 0 12px;
+}
+.dashboard-nav::-webkit-scrollbar{width:4px}
+.dashboard-nav::-webkit-scrollbar-thumb{background:#34353b;border-radius:99px}
+.nav-heading{
+  padding:11px 12px 7px;
+  color:#62646d;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+.dashboard-nav button{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 12px;
+  margin:2px 0;
+  border:0;
+  border-radius:11px;
+  background:transparent;
+  color:#9698a0;
+  text-align:left;
+  font-size:11px;
+  font-weight:700;
+  transition:.2s ease;
+}
+.dashboard-nav button:hover{background:rgba(255,255,255,.06);color:#fff}
+.dashboard-nav button.active{
+  color:#fff;
+  background:linear-gradient(90deg,rgba(255,47,146,.18),rgba(255,47,146,.06));
+  box-shadow:inset 3px 0 0 var(--db-pink);
+}
+.nav-icon{
+  width:24px;height:24px;
+  display:grid;place-items:center;
+  border-radius:8px;
+  background:rgba(255,255,255,.045);
+  font-size:11px;
+  flex:0 0 24px;
+}
+.nav-count{
+  margin-left:auto;
+  min-width:20px;
+  padding:3px 5px;
+  border-radius:99px;
+  text-align:center;
+  color:#ff72b8;
+  background:rgba(255,47,146,.10);
+  font-size:8px;
+}
+.sidebar-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:13px;
+}
+.profile-mini{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+}
+.profile-avatar{
+  width:31px;height:31px;
+  display:grid;place-items:center;
+  border-radius:10px;
+  color:#fff;
+  background:linear-gradient(135deg,#ff2f92,#733eff);
+  font-size:10px;
+  font-weight:850;
+}
+.profile-mini div{min-width:0}
+.profile-mini b{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profile-mini span{display:block;margin-top:2px;color:#6e7078;font-size:8px}
+.sidebar-signout{
+  width:100%;
+  margin-top:9px;
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:11px;
+  background:rgba(255,255,255,.035);
+  color:#9a9ca4;
+  font-size:10px;
+  font-weight:750;
+  transition:.2s ease;
+}
+.sidebar-signout:hover{
+  color:#fff;
+  border-color:rgba(255,47,146,.35);
+  background:rgba(255,47,146,.10);
+}
+.sidebar-signout span{font-size:14px}
+.dashboard-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:25;
+  background:rgba(5,6,8,.52);
+  backdrop-filter:blur(2px);
+}
+
+
+/* MAIN APP */
+.dashboard-main{
+  min-width:0;
+  flex:1;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.dashboard-header{
+  height:70px;
+  flex:0 0 70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:0 28px;
+  background:rgba(255,255,255,.9);
+  border-bottom:1px solid var(--db-line);
+  backdrop-filter:blur(16px);
+  z-index:20;
+}
+.mobile-menu{
+  display:none;
+  width:36px;height:36px;
+  border:1px solid var(--db-line);
+  border-radius:10px;
+  background:#fff;
+}
+.header-left{display:flex;align-items:center;gap:14px;min-width:0}
+.header-title h1{font-size:17px;letter-spacing:-.5px}
+.header-title p{margin-top:3px;color:var(--db-muted);font-size:9px}
+.header-right{display:flex;align-items:center;gap:9px}
+.header-icon{
+  width:35px;height:35px;
+  display:grid;place-items:center;
+  border:1px solid var(--db-line);
+  border-radius:10px;
+  background:#fff;
+  color:#666972;
+  position:relative;
+}
+.notification-dot{
+  position:absolute;
+  width:6px;height:6px;
+  top:7px;right:7px;
+  border-radius:50%;
+  background:var(--db-pink);
+  box-shadow:0 0 0 2px #fff;
+}
+.header-user{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 8px 5px 5px;
+  border:1px solid var(--db-line);
+  border-radius:11px;
+  background:#fff;
+}
+.header-avatar{
+  width:27px;height:27px;
+  display:grid;place-items:center;
+  border-radius:8px;
+  background:#111;
+  color:#fff;
+  font-size:9px;
+  font-weight:800;
+}
+.header-user b{font-size:9px}
+.header-user span{display:block;color:#888b94;font-size:8px;margin-top:1px}
+
+/* SCROLLABLE CONTENT */
+.dashboard-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:24px 28px 45px;
+  scroll-behavior:smooth;
+}
+.dashboard-scroll::-webkit-scrollbar{width:8px}
+.dashboard-scroll::-webkit-scrollbar-thumb{background:#cfd1d7;border-radius:99px}
+.dashboard-section{
+  display:none;
+  animation:sectionIn .28s ease both;
+}
+.dashboard-section.active{display:block}
+@keyframes sectionIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+  margin-bottom:18px;
+}
+.section-heading h2{font-size:22px;letter-spacing:-1px}
+.section-heading p{margin-top:5px;color:var(--db-muted);font-size:10px}
+.heading-action{
+  padding:9px 13px;
+  border:1px solid var(--db-line);
+  border-radius:10px;
+  background:#fff;
+  color:#555861;
+  font-size:9px;
+  font-weight:800;
+}
+.logged-in-id{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:9px;
+  padding:6px 9px;
+  border:1px solid #ececf1;
+  border-radius:8px;
+  background:#fafafd;
+  max-width:100%;
+}
+.logged-in-id span{
+  color:#a0a2a9;
+  font-size:7px;
+  font-weight:850;
+  letter-spacing:.8px;
+}
+.logged-in-id strong{
+  color:#33353b;
+  font-size:9px;
+  font-weight:750;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+
+/* CARDS */
+.card{
+  background:var(--db-panel);
+  border:1px solid var(--db-line);
+  border-radius:var(--db-radius);
+  box-shadow:var(--db-shadow);
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.stat-card{padding:18px}
+.stat-top{display:flex;align-items:center;justify-content:space-between}
+.stat-label{color:var(--db-muted);font-size:9px;font-weight:750;text-transform:uppercase;letter-spacing:.7px}
+.stat-icon{
+  width:28px;height:28px;
+  display:grid;place-items:center;
+  border-radius:9px;
+  background:#f7f7f9;
+  font-size:10px;
+}
+.stat-value{margin-top:11px;font-size:24px;letter-spacing:-1.2px}
+.stat-change{margin-top:5px;font-size:9px;font-weight:750}
+.up{color:var(--db-green)}
+.down{color:var(--db-red)}
+
+.dashboard-subgrid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:14px;
+}
+.mini-panel{
+  min-height:126px;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.mini-panel h3{
+  color:#7e8189;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.75px;
+}
+.mini-panel strong{
+  margin-top:10px;
+  font-size:19px;
+  letter-spacing:-.7px;
+}
+.mini-panel span{
+  margin-top:5px;
+  color:#92949c;
+  font-size:8px;
+  line-height:1.45;
+}
+.mini-panel b{
+  margin-top:auto;
+  padding-top:9px;
+  color:#666971;
+  font-size:8px;
+}
+
+.extra-dashboard-stack{
+  display:grid;
+  gap:14px;
+  margin-top:14px;
+}
+.wide-data-card,.data-table-card,.timeline-card,.notice-list{
+  padding:19px;
+}
+.wide-card-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:16px;
+}
+.wide-card-head h3{font-size:13px}
+.wide-card-head p{margin-top:4px;color:var(--db-muted);font-size:9px;line-height:1.5}
+.data-period{
+  padding:5px 8px;
+  border-radius:99px;
+  background:#f6f6f8;
+  color:#8b8d95;
+  font-size:7px;
+  font-weight:850;
+  letter-spacing:.7px;
+}
+.metric-row{
+  display:grid;
+  grid-template-columns:150px 90px minmax(100px,1fr) 45px;
+  align-items:center;
+  gap:12px;
+  min-height:48px;
+  border-top:1px solid #f0f0f3;
+}
+.metric-row:first-of-type{border-top:0}
+.metric-row span{font-size:9px;font-weight:700}
+.metric-row b{font-size:9px}
+.metric-row small{color:#85878f;font-size:8px;text-align:right}
+.metric-bar{
+  height:7px;
+  border-radius:99px;
+  background:#eeeef2;
+  overflow:hidden;
+}
+.metric-bar em{
+  display:block;
+  height:100%;
+  border-radius:99px;
+  background:linear-gradient(90deg,#ff2f92,#ff83bd);
+}
+.timeline-item{
+  display:grid;
+  grid-template-columns:55px 1fr auto;
+  gap:12px;
+  align-items:center;
+  min-height:48px;
+  border-top:1px solid #f0f0f3;
+}
+.timeline-item:first-of-type{border-top:0}
+.timeline-item b{font-size:9px;color:#ff2f92}
+.timeline-item span{font-size:9px;font-weight:750}
+.timeline-item small{color:#898b93;font-size:8px;text-align:right}
+.notice{
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  gap:12px;
+  align-items:center;
+  min-height:50px;
+  padding:10px 0;
+  border-top:1px solid #f0f0f3;
+}
+.notice:first-of-type{border-top:0}
+.notice strong{font-size:9px}
+.notice span{color:#85878f;font-size:8px;line-height:1.5}
+.notice b{font-size:8px;color:#666971;white-space:nowrap}
+
+.analytics-row{
+  display:grid;
+  grid-template-columns:145px 110px 130px minmax(120px,1fr);
+  align-items:center;
+  gap:12px;
+  min-height:50px;
+  border-top:1px solid #f0f0f3;
+}
+.analytics-row:first-of-type{border-top:0}
+.analytics-row strong{font-size:9px}
+.analytics-row span,.analytics-row b{font-size:8px;color:#777a82}
+.analytics-row i{
+  height:7px;
+  border-radius:99px;
+  overflow:hidden;
+  background:#eeeef2;
+}
+.analytics-row i em{
+  display:block;
+  height:100%;
+  border-radius:99px;
+  background:linear-gradient(90deg,#111216,#ff2f92);
+}
+.mini-data-table{width:100%;overflow-x:auto}
+.mini-row{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  min-width:560px;
+  min-height:43px;
+  align-items:center;
+  border-top:1px solid #f0f0f3;
+}
+.mini-row span{font-size:8px}
+.mini-row.header span{
+  color:#8b8d95;
+  font-size:7px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+.behaviour-grid,.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+.behaviour-grid div,.portfolio-grid div{
+  padding:15px 12px;
+  border:1px solid #ececf0;
+  border-radius:12px;
+  background:#fafafd;
+}
+.behaviour-grid b,.portfolio-grid b{
+  display:block;
+  font-size:17px;
+  letter-spacing:-.5px;
+}
+.behaviour-grid span,.portfolio-grid span{
+  display:block;
+  margin-top:4px;
+  color:#888b93;
+  font-size:8px;
+}
+.age-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.age-grid div{
+  padding:13px;
+  border:1px solid #ececf0;
+  border-radius:12px;
+  background:#fafafd;
+}
+.age-grid span,.age-grid b{display:block;font-size:9px}
+.age-grid b{margin-top:8px;font-size:15px}
+.age-grid i{
+  display:block;
+  height:6px;
+  margin-top:10px;
+  border-radius:99px;
+  background:#eeeef2;
+  overflow:hidden;
+}
+.age-grid i em{
+  display:block;
+  height:100%;
+  background:#ff2f92;
+  border-radius:99px;
+}
+.expense-row{
+  display:grid;
+  grid-template-columns:1fr 100px 50px;
+  min-height:43px;
+  align-items:center;
+  border-top:1px solid #f0f0f3;
+}
+.expense-row span{font-size:9px}
+.expense-row b{font-size:9px}
+.expense-row small{font-size:8px;color:#888b93;text-align:right}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.45fr .8fr;
+  gap:14px;
+  margin-top:14px;
+}
+.panel{padding:19px}
+.panel-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:17px;
+}
+.panel-title h3{font-size:13px}
+.panel-title span{color:var(--db-muted);font-size:9px}
+
+.chart{
+  height:235px;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  padding:10px 0 25px;
+}
+.chart-line{
+  position:absolute;
+  left:0;right:0;
+  border-top:1px dashed #ececf0;
+}
+.chart-line.l1{top:20%}
+.chart-line.l2{top:45%}
+.chart-line.l3{top:70%}
+.bar{
+  flex:1;
+  min-width:10px;
+  max-width:42px;
+  height:var(--h);
+  border-radius:8px 8px 3px 3px;
+  background:linear-gradient(180deg,#ff4da1,#ffb4d7);
+  position:relative;
+  z-index:1;
+}
+.bar:nth-child(odd){background:linear-gradient(180deg,#202126,#777981)}
+.bar span{
+  position:absolute;
+  bottom:-20px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#9699a1;
+  font-size:8px;
+}
+.activity-list{display:grid;gap:12px}
+.activity{
+  display:flex;gap:10px;align-items:flex-start;
+  padding-bottom:12px;
+  border-bottom:1px solid #f0f0f3;
+}
+.activity:last-child{border-bottom:0;padding-bottom:0}
+.activity-dot{
+  width:8px;height:8px;
+  flex:0 0 8px;
+  margin-top:4px;
+  border-radius:50%;
+  background:var(--db-pink);
+}
+.activity b{display:block;font-size:10px}
+.activity span{display:block;margin-top:3px;color:var(--db-muted);font-size:8px;line-height:1.5}
+
+/* TABLES */
+.table-card{overflow:hidden}
+.table-wrap{
+  width:100%;
+  overflow:auto;
+}
+.data-table{
+  width:100%;
+  min-width:650px;
+  border-collapse:collapse;
+}
+.data-table th{
+  padding:12px 16px;
+  background:#fafafd;
+  color:#85878f;
+  text-align:left;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.data-table td{
+  padding:14px 16px;
+  border-top:1px solid #f0f0f3;
+  font-size:9px;
+}
+.data-table td strong{font-size:9px}
+.status{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:99px;
+  font-size:8px;
+  font-weight:800;
+}
+.status.active{color:#188654;background:#eaf8f1}
+.status.pending{color:#ae7118;background:#fff5df}
+.status.closed{color:#8b4a54;background:#fcecef}
+.avatar{
+  width:28px;height:28px;
+  display:inline-grid;place-items:center;
+  margin-right:7px;
+  vertical-align:middle;
+  border-radius:9px;
+  background:#ececf1;
+  font-size:8px;
+  font-weight:800;
+}
+
+/* PROJECT CARDS */
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.project-card{padding:18px}
+.project-top{display:flex;justify-content:space-between;gap:10px}
+.project-card h3{font-size:12px}
+.project-card p{margin-top:6px;color:var(--db-muted);font-size:9px;line-height:1.5}
+.project-progress{margin-top:17px}
+.progress-meta{display:flex;justify-content:space-between;color:#878a92;font-size:8px}
+.progress-track{height:6px;margin-top:6px;border-radius:99px;background:#eeeef2;overflow:hidden}
+.progress-track i{display:block;height:100%;width:var(--progress);border-radius:99px;background:var(--db-pink)}
+.project-footer{display:flex;justify-content:space-between;align-items:center;margin-top:15px}
+.project-people{display:flex}
+.project-people span{
+  width:22px;height:22px;
+  margin-right:-5px;
+  display:grid;place-items:center;
+  border:2px solid #fff;
+  border-radius:50%;
+  background:#dddde3;
+  font-size:7px;
+}
+
+/* REVENUE / KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi-card{padding:18px}
+.kpi-card h3{font-size:10px;color:var(--db-muted)}
+.kpi-card strong{display:block;margin-top:9px;font-size:23px;letter-spacing:-1px}
+.kpi-card small{display:block;margin-top:4px;color:#888b93;font-size:8px}
+.goal{
+  margin-top:14px;
+  padding:18px;
+  border-radius:16px;
+  background:#111216;
+  color:#fff;
+}
+.goal-head{display:flex;justify-content:space-between;font-size:9px}
+.goal p{margin-top:5px;color:#8e9098;font-size:8px}
+.goal-track{height:7px;margin-top:15px;background:#2c2d32;border-radius:99px;overflow:hidden}
+.goal-track i{display:block;width:74%;height:100%;background:linear-gradient(90deg,#ff2f92,#ff7fbd);border-radius:99px}
+
+/* SETTINGS */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.settings-card{padding:20px}
+.settings-card h3{font-size:12px}
+.settings-card p{margin-top:5px;color:var(--db-muted);font-size:9px;line-height:1.5}
+.settings-field{margin-top:15px}
+.settings-field label{display:block;margin-bottom:6px;font-size:9px;font-weight:800}
+.settings-field input,.settings-field select{
+  width:100%;height:42px;
+  border:1px solid var(--db-line);
+  border-radius:10px;
+  background:#fafafd;
+  padding:0 11px;
+  outline:none;
+  font-size:10px;
+}
+.save-btn{
+  margin-top:15px;
+  padding:10px 14px;
+  border:0;
+  border-radius:10px;
+  background:#111216;
+  color:#fff;
+  font-size:9px;
+  font-weight:800;
+}
+
+/* MOBILE */
+@media(max-width:1050px){
+  :root{--db-sidebar:220px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .dashboard-grid{grid-template-columns:1fr}
+  .project-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  body{overflow:hidden}
+  .dashboard-sidebar{
+    position:fixed;
+    left:0;top:0;bottom:0;
+    width:min(290px,86vw);
+    transform:translateX(-110%);
+    transition:transform .28s cubic-bezier(.22,.61,.36,1);
+    box-shadow:22px 0 60px rgba(0,0,0,.28);
+    z-index:40;
+  }
+  .dashboard-sidebar.open{transform:translateX(0)}
+  .dashboard-sidebar.open + .dashboard-overlay{display:block}
+  .dashboard-overlay{
+    z-index:35;
+  }
+  .dashboard-main{width:100%;min-width:0}
+  .dashboard-header{
+    height:62px;
+    flex-basis:62px;
+    padding:0 12px;
+    position:relative;
+    z-index:30;
+  }
+  .mobile-menu{
+    display:grid;
+    place-items:center;
+    flex:0 0 36px;
+    font-size:16px;
+    color:#22242a;
+  }
+  .mobile-menu.is-open{background:#111216;color:#fff}
+  .header-left{gap:9px}
+  .header-title{min-width:0}
+  .header-title h1{
+    font-size:14px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .header-title p{display:none}
+  .header-user{
+    padding:4px;
+    border:0;
+    background:transparent;
+  }
+  .header-user div{display:none}
+  .header-icon{display:none}
+  .dashboard-scroll{padding:18px 13px 35px}
+  .dashboard-subgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .mini-panel{min-height:118px}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:9px}
+  .stat-card{padding:14px}
+  .stat-value{font-size:20px}
+  .project-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr}
+  .settings-grid{grid-template-columns:1fr}
+  .section-heading{gap:12px}
+  .logged-in-id{max-width:calc(100vw - 30px)}
+}
+@media(max-width:430px){
+  .dashboard-subgrid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+  .section-heading{align-items:flex-start;flex-direction:column}
+  .header-icon{display:none}
+  .heading-action{width:100%;text-align:center}
+  .section-heading h2{font-size:20px}
+  .dashboard-scroll{padding-left:11px;padding-right:11px}
+  .data-table{min-width:680px}
+}
+
+@media(max-width:760px){
+  .metric-row{grid-template-columns:1fr 65px;gap:8px;padding:8px 0}
+  .metric-row .metric-bar{grid-column:1 / -1}
+  .metric-row small{display:none}
+  .analytics-row{grid-template-columns:1fr 80px;gap:7px;padding:8px 0}
+  .analytics-row i{grid-column:1 / -1}
+  .analytics-row b{display:none}
+  .notice{grid-template-columns:1fr auto;gap:7px}
+  .notice span{grid-column:1 / -1}
+  .notice b{grid-column:2;grid-row:1}
+  .timeline-item{grid-template-columns:48px 1fr}
+  .timeline-item small{grid-column:2;text-align:left}
+  .behaviour-grid,.portfolio-grid{grid-template-columns:repeat(2,1fr)}
+  .age-grid{grid-template-columns:1fr 1fr}
+  .wide-data-card,.data-table-card,.timeline-card,.notice-list{padding:15px}
+}
+@media(max-width:430px){
+  .behaviour-grid,.portfolio-grid,.age-grid{grid-template-columns:1fr}
+}
+
+
+/* ===== EXTENDED OVERVIEW DATA ===== */
+.overview-data-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;margin-top:14px}
+.overview-three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.overview-data-card{padding:19px;min-width:0}
+.overview-wide-card{margin-top:14px}
+.overview-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:15px}
+.overview-card-head h3{font-size:13px}
+.overview-card-head p{margin-top:4px;color:var(--db-muted);font-size:9px;line-height:1.5}
+.overview-card-head>span{padding:5px 8px;border-radius:99px;background:#f6f6f8;color:#8b8d95;font-size:7px;font-weight:850;letter-spacing:.7px;white-space:nowrap}
+.overview-kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.overview-kpi-grid>div{padding:13px;border:1px solid #ececf0;border-radius:12px;background:#fafafd}
+.overview-kpi-grid small{display:block;color:#898b93;font-size:8px}
+.overview-kpi-grid strong{display:block;margin-top:7px;font-size:16px;letter-spacing:-.5px}
+.overview-kpi-grid em{display:block;margin-top:5px;color:var(--db-green);font-size:7px;font-style:normal;font-weight:800}
+.funnel-list>div,.capacity-list>div,.target-list>div{margin-top:13px}
+.funnel-list label,.capacity-list label,.target-list label{display:flex;justify-content:space-between;gap:10px;font-size:8px;font-weight:750}
+.funnel-list label b,.capacity-list label b,.target-list label b{font-size:8px}
+.funnel-list i,.capacity-list i,.target-list i,.resource-list i{display:block;height:7px;margin-top:7px;border-radius:99px;background:#eeeef2;overflow:hidden}
+.funnel-list em,.capacity-list em,.target-list em,.resource-list em{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#ff2f92,#ff83bd)}
+.funnel-list small,.target-list small{display:block;margin-top:4px;color:#888b93;font-size:7px;text-align:right}
+.finance-list>div{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;min-height:39px;border-top:1px solid #f0f0f3}
+.finance-list>div:first-child{border-top:0}
+.finance-list span{font-size:8px;color:#777a82}
+.finance-list strong{font-size:9px}
+.finance-list b{font-size:7px;color:#777a82}
+.finance-list .positive{color:var(--db-green)}
+.finance-list .warning{color:var(--db-orange)}
+.delivery-list>div{display:grid;grid-template-columns:1.15fr .8fr 55px;gap:10px;align-items:center;padding:9px 0;border-top:1px solid #f0f0f3}
+.delivery-list>div:first-child{border-top:0}
+.delivery-list span b{display:block;font-size:8px}
+.delivery-list span small{display:block;margin-top:3px;color:#898b93;font-size:7px}
+.delivery-list i{height:6px;border-radius:99px;background:#eeeef2;overflow:hidden}
+.delivery-list i em{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#111216,#ff2f92)}
+.delivery-list strong{font-size:7px;color:#777a82;text-align:right}
+.overview-schedule>div{display:grid;grid-template-columns:58px 1fr 58px;gap:14px;align-items:center;min-height:52px;border-top:1px solid #f0f0f3}
+.overview-schedule>div:first-child{border-top:0}
+.overview-schedule time{font-size:8px;font-weight:850;color:#ff2f92}
+.overview-schedule b{display:block;font-size:9px}
+.overview-schedule span{display:block;margin-top:3px;color:#888b93;font-size:8px}
+.overview-schedule em{justify-self:end;padding:5px 7px;border-radius:99px;background:#f6f6f8;color:#777a82;font-size:7px;font-style:normal;font-weight:800}
+.client-rank-list>div{display:grid;grid-template-columns:25px 1fr auto;gap:9px;align-items:center;padding:10px 0;border-top:1px solid #f0f0f3}
+.client-rank-list>div:first-child{border-top:0}
+.client-rank-list>b{font-size:7px;color:#a0a2a9}
+.client-rank-list span{font-size:8px;font-weight:750}
+.client-rank-list span small{display:block;margin-top:3px;color:#898b93;font-size:7px;font-weight:500}
+.client-rank-list strong{font-size:8px}
+.capacity-list label{font-size:8px}
+.priority-list>div{display:grid;grid-template-columns:9px 1fr auto;gap:9px;align-items:center;padding:9px 0;border-top:1px solid #f0f0f3}
+.priority-list>div:first-child{border-top:0}
+.priority-list span{font-size:8px;font-weight:750}
+.priority-list span small{display:block;margin-top:3px;color:#898b93;font-size:7px;font-weight:500}
+.priority-list b{font-size:7px;color:#777a82}
+.priority-dot{width:7px;height:7px;border-radius:50%;display:block}
+.priority-dot.high{background:#e45867}.priority-dot.medium{background:#e99a25}.priority-dot.low{background:#5671e9}
+.overview-activity-table{width:100%;overflow:auto}
+.overview-table-row{display:grid;grid-template-columns:2fr .8fr .8fr .8fr .5fr;gap:12px;align-items:center;min-width:650px;min-height:49px;border-top:1px solid #f0f0f3}
+.overview-table-row.head{min-height:30px;border-top:0}
+.overview-table-row.head span{color:#8b8d95;font-size:7px;font-weight:850;text-transform:uppercase;letter-spacing:.6px}
+.overview-table-row>span,.overview-table-row>strong,.overview-table-row>time{font-size:8px}
+.overview-table-row>span b{display:block;font-size:8px}
+.overview-table-row>span small{display:block;margin-top:3px;color:#898b93;font-size:7px}
+.overview-table-row strong{color:var(--db-green);font-size:7px}
+.overview-table-row strong.risk{color:var(--db-red)}
+.overview-table-row time{color:#898b93}
+.health-list>div{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;min-height:39px;border-top:1px solid #f0f0f3}
+.health-list>div:first-child{border-top:0}
+.health-list span{font-size:8px;color:#777a82}.health-list strong{font-size:9px}.health-list em{font-size:7px;color:#888b93;font-style:normal}
+.resource-list>div{display:grid;grid-template-columns:1fr 34px;gap:8px;align-items:center;margin-top:13px}
+.resource-list span{font-size:8px}.resource-list strong{font-size:8px;text-align:right}
+.resource-list i{grid-column:1/-1;margin-top:0}
+.target-list small{font-size:7px}
+@media(max-width:1050px){
+ .overview-three-grid{grid-template-columns:1fr 1fr}
+ .overview-three-grid>.overview-data-card:last-child{grid-column:1/-1}
+}
+@media(max-width:760px){
+ .overview-data-grid{grid-template-columns:1fr}
+ .overview-three-grid{grid-template-columns:1fr}
+ .overview-three-grid>.overview-data-card:last-child{grid-column:auto}
+ .overview-kpi-grid{grid-template-columns:repeat(2,1fr)}
+ .overview-schedule>div{grid-template-columns:48px 1fr 55px;gap:9px}
+}
+@media(max-width:430px){
+ .overview-kpi-grid{grid-template-columns:1fr}
+ .overview-data-card{padding:15px}
+ .overview-schedule>div{grid-template-columns:1fr auto;gap:6px;padding:9px 0}
+ .overview-schedule time{grid-column:1/-1}
+ .overview-schedule em{grid-column:2;grid-row:2}
+ .delivery-list>div{grid-template-columns:1fr 52px}
+ .delivery-list i{grid-column:1}
+ .delivery-list strong{grid-column:2;grid-row:1/3}
+}
+</style>
+
+<style id="stackly-cherry-gold-ivory-palette">
+:root{
+  --cherry:#8f1537;
+  --cherry-dark:#5f0d26;
+  --cherry-deep:#3f0819;
+  --cherry-soft:#b52a50;
+  --gold:#c9a227;
+  --gold-light:#e4c766;
+  --gold-pale:#f4e7b5;
+  --ivory:#fffaf0;
+  --ivory-deep:#f6eedc;
+  --ink:#2b1720;
+  --muted:#765f67;
+  --line:rgba(143,21,55,.14);
+  --shadow:0 18px 45px rgba(63,8,25,.12);
+}
+body{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(201,162,39,.10), transparent 28%),
+    radial-gradient(circle at 88% 20%, rgba(143,21,55,.08), transparent 30%),
+    var(--ivory) !important;
+  color:var(--ink) !important;
+}
+.dashboard-shell,
+.dashboard-main,
+.dashboard-content{
+  background:transparent !important;
+}
+.dashboard-sidebar{
+  background:linear-gradient(180deg,var(--cherry-deep),var(--cherry-dark)) !important;
+  border-right:1px solid rgba(201,162,39,.35) !important;
+}
+.sidebar-brand,
+.sidebar-logo{
+  color:var(--ivory) !important;
+}
+.sidebar-brand span,
+.sidebar-logo span{
+  color:var(--gold-light) !important;
+}
+.sidebar-nav button,
+.sidebar-link{
+  color:rgba(255,250,240,.78) !important;
+}
+.sidebar-nav button:hover,
+.sidebar-nav button.active,
+.sidebar-link:hover,
+.sidebar-link.active{
+  background:linear-gradient(90deg,rgba(201,162,39,.18),rgba(143,21,55,.45)) !important;
+  color:var(--ivory) !important;
+  border-color:rgba(201,162,39,.35) !important;
+}
+.sidebar-nav button.active::before,
+.sidebar-link.active::before{
+  background:var(--gold) !important;
+}
+.dashboard-header,
+.dashboard-topbar{
+  background:rgba(255,250,240,.88) !important;
+  border-bottom:1px solid var(--line) !important;
+}
+.dashboard-header h1,
+.dashboard-topbar h1,
+.section-title,
+.card-title{
+  color:var(--cherry-dark) !important;
+}
+.dashboard-header p,
+.section-subtitle,
+.muted,
+.card-subtitle{
+  color:var(--muted) !important;
+}
+.dashboard-card,
+.data-card,
+.wide-data-card,
+.data-table-card,
+.timeline-card,
+.mini-panel,
+.stat-card,
+.metric-card,
+.chart-card,
+.table-card,
+.settings-card,
+.overview-card{
+  background:rgba(255,250,240,.94) !important;
+  border:1px solid var(--line) !important;
+  box-shadow:var(--shadow) !important;
+}
+.dashboard-card:hover,
+.data-card:hover,
+.wide-data-card:hover,
+.mini-panel:hover,
+.stat-card:hover,
+.metric-card:hover{
+  border-color:rgba(201,162,39,.45) !important;
+}
+.kpi-value,
+.metric-value,
+.stat-value,
+.card-value,
+.big-number{
+  color:var(--cherry) !important;
+}
+.kpi-label,
+.metric-label,
+.stat-label,
+.card-label{
+  color:var(--muted) !important;
+}
+button,
+.primary-btn,
+.dashboard-btn,
+.btn-primary{
+  background:linear-gradient(135deg,var(--cherry),var(--cherry-dark)) !important;
+  color:var(--ivory) !important;
+  border-color:var(--cherry) !important;
+}
+button:hover,
+.primary-btn:hover,
+.dashboard-btn:hover,
+.btn-primary:hover{
+  background:linear-gradient(135deg,var(--cherry-soft),var(--cherry)) !important;
+  box-shadow:0 10px 24px rgba(143,21,55,.22) !important;
+}
+.secondary-btn,
+.btn-secondary{
+  background:var(--ivory) !important;
+  color:var(--cherry) !important;
+  border:1px solid rgba(201,162,39,.65) !important;
+}
+.secondary-btn:hover,
+.btn-secondary:hover{
+  background:var(--gold-pale) !important;
+}
+.badge,
+.status-badge,
+.data-period,
+.tag,
+.chip{
+  background:rgba(201,162,39,.14) !important;
+  color:var(--cherry-dark) !important;
+  border-color:rgba(201,162,39,.32) !important;
+}
+.progress,
+.metric-track,
+.bar-track{
+  background:#eadfc8 !important;
+}
+.progress > span,
+.metric-bar > span,
+.bar-fill{
+  background:linear-gradient(90deg,var(--cherry),var(--gold)) !important;
+}
+.chart-line,
+.chart-accent{
+  stroke:var(--cherry) !important;
+}
+.chart-fill{
+  fill:rgba(143,21,55,.12) !important;
+}
+.gold,
+.accent-gold{
+  color:var(--gold) !important;
+}
+.cherry,
+.accent-cherry{
+  color:var(--cherry) !important;
+}
+table thead,
+.mini-data-table thead{
+  background:var(--ivory-deep) !important;
+}
+table th,
+.mini-data-table th{
+  color:var(--cherry-dark) !important;
+}
+table td,
+.mini-data-table td{
+  border-color:var(--line) !important;
+  color:var(--ink) !important;
+}
+.form-control,
+input,
+select,
+textarea{
+  background:#fffdf7 !important;
+  color:var(--ink) !important;
+  border-color:rgba(143,21,55,.18) !important;
+}
+.form-control:focus,
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--gold) !important;
+  box-shadow:0 0 0 3px rgba(201,162,39,.14) !important;
+}
+.avatar,
+.user-avatar,
+.profile-avatar{
+  background:linear-gradient(135deg,var(--cherry),var(--gold)) !important;
+  color:var(--ivory) !important;
+}
+.sidebar-signout{
+  background:rgba(255,250,240,.08) !important;
+  color:var(--ivory) !important;
+  border:1px solid rgba(201,162,39,.28) !important;
+}
+.sidebar-signout:hover{
+  background:rgba(201,162,39,.16) !important;
+  border-color:var(--gold) !important;
+}
+.notice,
+.attention-item{
+  border-left-color:var(--gold) !important;
+  background:rgba(201,162,39,.06) !important;
+}
+.timeline-dot{
+  background:var(--cherry) !important;
+  border-color:var(--gold) !important;
+}
+.dashboard-overlay{
+  background:rgba(63,8,25,.62) !important;
+}
+@media(max-width:760px){
+  .dashboard-header,
+  .dashboard-topbar{
+    background:rgba(255,250,240,.96) !important;
+  }
+}
+</style>
+
+
+<script id="customer-role-guard">
+(function(){
+  try{
+    const raw = localStorage.getItem("stacklyUser") || sessionStorage.getItem("stacklyUser");
+    if(!raw) return;
+    const user = JSON.parse(raw);
+    if(user && user.role && user.role !== "customer"){
+      window.location.replace("entrepreneur-dashboard.html");
+    }
+  }catch(e){}
+})();
+</script>
+
+
+<style id="customer-snapshot-final-fix">
+/* FINAL ISOLATED CUSTOMER SNAPSHOT FIX
+   Deliberately does not use any shared dashboard metric classes. */
+.customer-snapshot-list{
+  display:flex !important;
+  flex-direction:column !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:0 !important;
+  box-sizing:border-box !important;
+}
+.customer-snapshot-row{
+  display:grid !important;
+  grid-template-columns:minmax(165px, 1fr) 58px minmax(220px, 2.2fr) !important;
+  align-items:center !important;
+  column-gap:18px !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:56px !important;
+  padding:10px 0 !important;
+  margin:0 !important;
+  box-sizing:border-box !important;
+  border-top:1px solid rgba(143,21,55,.10) !important;
+}
+.customer-snapshot-row:first-child{
+  border-top:0 !important;
+}
+.customer-snapshot-label{
+  display:block !important;
+  min-width:0 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  font-size:11px !important;
+  line-height:1.2 !important;
+  font-weight:800 !important;
+  color:#3f0819 !important;
+}
+.customer-snapshot-value{
+  display:block !important;
+  width:auto !important;
+  min-width:58px !important;
+  margin:0 !important;
+  padding:0 !important;
+  text-align:right !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  color:#8f1537 !important;
+}
+.customer-snapshot-track{
+  display:block !important;
+  width:100% !important;
+  height:8px !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:999px !important;
+  background:#eadfc8 !important;
+  box-sizing:border-box !important;
+}
+.customer-snapshot-track > span{
+  display:block !important;
+  width:auto;
+  height:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#8f1537 0%,#c9a227 100%) !important;
+}
+@media (max-width:760px){
+  .customer-snapshot-row{
+    grid-template-columns:minmax(0,1fr) 52px !important;
+    column-gap:12px !important;
+    row-gap:9px !important;
+    min-height:66px !important;
+    padding:11px 0 !important;
+  }
+  .customer-snapshot-label{
+    font-size:10px !important;
+  }
+  .customer-snapshot-value{
+    min-width:52px !important;
+    font-size:11px !important;
+  }
+  .customer-snapshot-track{
+    grid-column:1 / -1 !important;
+    width:100% !important;
+  }
+}
+
+/* ===== STACKLY RIGHT-SIDE GAP FIX ===== */
+html, body {
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden !important;
+}
+
+.stackly-customer-dashboard,
+.dashboard-main,
+.dashboard-scroll {
+  width:100%;
+  max-width:100%;
+  min-width:0 !important;
+}
+
+.dashboard-main {
+  overflow:hidden !important;
+}
+
+.dashboard-scroll {
+  overflow-x:hidden !important;
+}
+
+.dashboard-section,
+.dashboard-section > *,
+.extra-dashboard-stack,
+.dashboard-grid,
+.dashboard-subgrid,
+.overview-data-grid,
+.overview-three-grid,
+.stats-grid,
+.project-grid,
+.kpi-grid,
+.settings-grid,
+.card,
+.panel,
+.mini-panel,
+.wide-data-card,
+.data-table-card,
+.timeline-card,
+.notice-list,
+.overview-data-card,
+.project-card,
+.kpi-card,
+.settings-card {
+  min-width:0 !important;
+  max-width:100%;
+}
+
+.table-wrap,
+.mini-data-table,
+.overview-activity-table {
+  width:100%;
+  max-width:100%;
+  overflow-x:auto !important;
+}
+
+@media (max-width:760px) {
+  .dashboard-main,
+  .dashboard-scroll {
+    width:100% !important;
+    max-width:100% !important;
+  }
+}
+
+</style>
+
+
+<style id="stackly-about-logo-treatment">
+  /* Same Stackly logo asset/treatment as the About page */
+  .dashboard-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:5px 10px 24px;
+  }
+
+  .dashboard-brand-mark.stackly-dashboard-logo{
+    width:36px !important;
+    height:36px !important;
+    flex:0 0 36px !important;
+    display:block !important;
+    object-fit:contain !important;
+    object-position:center !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    color:inherit !important;
+    filter:
+      brightness(0)
+      saturate(100%)
+      invert(17%)
+      sepia(78%)
+      saturate(2544%)
+      hue-rotate(340deg)
+      brightness(83%)
+      contrast(99%);
+  }
+
+  .dashboard-brand strong{
+    color:#fff !important;
+    font-family:Fraunces, Georgia, serif !important;
+    font-weight:600 !important;
+    letter-spacing:-.03em !important;
+  }
+</style>
+
+</head>
+
+<body class="stackly-customer-dashboard">
+<div class="stackly-customer-dashboard">
+
+<aside class="dashboard-sidebar" id="dashboardSidebar">
+  <div class="dashboard-brand">
+    <img class="dashboard-brand-mark stackly-dashboard-logo" src="assets/img/logo.webp" alt="Stackly">
+    <strong>Stackly</strong>
+  </div>
+
+  <div class="dashboard-role">
+    <small>Workspace</small>
+    <b>Customer</b>
+  </div>
+
+  <nav class="dashboard-nav" id="dashboardNav">
+    <div class="nav-heading">Overview</div>
+    <button class="active" data-section="overview"><span class="nav-icon">⌂</span>Overview</button>
+    <button data-section="analytics"><span class="nav-icon">◒</span>My Activity</button>
+    <button data-section="revenue"><span class="nav-icon">↗</span>Payments</button>
+
+    <div class="nav-heading">Shopping</div>
+    <button data-section="projects"><span class="nav-icon">▦</span>My Orders<span class="nav-count">8</span></button>
+    <button data-section="clients"><span class="nav-icon">♡</span>Wishlist<span class="nav-count">24</span></button>
+    <button data-section="team"><span class="nav-icon">♧</span>Support<span class="nav-count">12</span></button>
+    <button data-section="tasks"><span class="nav-icon">★</span>Reviews<span class="nav-count">17</span></button>
+
+    <div class="nav-heading">Account</div>
+    <button data-section="settings"><span class="nav-icon">⚙</span>Settings</button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="profile-mini">
+      <span class="profile-avatar" id="sidebarAvatar">EN</span>
+      <div>
+        <b id="sidebarName">Customer</b>
+        <span id="sidebarEmail">Customer account</span>
+      </div>
+    </div>
+    <button class="sidebar-signout" id="signOutButton" type="button">
+      <span>↪</span> Sign out
+    </button>
+  </div>
+</aside>
+
+<div class="dashboard-overlay" id="dashboardOverlay"></div>
+
+<main class="dashboard-main">
+
+<header class="dashboard-header">
+  <div class="header-left">
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+    <div class="header-title">
+      <h1 id="headerTitle">Customer Overview</h1>
+      <p id="headerSubtitle">Your customer activity at a glance</p>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <button class="header-icon" aria-label="Notifications">♢<i class="notification-dot"></i></button>
+    <button class="header-icon" aria-label="Messages">✉</button>
+    <div class="header-user">
+      <span class="header-avatar" id="headerAvatar">EN</span>
+      <div>
+        <b id="headerName">Customer</b>
+        <span id="headerEmail">Customer account</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="dashboard-scroll" id="dashboardScroll">
+
+<!-- OVERVIEW -->
+<section class="dashboard-section active" data-page="overview">
+
+  <div class="section-heading">
+    <div>
+      <h2>Welcome back, <span id="welcomeName">Customer</span>.</h2>
+      <p>Here is your latest shopping activity, orders, rewards and support status.</p>
+      <div class="logged-in-line"><span>LOGGED IN AS</span> <strong id="overviewEmail">Customer account</strong></div>
+    </div>
+    <div class="section-heading-actions"><span class="data-period">Last 30 days ▾</span></div>
+  </div>
+
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Orders</span><strong>18</strong><small>4 active orders</small></div>
+    <div class="mini-panel"><span>Total spent</span><strong>₹68,420</strong><small>↑ 12.8% this month</small></div>
+    <div class="mini-panel"><span>Rewards</span><strong>2,840</strong><small>+420 points earned</small></div>
+    <div class="mini-panel"><span>Wishlist</span><strong>27</strong><small>6 price drops</small></div>
+    <div class="mini-panel"><span>Returns</span><strong>2</strong><small>1 awaiting pickup</small></div>
+  </div>
+
+  <div class="extra-dashboard-stack">
+    <div class="wide-data-card">
+      <div class="wide-card-head"><div><h3>Customer snapshot</h3><p>Your current account activity at a glance.</p></div><span class="data-period">Live</span></div>
+      <div class="customer-snapshot-list">
+        <div class="customer-snapshot-row"><div class="customer-snapshot-label">Order fulfillment</div><strong class="customer-snapshot-value">86%</strong><div class="customer-snapshot-track"><span style="width:86%"></span></div></div>
+        <div class="customer-snapshot-row"><div class="customer-snapshot-label">Reward progress</div><strong class="customer-snapshot-value">71%</strong><div class="customer-snapshot-track"><span style="width:71%"></span></div></div>
+        <div class="customer-snapshot-row"><div class="customer-snapshot-label">Profile completion</div><strong class="customer-snapshot-value">94%</strong><div class="customer-snapshot-track"><span style="width:94%"></span></div></div>
+        <div class="customer-snapshot-row"><div class="customer-snapshot-label">Support satisfaction</div><strong class="customer-snapshot-value">96%</strong><div class="customer-snapshot-track"><span style="width:96%"></span></div></div>
+      </div>
+    </div>
+
+    <div class="wide-data-card">
+      <div class="wide-card-head"><div><h3>Active orders</h3><p>Track your latest purchases from checkout to delivery.</p></div><span class="data-period">4 active</span></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>STK-90481</strong><span>Premium Workspace Kit</span><b>Out for delivery</b><em>Today</em></div>
+        <div class="mini-row"><strong>STK-90437</strong><span>Wireless Headset</span><b>Shipped</b><em>Sep 22</em></div>
+        <div class="mini-row"><strong>STK-90392</strong><span>Travel Organizer</span><b>Processing</b><em>Sep 24</em></div>
+        <div class="mini-row"><strong>STK-90321</strong><span>Smart Desk Lamp</span><b>Confirmed</b><em>Sep 26</em></div>
+      </div>
+    </div>
+
+    <div class="data-table-card">
+      <div class="wide-card-head"><div><h3>Recent purchases</h3><p>Your latest completed orders and payment status.</p></div><span class="data-period">This month</span></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>Sep 18</strong><span>Ergonomic Chair</span><b>Delivered</b><em>₹18,900</em></div>
+        <div class="mini-row"><strong>Sep 14</strong><span>Desk Organizer Set</span><b>Delivered</b><em>₹2,450</em></div>
+        <div class="mini-row"><strong>Sep 09</strong><span>Monitor Stand</span><b>Delivered</b><em>₹5,800</em></div>
+        <div class="mini-row"><strong>Sep 03</strong><span>USB-C Hub</span><b>Delivered</b><em>₹3,240</em></div>
+        <div class="mini-row"><strong>Aug 28</strong><span>Notebook Bundle</span><b>Delivered</b><em>₹1,680</em></div>
+      </div>
+    </div>
+
+    <div class="wide-data-card">
+      <div class="wide-card-head"><div><h3>Today’s customer timeline</h3><p>Important updates that need your attention.</p></div></div>
+      <div class="timeline-card">
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>10:20 AM — Order dispatched</strong><p>Premium Workspace Kit has left the fulfillment center.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>12:40 PM — Reward points added</strong><p>420 points were added after your recent purchase.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>02:15 PM — Price drop alert</strong><p>One wishlist item is now 14% lower than last week.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>04:00 PM — Support update</strong><p>Your delivery question has received a response.</p></div></div>
+      </div>
+    </div>
+
+    <div class="dashboard-subgrid">
+      <div class="mini-panel"><span>Next delivery</span><strong>Today</strong><small>Workspace Kit · 2–6 PM</small></div>
+      <div class="mini-panel"><span>Saved addresses</span><strong>3</strong><small>1 primary address</small></div>
+      <div class="mini-panel"><span>Saved payments</span><strong>4</strong><small>2 cards · 2 UPI</small></div>
+      <div class="mini-panel"><span>Coupons</span><strong>8</strong><small>₹1,850 potential savings</small></div>
+      <div class="mini-panel"><span>Support tickets</span><strong>2</strong><small>1 open · 1 resolved</small></div>
+    </div>
+
+    <div class="data-table-card">
+      <div class="wide-card-head"><div><h3>Recommended for you</h3><p>Based on your recent browsing and purchases.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>01</strong><span>Minimal Desk Setup Bundle</span><b>92% match</b><em>₹12,990</em></div>
+        <div class="mini-row"><strong>02</strong><span>Noise Cancelling Headphones</span><b>89% match</b><em>₹9,499</em></div>
+        <div class="mini-row"><strong>03</strong><span>Premium Laptop Stand</span><b>86% match</b><em>₹4,250</em></div>
+        <div class="mini-row"><strong>04</strong><span>Executive Backpack</span><b>82% match</b><em>₹6,800</em></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ANALYTICS -->
+<section class="dashboard-section" data-page="analytics">
+
+  <div class="section-heading"><div><h2>My Activity</h2><p>Understand your shopping behaviour, engagement and account activity.</p></div><div class="section-heading-actions"><span class="data-period">Last 90 days ▾</span></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Pages viewed</span><strong>284</strong><small>↑ 18.4% vs last period</small></div>
+    <div class="mini-panel"><span>Products viewed</span><strong>126</strong><small>32 saved to wishlist</small></div>
+    <div class="mini-panel"><span>Cart additions</span><strong>41</strong><small>18 converted to orders</small></div>
+    <div class="mini-panel"><span>Purchase rate</span><strong>14.3%</strong><small>↑ 2.1% this period</small></div>
+    <div class="mini-panel"><span>Return rate</span><strong>3.2%</strong><small>Below account average</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Engagement channels</h3><p>Where your recent activity is coming from.</p></div></div>
+      <div class="analytics-row">
+        <div class="metric-row"><span>Direct visits</span><strong>42%</strong><div class="metric-track"><span style="width:42%"></span></div></div>
+        <div class="metric-row"><span>Search</span><strong>27%</strong><div class="metric-track"><span style="width:27%"></span></div></div>
+        <div class="metric-row"><span>Email</span><strong>16%</strong><div class="metric-track"><span style="width:16%"></span></div></div>
+        <div class="metric-row"><span>Recommendations</span><strong>15%</strong><div class="metric-track"><span style="width:15%"></span></div></div>
+      </div>
+    </div>
+    <div class="data-table-card"><div class="wide-card-head"><div><h3>Recently viewed products</h3><p>Your latest browsing activity.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>Today</strong><span>Noise Cancelling Headphones</span><b>Viewed 4×</b><em>₹9,499</em></div>
+        <div class="mini-row"><strong>Today</strong><span>Minimal Desk Setup Bundle</span><b>Viewed 3×</b><em>₹12,990</em></div>
+        <div class="mini-row"><strong>Yesterday</strong><span>Executive Backpack</span><b>Viewed 2×</b><em>₹6,800</em></div>
+        <div class="mini-row"><strong>Sep 18</strong><span>Smart Desk Lamp</span><b>Viewed 2×</b><em>₹3,600</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Monthly shopping activity</h3><p>Visits, cart additions and completed purchases.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>September</strong><span>92 visits · 18 carts</span><b>9 orders</b><em>₹32.4K</em></div>
+        <div class="mini-row"><strong>August</strong><span>76 visits · 15 carts</span><b>7 orders</b><em>₹24.8K</em></div>
+        <div class="mini-row"><strong>July</strong><span>61 visits · 11 carts</span><b>5 orders</b><em>₹18.6K</em></div>
+        <div class="mini-row"><strong>June</strong><span>54 visits · 9 carts</span><b>4 orders</b><em>₹15.2K</em></div>
+      </div>
+    </div>
+    <div class="behaviour-grid">
+      <div class="mini-panel"><span>Preferred category</span><strong>Workspace</strong><small>38% of purchases</small></div>
+      <div class="mini-panel"><span>Typical order</span><strong>₹4,820</strong><small>Average basket value</small></div>
+      <div class="mini-panel"><span>Peak shopping</span><strong>8–10 PM</strong><small>Most active period</small></div>
+      <div class="mini-panel"><span>Repeat rate</span><strong>72%</strong><small>Returning customer</small></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- REVENUE -->
+<section class="dashboard-section" data-page="revenue">
+
+  <div class="section-heading"><div><h2>Payments</h2><p>Track purchases, invoices, refunds and saved payment methods.</p></div><div class="section-heading-actions"><span class="data-period">September 2026</span></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>This month</span><strong>₹32.4K</strong><small>9 successful payments</small></div>
+    <div class="mini-panel"><span>Pending</span><strong>₹4,250</strong><small>1 payment awaiting confirmation</small></div>
+    <div class="mini-panel"><span>Refunds</span><strong>₹2,180</strong><small>2 refunds processed</small></div>
+    <div class="mini-panel"><span>Saved methods</span><strong>4</strong><small>Cards and UPI</small></div>
+    <div class="mini-panel"><span>Coupons used</span><strong>₹3,640</strong><small>Total savings</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="data-table-card"><div class="wide-card-head"><div><h3>Transaction history</h3><p>Recent purchases and payment activity.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>Sep 18</strong><span>Ergonomic Chair · STK-90402</span><b>Paid</b><em>₹18,900</em></div>
+        <div class="mini-row"><strong>Sep 14</strong><span>Desk Organizer · STK-90371</span><b>Paid</b><em>₹2,450</em></div>
+        <div class="mini-row"><strong>Sep 09</strong><span>Monitor Stand · STK-90312</span><b>Refunded</b><em>₹5,800</em></div>
+        <div class="mini-row"><strong>Sep 03</strong><span>USB-C Hub · STK-90284</span><b>Paid</b><em>₹3,240</em></div>
+        <div class="mini-row"><strong>Aug 28</strong><span>Notebook Bundle · STK-90196</span><b>Paid</b><em>₹1,680</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Payment methods</h3><p>Your available checkout options.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>VISA •••• 4812</strong><span>Primary card</span><b>Active</b><em>Default</em></div>
+        <div class="mini-row"><strong>UPI</strong><span>harini@upi</span><b>Active</b><em>Verified</em></div>
+        <div class="mini-row"><strong>Mastercard •••• 1290</strong><span>Backup card</span><b>Active</b><em>Backup</em></div>
+        <div class="mini-row"><strong>Wallet</strong><span>Stackly Wallet</span><b>₹1,240</b><em>Available</em></div>
+      </div>
+    </div>
+    <div class="age-grid">
+      <div class="mini-panel"><span>0–15 days</span><strong>₹0</strong><small>Nothing due</small></div>
+      <div class="mini-panel"><span>16–30 days</span><strong>₹0</strong><small>Nothing due</small></div>
+      <div class="mini-panel"><span>Refund queue</span><strong>₹0</strong><small>All cleared</small></div>
+      <div class="mini-panel"><span>Wallet balance</span><strong>₹1,240</strong><small>Ready to use</small></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PROJECTS -->
+<section class="dashboard-section" data-page="projects">
+
+  <div class="section-heading"><div><h2>My Orders</h2><p>Track current deliveries, previous purchases and returns.</p></div><div class="section-heading-actions"><span class="data-period">All orders ▾</span></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Total orders</span><strong>86</strong><small>Lifetime purchases</small></div>
+    <div class="mini-panel"><span>In transit</span><strong>2</strong><small>Expected this week</small></div>
+    <div class="mini-panel"><span>Delivered</span><strong>79</strong><small>91.9% completed</small></div>
+    <div class="mini-panel"><span>Returns</span><strong>3</strong><small>3.5% return rate</small></div>
+    <div class="mini-panel"><span>Cancelled</span><strong>2</strong><small>2.3% of orders</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Order portfolio</h3><p>Current status across your recent orders.</p></div></div>
+      <div class="portfolio-grid">
+        <div class="mini-panel"><span>Processing</span><strong>2</strong><small>Being prepared</small></div>
+        <div class="mini-panel"><span>Shipped</span><strong>1</strong><small>In transit</small></div>
+        <div class="mini-panel"><span>Out for delivery</span><strong>1</strong><small>Arriving today</small></div>
+        <div class="mini-panel"><span>Delivered</span><strong>79</strong><small>Successfully received</small></div>
+      </div>
+    </div>
+    <div class="data-table-card"><div class="wide-card-head"><div><h3>Order tracking</h3><p>Live delivery updates.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>STK-90481</strong><span>Premium Workspace Kit</span><b>Out for delivery</b><em>Today</em></div>
+        <div class="mini-row"><strong>STK-90437</strong><span>Wireless Headset</span><b>Shipped</b><em>Sep 22</em></div>
+        <div class="mini-row"><strong>STK-90392</strong><span>Travel Organizer</span><b>Processing</b><em>Sep 24</em></div>
+        <div class="mini-row"><strong>STK-90321</strong><span>Smart Desk Lamp</span><b>Confirmed</b><em>Sep 26</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Returns & refunds</h3><p>Recent return requests and resolution status.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>RET-2214</strong><span>Monitor Stand</span><b>Refund complete</b><em>₹5,800</em></div>
+        <div class="mini-row"><strong>RET-2179</strong><span>Travel Bag</span><b>Pickup scheduled</b><em>₹3,240</em></div>
+        <div class="mini-row"><strong>RET-2141</strong><span>Keyboard</span><b>Completed</b><em>₹2,190</em></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CLIENTS -->
+<section class="dashboard-section" data-page="clients">
+
+  <div class="section-heading"><div><h2>Wishlist</h2><p>Keep track of saved products, price drops and back-in-stock alerts.</p></div><div class="section-heading-actions"><span class="data-period">27 saved items</span></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Saved items</span><strong>27</strong><small>Across 8 categories</small></div>
+    <div class="mini-panel"><span>Price drops</span><strong>6</strong><small>Available today</small></div>
+    <div class="mini-panel"><span>Back in stock</span><strong>3</strong><small>Ready to buy</small></div>
+    <div class="mini-panel"><span>Lowest price</span><strong>₹2,490</strong><small>Saved this month</small></div>
+    <div class="mini-panel"><span>Potential savings</span><strong>₹7,840</strong><small>Current offers</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="data-table-card"><div class="wide-card-head"><div><h3>Price drop alerts</h3><p>Wishlist products that became cheaper.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>01</strong><span>Noise Cancelling Headphones</span><b>-14%</b><em>₹9,499</em></div>
+        <div class="mini-row"><strong>02</strong><span>Executive Backpack</span><b>-11%</b><em>₹6,800</em></div>
+        <div class="mini-row"><strong>03</strong><span>Smart Desk Lamp</span><b>-9%</b><em>₹3,600</em></div>
+        <div class="mini-row"><strong>04</strong><span>Mechanical Keyboard</span><b>-7%</b><em>₹5,990</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Saved collections</h3><p>Your personal shopping lists.</p></div></div>
+      <div class="portfolio-grid">
+        <div class="mini-panel"><span>Work setup</span><strong>8</strong><small>Saved products</small></div>
+        <div class="mini-panel"><span>Travel</span><strong>5</strong><small>Saved products</small></div>
+        <div class="mini-panel"><span>Tech</span><strong>7</strong><small>Saved products</small></div>
+        <div class="mini-panel"><span>Home</span><strong>7</strong><small>Saved products</small></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TEAM -->
+<section class="dashboard-section" data-page="team">
+
+  <div class="section-heading"><div><h2>Support</h2><p>Get help, follow open tickets and review your support history.</p></div><div class="section-heading-actions"><span class="data-period">2 active tickets</span></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Open tickets</span><strong>2</strong><small>1 awaiting reply</small></div>
+    <div class="mini-panel"><span>Resolved</span><strong>18</strong><small>Past 12 months</small></div>
+    <div class="mini-panel"><span>Avg. response</span><strong>18 min</strong><small>Support team</small></div>
+    <div class="mini-panel"><span>Satisfaction</span><strong>96%</strong><small>Based on your ratings</small></div>
+    <div class="mini-panel"><span>Help articles</span><strong>42</strong><small>Available to you</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="data-table-card"><div class="wide-card-head"><div><h3>Open support tickets</h3><p>Current conversations with the Stackly support team.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>SUP-8421</strong><span>Delivery timing for STK-90481</span><b>Agent replied</b><em>Today</em></div>
+        <div class="mini-row"><strong>SUP-8374</strong><span>Payment confirmation question</span><b>Awaiting reply</b><em>2 hrs</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Support timeline</h3><p>Recent account support events.</p></div></div>
+      <div class="timeline-card">
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>Today — Agent replied</strong><p>Your delivery question received a detailed response.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>Sep 18 — Ticket resolved</strong><p>Payment confirmation issue was successfully closed.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>Sep 12 — Return approved</strong><p>Your return request was accepted.</p></div></div>
+      </div>
+    </div>
+    <div class="notice-list">
+      <div class="notice"><strong>Delivery help</strong><p>Your order is scheduled for delivery today between 2–6 PM.</p></div>
+      <div class="notice"><strong>Account tip</strong><p>Add a backup phone number to make delivery verification easier.</p></div>
+      <div class="notice"><strong>Priority support</strong><p>Your customer tier currently includes faster response routing.</p></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TASKS -->
+<section class="dashboard-section" data-page="tasks">
+
+  <div class="section-heading"><div><h2>Reviews & Feedback</h2><p>Manage your ratings, reviews and product feedback.</p></div><div class="section-heading-actions"><span class="data-period">Your activity</span></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Reviews posted</span><strong>34</strong><small>Across 41 purchases</small></div>
+    <div class="mini-panel"><span>Average rating</span><strong>4.8/5</strong><small>Your submitted ratings</small></div>
+    <div class="mini-panel"><span>Pending reviews</span><strong>7</strong><small>Products awaiting feedback</small></div>
+    <div class="mini-panel"><span>Helpful votes</span><strong>128</strong><small>From other customers</small></div>
+    <div class="mini-panel"><span>Photos shared</span><strong>12</strong><small>In product reviews</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="data-table-card"><div class="wide-card-head"><div><h3>Recent reviews</h3><p>Your latest ratings and feedback.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>Sep 18</strong><span>Ergonomic Chair</span><b>★★★★★</b><em>Helpful 14</em></div>
+        <div class="mini-row"><strong>Sep 14</strong><span>Desk Organizer Set</span><b>★★★★☆</b><em>Helpful 8</em></div>
+        <div class="mini-row"><strong>Sep 09</strong><span>Monitor Stand</span><b>★★★★★</b><em>Helpful 21</em></div>
+        <div class="mini-row"><strong>Aug 28</strong><span>Notebook Bundle</span><b>★★★★☆</b><em>Helpful 5</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Review queue</h3><p>Products you can review next.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>01</strong><span>Wireless Headset</span><b>Pending</b><em>Delivered Sep 18</em></div>
+        <div class="mini-row"><strong>02</strong><span>Travel Organizer</span><b>Pending</b><em>Delivered Sep 14</em></div>
+        <div class="mini-row"><strong>03</strong><span>USB-C Hub</span><b>Pending</b><em>Delivered Sep 03</em></div>
+        <div class="mini-row"><strong>04</strong><span>Smart Desk Lamp</span><b>Pending</b><em>Delivered Aug 30</em></div>
+      </div>
+    </div>
+    <div class="behaviour-grid">
+      <div class="mini-panel"><span>Most reviewed</span><strong>Tech</strong><small>14 reviews</small></div>
+      <div class="mini-panel"><span>Top rating</span><strong>5.0</strong><small>Workspace category</small></div>
+      <div class="mini-panel"><span>Helpful ratio</span><strong>91%</strong><small>Community feedback</small></div>
+      <div class="mini-panel"><span>Response rate</span><strong>100%</strong><small>All merchant replies read</small></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SETTINGS -->
+<section class="dashboard-section" data-page="settings">
+
+  <div class="section-heading"><div><h2>Settings</h2><p>Manage your customer profile, security, preferences and account activity.</p></div></div>
+  <div class="dashboard-subgrid">
+    <div class="mini-panel"><span>Profile</span><strong>94%</strong><small>Profile completion</small></div>
+    <div class="mini-panel"><span>Security</span><strong>Strong</strong><small>2FA enabled</small></div>
+    <div class="mini-panel"><span>Notifications</span><strong>8</strong><small>Active preferences</small></div>
+    <div class="mini-panel"><span>Addresses</span><strong>3</strong><small>1 primary</small></div>
+    <div class="mini-panel"><span>Storage</span><strong>18%</strong><small>Saved documents & receipts</small></div>
+  </div>
+  <div class="extra-dashboard-stack">
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Customer profile</h3><p>Personal information connected to your Stackly account.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>Name</strong><span id="settingsName">Customer</span><b>Verified</b><em>Profile</em></div>
+        <div class="mini-row"><strong>Email</strong><span id="settingsEmail">Customer account</span><b>Verified</b><em>Primary</em></div>
+        <div class="mini-row"><strong>Phone</strong><span>+91 ••••• 4821</span><b>Verified</b><em>Primary</em></div>
+        <div class="mini-row"><strong>Customer tier</strong><span>Premium</span><b>Active</b><em>Benefits enabled</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Security centre</h3><p>Account protection and sign-in activity.</p></div></div>
+      <div class="mini-data-table">
+        <div class="mini-row"><strong>Two-factor authentication</strong><span>Authenticator enabled</span><b>Protected</b><em>Active</em></div>
+        <div class="mini-row"><strong>Password</strong><span>Updated 18 days ago</span><b>Healthy</b><em>Recommended</em></div>
+        <div class="mini-row"><strong>New device alerts</strong><span>Enabled</span><b>Active</b><em>Recommended</em></div>
+      </div>
+    </div>
+    <div class="wide-data-card"><div class="wide-card-head"><div><h3>Recent account activity</h3><p>Latest sign-in and account events.</p></div></div>
+      <div class="timeline-card">
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>Today — Dashboard login</strong><p>Customer dashboard accessed successfully.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>Yesterday — Payment method used</strong><p>VISA ending 4812 was used for an order.</p></div></div>
+        <div class="timeline-item"><span class="timeline-dot"></span><div><strong>Sep 17 — Address updated</strong><p>Your primary delivery address was updated.</p></div></div>
+      </div>
+    </div>
+    <div class="dashboard-subgrid">
+      <div class="mini-panel"><span>Email alerts</span><strong>On</strong><small>Order updates</small></div>
+      <div class="mini-panel"><span>SMS alerts</span><strong>On</strong><small>Delivery updates</small></div>
+      <div class="mini-panel"><span>Offers</span><strong>On</strong><small>Personalized deals</small></div>
+      <div class="mini-panel"><span>Recommendations</span><strong>On</strong><small>Based on activity</small></div>
+      <div class="mini-panel"><span>Privacy</span><strong>Standard</strong><small>Account protected</small></div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+</main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const navButtons = document.querySelectorAll("#dashboardNav button[data-section]");
+  const sections = document.querySelectorAll(".dashboard-section");
+  const scroll = document.getElementById("dashboardScroll");
+  const sidebar = document.getElementById("dashboardSidebar");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  const titles = {
+    overview:["Customer Overview","Your shopping activity at a glance"],
+    analytics:["My Activity","Your engagement and shopping behaviour"],
+    revenue:["Payments","Track purchases, refunds and payment methods"],
+    projects:["My Orders","Track deliveries, purchases and returns"],
+    clients:["Wishlist","Manage saved products and price alerts"],
+    team:["Support","Get help and follow your support requests"],
+    tasks:["Reviews & Feedback","Manage your ratings and product feedback"],
+    settings:["Settings","Manage your customer account and preferences"]
+  };
+
+  function showSection(name){
+    sections.forEach(section => {
+      section.classList.toggle("active", section.dataset.page === name);
+    });
+
+    navButtons.forEach(button => {
+      button.classList.toggle("active", button.dataset.section === name);
+    });
+
+    const title = titles[name] || titles.overview;
+    document.getElementById("headerTitle").textContent = title[0];
+    document.getElementById("headerSubtitle").textContent = title[1];
+
+    scroll.scrollTop = 0;
+    sidebar.classList.remove("open");
+    history.replaceState(null,"","#" + name);
+  }
+
+  navButtons.forEach(button => {
+    button.addEventListener("click", () => showSection(button.dataset.section));
+  });
+
+  const overlay = document.getElementById("dashboardOverlay");
+  const signOutButton = document.getElementById("signOutButton");
+
+  function setMobileMenu(open){
+    sidebar.classList.toggle("open", open);
+    mobileMenu.classList.toggle("is-open", open);
+    mobileMenu.textContent = open ? "×" : "☰";
+    mobileMenu.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if(!open) overlay.style.display = "";
+  }
+
+  mobileMenu.addEventListener("click", function(){
+    setMobileMenu(!sidebar.classList.contains("open"));
+  });
+
+  overlay.addEventListener("click", function(){
+    setMobileMenu(false);
+  });
+
+  window.addEventListener("resize", function(){
+    if(window.innerWidth > 760) setMobileMenu(false);
+  });
+
+  signOutButton.addEventListener("click", function(){
+    localStorage.removeItem("stacklyUser");
+    sessionStorage.removeItem("stacklyUser");
+    window.location.href = "login-premium.html";
+  });
+
+  // Use the account information created by the Stackly login/register page.
+  let user = null;
+  try{
+    user = JSON.parse(localStorage.getItem("stacklyUser") || sessionStorage.getItem("stacklyUser") || "null");
+  }catch(e){}
+
+  if(user){
+    const displayName = user.name || user.email?.split("@")[0] || "Customer";
+    const email = user.email || "Customer account";
+    const initials = displayName.split(/\s+/).slice(0,2).map(x => x[0]).join("").toUpperCase();
+
+    document.getElementById("welcomeName").textContent = displayName.split(" ")[0];
+    document.getElementById("sidebarName").textContent = displayName;
+    document.getElementById("sidebarEmail").textContent = email;
+    document.getElementById("headerName").textContent = displayName;
+    document.getElementById("headerEmail").textContent = email;
+    document.getElementById("overviewEmail").textContent = email;
+    document.getElementById("sidebarAvatar").textContent = initials || "EN";
+    document.getElementById("headerAvatar").textContent = initials || "EN";
+    document.getElementById("settingsEmail").value = email;
+  }
+
+  document.getElementById("saveSettings").addEventListener("click", function(){
+    this.textContent = "Saved ✓";
+    setTimeout(() => this.textContent = "Save changes", 1400);
+  });
+
+  document.getElementById("savePreferences").addEventListener("click", function(){
+    this.textContent = "Saved ✓";
+    setTimeout(() => this.textContent = "Save preferences", 1400);
+  });
+
+  // If the dashboard is opened directly, keep the UI usable while
+  // clearly showing that no login session was found.
+  if(!user){
+    document.getElementById("headerEmail").textContent = "Not signed in";
+    document.getElementById("overviewEmail").textContent = "No login session found";
+  }
+
+  const initial = location.hash.replace("#","");
+  showSection(titles[initial] ? initial : "overview");
+})();
+</script>
+</body>
+</html>
