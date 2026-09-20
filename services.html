@@ -415,8 +415,7 @@
     margin-bottom:22px;
     gap:18px;
   }
-  .stackly-services-page .services-process-step > div:first-child,
-  .stackly-services-page .services-process-step > div:last-child{
+  .stackly-services-page .services-process-step > div:empty{
     display:none;
   }
   .stackly-services-page .services-process-step .services-process-dot{
@@ -1751,13 +1750,240 @@ body:not(.stackly-services-page) .stk-services-demo-btn{
       <div class="footer-col"><h5>Company</h5>
         <ul><li><a href="index.html">home</a></li><li><a href="product.html">products</a></li><li><a href="services.html">service</a></li><li><a href="pricing.html">pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">contact</a></li></ul></div>
       <div class="footer-col"><h5>Resources</h5><ul><li><a href="404.html">Pricing</a></li><li><a href="404.html">FAQ</a></li><li><a href="404.html">Documentation</a></li><li><a href="404.html">Dashboard Demo</a></li></ul></div>
-      <div class="footer-col newsletter">
-        <h5>Stay Ahead</h5>
-        <p>Monthly insights on enterprise technology. No noise.</p>
-        <form class="newsletter-form" novalidate>
-          <input type="email" placeholder="Your work email" aria-label="Email address" required>
-          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-        </form>
+       <div class="footer-col newsletter">
+  <h5>Stay Ahead</h5>
+
+  <p>Monthly insights on enterprise technology. No noise.</p>
+
+  <form class="stk-footer-newsletter" novalidate>
+
+    <input
+      type="text"
+      class="stk-footer-email"
+      placeholder="Your work email"
+      aria-label="Email address"
+    >
+
+    <button
+      type="submit"
+      class="stk-footer-submit"
+      aria-label="Subscribe"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <use href="#i-arrow"></use>
+      </svg>
+    </button>
+
+    <span
+      class="stk-footer-error"
+      aria-live="polite"
+    ></span>
+
+  </form>
+</div>
+<style>
+  /* =========================================
+   STACKLY FOOTER NEWSLETTER
+   ========================================= */
+
+.stk-footer-newsletter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  margin-top: 22px;
+}
+
+.stk-footer-email {
+  width: 100%;
+  height: 68px;
+  padding: 0 72px 0 26px;
+
+  border: 1px solid #ddd9d5;
+  border-radius: 40px;
+
+  background: #fff;
+  color: #333;
+
+  font-family: inherit;
+  font-size: 17px;
+  line-height: 1;
+
+  outline: none;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.stk-footer-email::placeholder {
+  color: #6f6f6f;
+  opacity: 1;
+}
+
+.stk-footer-email:focus {
+  border-color: #b01835;
+  box-shadow: 0 0 0 3px rgba(176, 24, 53, 0.08);
+}
+
+
+/* Arrow button */
+
+.stk-footer-submit {
+  position: absolute;
+
+  right: 6px;
+  top: 50%;
+
+  width: 56px;
+  height: 56px;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 0;
+
+  border-radius: 50%;
+
+  background: #a91432;
+  color: #fff;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.stk-footer-submit svg {
+  width: 31px;
+  height: 31px;
+
+  display: block;
+}
+
+.stk-footer-submit:hover {
+  background: #8f102b;
+  transform: translateY(-50%) scale(1.04);
+}
+
+.stk-footer-submit:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+
+/* Inline error */
+
+.stk-footer-error {
+  display: none;
+
+  position: absolute;
+
+  left: 26px;
+  top: calc(100% + 8px);
+
+  width: calc(100% - 52px);
+
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #b01835;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 767px) {
+
+  .stk-footer-newsletter {
+    max-width: 100%;
+  }
+
+  .stk-footer-email {
+    height: 62px;
+    padding-left: 22px;
+    padding-right: 66px;
+    font-size: 16px;
+  }
+
+  .stk-footer-submit {
+    width: 50px;
+    height: 50px;
+    right: 6px;
+  }
+
+  .stk-footer-submit svg {
+    width: 28px;
+    height: 28px;
+  }
+
+}
+</style>
+<script>
+(function () {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var form = document.querySelector('.stk-footer-newsletter');
+    var email = document.querySelector('.stk-footer-email');
+    var error = document.querySelector('.stk-footer-error');
+
+    if (!form || !email || !error) return;
+
+    form.addEventListener('submit', function (event) {
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      var value = email.value.trim();
+
+      if (value === '') {
+        error.textContent = 'Please enter your email address.';
+        error.style.display = 'block';
+        email.focus();
+        return;
+      }
+
+      error.textContent = '';
+      error.style.display = 'none';
+
+      window.location.href = '404.html';
+
+    }, true);
+
+    email.addEventListener('input', function () {
+
+      if (email.value.trim() !== '') {
+        error.textContent = '';
+        error.style.display = 'none';
+      }
+
+    });
+
+  });
+
+})();
+</script>
       </div>
     </div>
     <div class="footer-bottom">
