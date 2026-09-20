@@ -1,738 +1,1456 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login — Stackly</title>
-<meta name="description" content="Secure Stackly login for entrepreneurs and customers.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stackly | Login</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/img/impact/logo STAC.webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Manrope", sans-serif;
+            background: #f7f8f5;
+            color: #111111;
+            min-height: 100vh;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
 
-<style>
-:root{
-  --cream:#f6efe5;
-  --paper:#fffdf9;
-  --burgundy:#7d1628;
-  --burgundy-deep:#4b0d19;
-  --red:#a71930;
-  --gold:#c8a04a;
-  --ink:#2a211e;
-  --muted:#786b62;
-  --line:#e5d9cd;
-  --shadow:0 30px 90px rgba(67,30,24,.14);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  min-height:100vh;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--ink);
-  background:var(--cream);
-  overflow-x:hidden;
-  overflow-y:auto;
-}
-button,input{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
 
-.stackly-login-page{
-  min-height:100vh;
-  position:relative;
-  display:block;
-  padding:28px;
-  isolation:isolate;
-  overflow-x:hidden;
-  overflow-y:visible;
-}
-.stackly-login-page::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-3;
-  background:
-    radial-gradient(circle at 8% 8%,rgba(200,160,74,.18),transparent 22%),
-    radial-gradient(circle at 94% 92%,rgba(167,25,48,.12),transparent 28%),
-    var(--cream);
-}
-.stackly-login-page::after{
-  content:"";
-  position:absolute;
-  width:560px;height:560px;
-  right:-280px;top:-280px;
-  border:1px solid rgba(125,22,40,.12);
-  border-radius:50%;
-  box-shadow:0 0 0 90px rgba(125,22,40,.025),0 0 0 180px rgba(125,22,40,.018);
-  z-index:-2;
-}
-.login-orb{display:none}
+        .login-wrapper {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 48% 52%;
+        }
 
-.login-shell{
-  width:min(1240px,100%);
-  min-height:720px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
-  background:var(--paper);
-  border:1px solid rgba(125,22,40,.12);
-  border-radius:30px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-  position:relative;
-}
 
-/* NEW BRAND PANEL */
-.login-brand{
-  position:relative;
-  overflow:hidden;
-  min-height:720px;
-  padding:48px;
-  color:#fff;
-  background:
-    radial-gradient(circle at 84% 18%,rgba(200,160,74,.20),transparent 24%),
-    radial-gradient(circle at 8% 90%,rgba(167,25,48,.42),transparent 34%),
-    linear-gradient(145deg,var(--burgundy-deep),#721326 52%,#8e182e);
-}
-.login-brand::before{
-  content:"";
-  position:absolute;
-  width:620px;height:620px;
-  right:-330px;bottom:-330px;
-  border:1px solid rgba(255,255,255,.13);
-  border-radius:50%;
-  box-shadow:
-    0 0 0 72px rgba(255,255,255,.025),
-    0 0 0 145px rgba(255,255,255,.018);
-}
-.login-brand::after{
-  content:"";
-  position:absolute;
-  width:620px;height:1px;
-  left:-110px;
-  bottom:150px;
-  transform:rotate(-28deg);
-  background:linear-gradient(90deg,transparent,rgba(200,160,74,.8),transparent);
-}
-.brand-inner{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-}
-.brand-logo{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  width:max-content;
-  font-family:Fraunces,Georgia,serif;
-  font-size:28px;
-  font-weight:600;
-  letter-spacing:-.04em;
-}
-.brand-mark.stackly-login-logo{
-  width:42px!important;
-  height:42px!important;
-  object-fit:contain!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  filter:brightness(0) invert(1)!important;
-}
-.brand-copy{
-  margin:auto 0;
-  max-width:610px;
-}
-.brand-eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  color:#eadfd6;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.brand-eyebrow i{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 18px rgba(200,160,74,.8);
-}
-.brand-copy h1{
-  margin-top:22px;
-  font-family:Fraunces,Georgia,serif;
-  font-size:clamp(52px,5.4vw,78px);
-  font-weight:500;
-  line-height:.92;
-  letter-spacing:-.055em;
-  max-width:650px;
-}
-.brand-copy h1 span{
-  color:#e5c77f;
-}
-.brand-copy p{
-  margin-top:27px;
-  max-width:500px;
-  color:#d7c8c0;
-  line-height:1.8;
-  font-size:14px;
-}
-.brand-features{
-  margin-top:34px;
-  display:flex;
-  gap:10px;
-  max-width:560px;
-}
-.brand-feature{
-  min-width:180px;
-  padding:15px 17px;
-  border:1px solid rgba(255,255,255,.13);
-  background:rgba(255,255,255,.055);
-  border-radius:13px;
-  backdrop-filter:blur(10px);
-}
-.brand-feature strong{display:block;font-size:12px}
-.brand-feature span{display:block;color:#bdaea6;font-size:10px;margin-top:5px}
-.brand-foot{
-  color:#b9aaa2;
-  font-size:10px;
-  letter-spacing:.08em;
-}
+        /* =========================================
+           LEFT BRAND PANEL
+        ========================================= */
 
-/* NEW LOGIN PANEL */
-.login-panel{
-  padding:54px clamp(34px,5vw,74px);
-  display:flex;
-  align-items:center;
-  background:
-    radial-gradient(circle at 100% 0%,rgba(200,160,74,.10),transparent 30%),
-    var(--paper);
-}
-.login-content{width:min(100%,430px);margin:auto}
-.login-topline{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-.login-kicker{
-  color:var(--burgundy);
-  font-size:10px;
-  font-weight:850;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-}
-.login-home{
-  color:#8a7c73;
-  font-size:11px;
-  transition:.25s ease;
-}
-.login-home:hover{color:var(--burgundy)}
-.login-content h2{
-  margin-top:15px;
-  font-family:Fraunces,Georgia,serif;
-  font-size:44px;
-  font-weight:500;
-  letter-spacing:-.045em;
-  line-height:1;
-  color:var(--ink);
-}
-.login-intro{
-  color:var(--muted);
-  margin-top:11px;
-  font-size:12px;
-  line-height:1.7;
-}
-.role-label{
-  display:block;
-  margin:31px 0 11px;
-  color:#44352e;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.03em;
-}
-.role-switch{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.role-option{position:relative}
-.role-option input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-.role-card{
-  display:block;
-  min-height:92px;
-  padding:16px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:#fffaf4;
-  transition:.25s ease;
-}
-.role-card:hover{
-  border-color:#c9aa93;
-  transform:translateY(-2px);
-}
-.role-option input:checked + .role-card{
-  border-color:var(--burgundy);
-  background:linear-gradient(135deg,rgba(125,22,40,.075),rgba(200,160,74,.06));
-  box-shadow:0 12px 30px rgba(125,22,40,.10);
-}
-.role-icon{
-  width:30px;height:30px;
-  display:grid;place-items:center;
-  border-radius:9px;
-  color:var(--burgundy);
-  background:#fff;
-  border:1px solid #eadfd4;
-  font-size:12px;
-}
-.role-card strong{display:block;margin-top:10px;font-size:12px}
-.role-card span{display:block;margin-top:2px;color:#96887f;font-size:10px}
-.login-form{margin-top:24px}
-.form-field{margin-top:15px}
-.form-field:first-child{margin-top:0}
-.form-field label{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
-  font-size:10px;
-  font-weight:800;
-  color:#44352e;
-}
-.form-field label span{color:#a09289;font-weight:500}
-.input-wrap{position:relative}
-.form-input{
-  width:100%;
-  height:54px;
-  padding:0 16px;
-  border:1px solid #ddd1c6;
-  border-radius:12px;
-  outline:none;
-  background:#fffaf5;
-  color:var(--ink);
-  font-size:12px;
-  transition:.25s ease;
-}
-.form-input::placeholder{color:#ad9f96}
-.form-input:focus{
-  border-color:var(--burgundy);
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(125,22,40,.07);
-}
-.password-toggle{
-  position:absolute;
-  top:50%;right:10px;
-  transform:translateY(-50%);
-  border:0;
-  background:transparent;
-  color:#8b7d74;
-  font-size:10px;
-  font-weight:750;
-  padding:7px;
-}
-.login-meta{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:13px;
-  font-size:10px;
-}
-.remember{display:flex;align-items:center;gap:7px;color:#7e7169}
-.remember input{accent-color:var(--burgundy)}
-.forgot{color:var(--burgundy);font-weight:800}
-.login-button{
-  position:relative;
-  width:100%;
-  height:55px;
-  margin-top:21px;
-  border:0;
-  border-radius:12px;
-  color:#fff;
-  background:linear-gradient(110deg,#641020,#9b1b33);
-  font-size:11px;
-  font-weight:850;
-  letter-spacing:.03em;
-  overflow:hidden;
-  transition:.3s ease;
-  box-shadow:0 14px 28px rgba(100,16,32,.18);
-}
-.login-button::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  transform:translateX(-110%);
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.20),transparent);
-  transition:.6s ease;
-}
-.login-button:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(100,16,32,.24)}
-.login-button:hover::before{transform:translateX(110%)}
-.login-error{
-  min-height:18px;
-  margin-top:9px;
-  color:var(--red);
-  font-size:10px;
-  font-weight:650;
-}
-.login-divider{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  margin:22px 0 15px;
-  color:#aa9b91;
-  font-size:9px;
-  letter-spacing:.08em;
-}
-.login-divider::before,.login-divider::after{
-  content:"";height:1px;flex:1;background:#e9ded4;
-}
-.demo-note{
-  padding:12px 14px;
-  border:1px solid #e9ded4;
-  border-radius:11px;
-  background:#fbf4eb;
-  color:#8b7d74;
-  font-size:9px;
-  line-height:1.55;
-}
-.demo-note strong{color:#44352e}
-.signup-note{
-  text-align:center;
-  margin-top:18px;
-  color:#8c7e75;
-  font-size:10px;
-}
-.signup-note a{color:var(--burgundy);font-weight:850}
-.login-loading{opacity:.7;pointer-events:none}
+        .brand-panel {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #111111;
+            color: #ffffff;
+            padding: 42px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-/* Responsive — mobile-first hardening */
-@media (max-width: 1100px){
-  .stackly-login-page{padding:18px}
-  .login-shell{
-    width:100%;max-width:760px;min-height:0;
-    grid-template-columns:1fr;border-radius:24px;
-  }
-  .login-brand{min-height:420px;padding:34px}
-  .brand-copy{margin:72px 0 0;max-width:680px}
-  .brand-copy h1{font-size:clamp(44px,7vw,62px)}
-  .brand-features{display:none}
-  .login-panel{padding:42px 34px 48px}
-  .login-content{width:min(100%,520px)}
-}
-@media (max-width:600px){
-  html,body{width:100%;min-width:0;overflow-x:hidden}
-  .stackly-login-page{display:block;min-height:100svh;padding:0}
-  .login-shell{
-    display:flex;flex-direction:column;width:100%;max-width:none;min-height:100svh;
-    margin:0;border:0;border-radius:0;box-shadow:none;
-  }
-  .login-brand{flex:0 0 auto;width:100%;min-height:300px;padding:22px 20px 24px}
-  .brand-inner{min-height:256px}
-  .brand-logo{gap:9px;font-size:21px}
-  .brand-mark.stackly-login-logo{width:32px!important;height:32px!important}
-  .brand-copy{margin:48px 0 0;max-width:none}
-  .brand-eyebrow{font-size:8px;letter-spacing:.15em;gap:7px}
-  .brand-eyebrow i{width:6px;height:6px}
-  .brand-copy h1{
-    margin-top:14px;max-width:100%;font-size:clamp(34px,10.5vw,48px);
-    line-height:.94;letter-spacing:-.045em;
-  }
-  .brand-copy p{max-width:100%;margin-top:15px;font-size:10px;line-height:1.55}
-  .brand-foot,.brand-features{display:none}
-  .login-panel{
-    width:100%;flex:1 1 auto;padding:28px 20px 34px;align-items:flex-start;
-  }
-  .login-content{width:100%;max-width:none;margin:0}
-  .login-topline{gap:10px}
-  .login-kicker{font-size:8px;letter-spacing:.15em}
-  .login-home{font-size:9px}
-  .login-content h2{margin-top:13px;font-size:34px}
-  .login-intro{margin-top:9px;font-size:10px;line-height:1.55}
-  .role-label{margin:24px 0 9px;font-size:10px}
-  .role-switch{gap:8px}
-  .role-card{min-height:78px;padding:11px;border-radius:12px}
-  .role-icon{width:26px;height:26px;border-radius:8px}
-  .role-card strong{margin-top:7px;font-size:11px}
-  .role-card span{font-size:9px}
-  .login-form{margin-top:20px}
-  .form-field{margin-top:13px}
-  .form-field label{margin-bottom:7px;font-size:9px}
-  .form-input{height:49px;padding:0 13px;border-radius:10px;font-size:11px}
-  .password-toggle{right:7px;font-size:9px;padding:6px}
-  .login-meta{margin-top:11px;font-size:9px}
-  .login-button{height:51px;margin-top:18px;border-radius:10px;font-size:10px}
-  .login-divider{margin:20px 0 12px;font-size:8px}
-  .demo-note{padding:10px 11px;font-size:8px;line-height:1.5}
-  .signup-note{margin-top:15px;font-size:9px}
-}
-@media (max-width:360px){
-  .login-brand{min-height:280px;padding:19px 16px 21px}
-  .brand-copy{margin-top:42px}
-  .brand-copy h1{font-size:32px}
-  .brand-copy p{font-size:9px}
-  .login-panel{padding:25px 16px 30px}
-  .login-content h2{font-size:31px}
-  .role-switch{gap:6px}
-  .role-card{padding:9px}
-}
-/* FINAL DESKTOP SCROLL FIX */
-html{
-  min-height:100%;
-  overflow-y:auto !important;
-}
-body{
-  min-height:100vh;
-  overflow-x:hidden !important;
-  overflow-y:auto !important;
-}
-.stackly-login-page{
-  min-height:100vh !important;
-  height:auto !important;
-  display:block !important;
-  overflow-x:hidden !important;
-  overflow-y:visible !important;
-}
-.login-shell{
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
+        .brand-panel::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: #c8ff00;
+            opacity: 0.08;
+            top: -180px;
+            right: -180px;
+        }
 
-@media (max-width:600px){
-  .stackly-login-page{
-    display:block !important;
-    min-height:100svh !important;
-    overflow-x:hidden !important;
-    overflow-y:visible !important;
-  }
-}
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            border: 1px solid rgba(200, 255, 0, 0.2);
+            bottom: -150px;
+            left: -120px;
+        }
 
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
-}
-</style>
-</style>
+
+
+        /* =========================================
+           STACKLY LOGO — TRANSPARENT + LIME GREEN
+        ========================================= */
+
+        .stackly-transparent-logo {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 10px 14px;
+            background: transparent !important;
+            border: 0;
+            border-radius: 0;
+        }
+
+        .stackly-transparent-logo img {
+            display: block;
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+            background: transparent !important;
+
+            /* Convert every non-transparent logo pixel to #c8ff00 */
+            filter: brightness(0) saturate(100%)
+                    invert(87%) sepia(98%) saturate(1174%)
+                    hue-rotate(22deg) brightness(105%) contrast(104%);
+        }
+
+        .mobile-logo img {
+            background: transparent !important;
+        }
+
+        /* =========================================
+           BRAND CONTENT
+        ========================================= */
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+            max-width: 620px;
+        }
+
+        .brand-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: #c8ff00;
+        }
+
+        .brand-tag::before {
+            content: "";
+            width: 30px;
+            height: 2px;
+            background: #c8ff00;
+        }
+
+        .brand-content h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 5vw, 72px);
+            line-height: 1.03;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+        }
+
+        .brand-content h1 span {
+            color: #c8ff00;
+        }
+
+        .brand-content p {
+            max-width: 560px;
+            color: #bcbcbc;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           IMPACT STATS
+        ========================================= */
+
+        .impact-stats {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 650px;
+        }
+
+        .impact-stat {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 15px;
+        }
+
+        .impact-stat strong {
+            display: block;
+            font-size: 25px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .impact-stat span {
+            display: block;
+            margin-top: 4px;
+            color: #929292;
+            font-size: 11px;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+
+        /* =========================================
+           RIGHT AUTH PANEL
+        ========================================= */
+
+        .auth-panel {
+            min-height: 100vh;
+            background: #ffffff;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+
+        /* =========================================
+           MOBILE LOGO
+        ========================================= */
+
+        .mobile-logo {
+            display: none;
+            margin-bottom: 35px;
+        }
+
+        .mobile-logo img {
+            width: 145px;
+            height: auto;
+            background: transparent !important;
+
+            /* Keep mobile logo color exactly the same as desktop */
+            filter: brightness(0) saturate(100%)
+                    invert(87%) sepia(98%) saturate(1174%)
+                    hue-rotate(22deg) brightness(105%) contrast(104%);
+        }
+
+
+        /* =========================================
+           AUTH HEADER
+        ========================================= */
+
+        .auth-header {
+            margin-bottom: 28px;
+        }
+
+        .auth-header .eyebrow {
+            color: #6f6f6f;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .auth-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .auth-header p {
+            color: #777777;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================
+           PORTAL SWITCHER
+        ========================================= */
+
+        .portal-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 5px;
+            margin-bottom: 25px;
+            border: 1px solid #e5e5e5;
+            border-radius: 15px;
+            background: #f5f5f3;
+        }
+
+        .portal-btn {
+            border: 0;
+            background: transparent;
+            border-radius: 11px;
+            padding: 14px 12px;
+            color: #777777;
+            font-size: 13px;
+            font-weight: 800;
+            transition: 0.25s ease;
+        }
+
+        .portal-btn.active {
+            background: #111111;
+            color: #c8ff00;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+        .portal-btn:hover:not(.active) {
+            color: #111111;
+        }
+
+
+        /* =========================================
+           PORTAL INFO
+        ========================================= */
+
+        .portal-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            margin-bottom: 22px;
+            background: #f8f9f5;
+            border: 1px solid #e7eadf;
+            border-radius: 13px;
+        }
+
+        .portal-icon {
+            flex: 0 0 38px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111111;
+            color: #c8ff00;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .portal-info strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .portal-info p {
+            color: #777777;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #222222;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 54px;
+            padding: 0 48px 0 16px;
+            border: 1px solid #dddddd;
+            border-radius: 11px;
+            outline: none;
+            background: #ffffff;
+            color: #111111;
+            font-size: 14px;
+            transition: 0.25s ease;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #111111;
+            box-shadow: 0 0 0 3px rgba(200,255,0,0.18);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888888;
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: #777777;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .password-toggle:hover {
+            color: #111111;
+        }
+
+
+        /* =========================================
+           FORM OPTIONS
+        ========================================= */
+
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 3px 0 22px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666666;
+            font-size: 12px;
+        }
+
+        .remember input {
+            width: 15px;
+            height: 15px;
+            accent-color: #111111;
+        }
+
+        .forgot {
+            border: 0;
+            background: transparent;
+            color: #111111;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .forgot:hover {
+            color: #789900;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+        ========================================= */
+
+        .login-btn {
+            width: 100%;
+            height: 56px;
+            border: 0;
+            border-radius: 11px;
+            background: #111111;
+            color: #c8ff00;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            transition: 0.25s ease;
+        }
+
+        .login-btn:hover {
+            background: #c8ff00;
+            color: #111111;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================================
+           REGISTER
+        ========================================= */
+
+        .register-text {
+            text-align: center;
+            margin-top: 23px;
+            color: #777777;
+            font-size: 13px;
+        }
+
+        .register-text a {
+            color: #111111;
+            font-weight: 800;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+
+        /* =========================================
+           BACK HOME
+        ========================================= */
+
+        .back-home {
+            display: flex;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .back-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #777777;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .back-home a:hover {
+            color: #111111;
+        }
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        .message {
+            display: none;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            background: #fff0f0;
+            border: 1px solid #ffd0d0;
+            color: #b00020;
+        }
+
+        .message.success {
+            background: #f1fbd7;
+            border: 1px solid #d9ed9a;
+            color: #456000;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .auth-footer {
+            margin-top: 28px;
+            text-align: center;
+            color: #aaaaaa;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .login-wrapper {
+                grid-template-columns: 42% 58%;
+            }
+
+            .brand-panel {
+                padding: 30px;
+            }
+
+            .auth-panel {
+                padding: 30px;
+            }
+
+            .brand-content h1 {
+                font-size: 48px;
+            }
+
+            .impact-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .impact-stat {
+                display: flex;
+                align-items: baseline;
+                gap: 10px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 760px) {
+
+            body {
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+
+            .login-wrapper {
+                display: block;
+                min-height: 100vh;
+            }
+
+            .brand-panel {
+                display: none;
+            }
+
+            .auth-panel {
+                min-height: 100vh;
+                padding: 28px 20px;
+                align-items: flex-start;
+            }
+
+            .auth-container {
+                max-width: 100%;
+                padding-top: 5px;
+            }
+
+            .mobile-logo {
+                display: block;
+            }
+
+            .auth-header {
+                margin-bottom: 23px;
+            }
+
+            .auth-header h2 {
+                font-size: 35px;
+            }
+
+            .portal-switcher {
+                margin-bottom: 20px;
+            }
+
+            .portal-btn {
+                padding: 13px 8px;
+                font-size: 12px;
+            }
+
+            .portal-info {
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 17px;
+            }
+
+            .form-options {
+                margin-bottom: 20px;
+            }
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+        ========================================= */
+
+        @media (max-width: 420px) {
+
+            .auth-panel {
+                padding: 23px 16px;
+            }
+
+            .mobile-logo img {
+                width: 130px;
+            }
+
+            .auth-header h2 {
+                font-size: 31px;
+            }
+
+            .auth-header p {
+                font-size: 13px;
+            }
+
+            .portal-btn {
+                padding: 12px 5px;
+            }
+
+            .portal-info {
+                padding: 13px;
+            }
+
+            .portal-icon {
+                width: 34px;
+                height: 34px;
+                flex-basis: 34px;
+            }
+
+            .input-wrapper input {
+                height: 52px;
+            }
+
+            .login-btn {
+                height: 54px;
+            }
+        }
+    </style>
 </head>
 
-<body class="stackly-login-page">
+<body>
 
-<div class="login-orb one"></div>
-<div class="login-orb two"></div>
+    <main class="login-wrapper">
 
-<main class="login-shell">
+        <!-- =====================================
+             LEFT BRANDING
+        ====================================== -->
 
-  <section class="login-brand" aria-label="Stackly introduction">
-    <div class="brand-inner">
-      <a href="index.html" class="brand-logo" aria-label="Stackly home">
-        <img class="brand-mark stackly-login-logo" src="assets/img/logo.webp" alt="Stackly">
-        <span>Stackly</span>
-      </a>
+        <section class="brand-panel">
 
-      <div class="brand-copy">
-        <div class="brand-eyebrow"><i></i> Enterprise Platform</div>
-        <h1>Everything your business needs.<br><span>One intelligent space.</span></h1>
-        <p>
-          Sign in to your Stackly workspace and continue managing your
-          business, customers, projects and operations from one connected platform.
-        </p>
+            <a href="index.html" class="stackly-transparent-logo">
+                <img
+                    src="assets/img/impact/logo STAC.webp"
+                    alt="Stackly Logo"
+                >
+            </a>
 
-        <div class="brand-features">
-          <div class="brand-feature">
-            <strong>Business control</strong>
-            <span>Built for entrepreneurs</span>
-          </div>
-          <div class="brand-feature">
-            <strong>Simple experience</strong>
-            <span>Designed for customers</span>
-          </div>
-        </div>
-      </div>
+            <div class="brand-content">
 
-      <div class="brand-foot">© 2026 Stackly. All rights reserved.</div>
-    </div>
-  </section>
+                <div class="brand-tag">
+                    Volunteer Organization
+                </div>
 
-  <section class="login-panel">
-    <div class="login-content">
+                <h1>
+                    Stronger communities.
+                    <span>Brighter tomorrows.</span>
+                </h1>
 
-      <div class="login-topline">
-        <span class="login-kicker">Secure sign in</span>
-        <a class="login-home" href="index.html">← Back to home</a>
-      </div>
+                <p>
+                    Join Stackly and be part of a community where people,
+                    purpose and progress come together to create meaningful
+                    change.
+                </p>
 
-      <h2>Welcome back.</h2>
-      <p class="login-intro">Choose your account type and enter your credentials to continue.</p>
+            </div>
 
-      <span class="role-label">Continue as</span>
+            <div class="impact-stats">
 
-      <div class="role-switch" role="radiogroup" aria-label="Account type">
-        <label class="role-option">
-          <input type="radio" name="accountRole" value="entrepreneur" checked>
-          <span class="role-card">
-            <span class="role-icon">◆</span>
-            <strong>Entrepreneur</strong>
-            <span>Business dashboard</span>
-          </span>
-        </label>
+                <div class="impact-stat">
+                    <strong>10K+</strong>
+                    <span>Active Volunteers</span>
+                </div>
 
-        <label class="role-option">
-          <input type="radio" name="accountRole" value="customer">
-          <span class="role-card">
-            <span class="role-icon">◇</span>
-            <strong>Customer</strong>
-            <span>Customer dashboard</span>
-          </span>
-        </label>
-      </div>
+                <div class="impact-stat">
+                    <strong>150+</strong>
+                    <span>Initiatives</span>
+                </div>
 
-      <form class="login-form" id="stacklyLoginForm" novalidate>
-        <div class="form-field">
-          <label for="loginEmail">Email address <span>Required</span></label>
-          <div class="input-wrap">
-            <input class="form-input" id="loginEmail" type="email" autocomplete="email"
-                   placeholder="you@company.com" required>
-          </div>
-        </div>
+                <div class="impact-stat">
+                    <strong>25K+</strong>
+                    <span>Lives Impacted</span>
+                </div>
 
-        <div class="form-field">
-          <label for="loginPassword">Password <span>Required</span></label>
-          <div class="input-wrap">
-            <input class="form-input" id="loginPassword" type="password"
-                   autocomplete="current-password" placeholder="Enter your password" required>
-            <button class="password-toggle" type="button" id="passwordToggle" aria-label="Show password">Show</button>
-          </div>
-        </div>
+            </div>
 
-        <div class="login-meta">
-          <label class="remember">
-            <input type="checkbox" id="rememberMe">
-            <span>Remember me</span>
-          </label>
-          <a class="forgot" href="404.html">Forgot password?</a>
-        </div>
+        </section>
 
-        <div class="login-error" id="loginError" role="alert" aria-live="polite"></div>
 
-        <button class="login-button" id="loginButton" type="submit">
-          <span id="loginButtonText">Enter Entrepreneur Dashboard →</span>
-        </button>
-      </form>
+        <!-- =====================================
+             AUTH PANEL
+        ====================================== -->
 
-      <div class="login-divider">DEMO / FRONT-END LOGIN</div>
+        <section class="auth-panel">
 
-      <div class="demo-note">
-        <strong>Dashboard routing:</strong> Entrepreneur accounts open
-        <strong>entrepreneur-dashboard.html</strong>. Customer accounts open
-        <strong>customer-dashboard.html</strong>.
-      </div>
+            <div class="auth-container">
 
-      <p class="signup-note">
-        Don't have an account? <a href="register.html">Create one</a>
-      </p>
+                <!-- Mobile Logo -->
 
-    </div>
-  </section>
+                <div class="mobile-logo">
+                    <a href="index.html">
+                        <img
+                            src="assets/img/impact/logo STAC.webp"
+                            alt="Stackly Logo"
+                        >
+                    </a>
+                </div>
 
-</main>
 
-<script>
-(function(){
-  "use strict";
+                <!-- Header -->
 
-  const form = document.getElementById("stacklyLoginForm");
-  const email = document.getElementById("loginEmail");
-  const password = document.getElementById("loginPassword");
-  const remember = document.getElementById("rememberMe");
-  const error = document.getElementById("loginError");
-  const button = document.getElementById("loginButton");
-  const buttonText = document.getElementById("loginButtonText");
-  const passwordToggle = document.getElementById("passwordToggle");
-  const roles = document.querySelectorAll('input[name="accountRole"]');
+                <div class="auth-header">
 
-  const routes = {
-    entrepreneur: "entrepreneur-dashboard.html",
-    customer: "customer-dashboard.html"
-  };
+                    <div class="eyebrow">
+                        Stackly Portal
+                    </div>
 
-  function selectedRole(){
-    const selected = document.querySelector('input[name="accountRole"]:checked');
-    return selected ? selected.value : "entrepreneur";
-  }
+                    <h2>
+                        Welcome back.
+                    </h2>
 
-  function updateButton(){
-    const role = selectedRole();
-    buttonText.textContent =
-      role === "entrepreneur"
-        ? "Enter Entrepreneur Dashboard →"
-        : "Enter Customer Dashboard →";
-  }
+                    <p>
+                        Select your portal and sign in to continue.
+                    </p>
 
-  roles.forEach(function(role){
-    role.addEventListener("change", updateButton);
-  });
+                </div>
 
-  passwordToggle.addEventListener("click", function(){
-    const visible = password.type === "text";
-    password.type = visible ? "password" : "text";
-    passwordToggle.textContent = visible ? "Show" : "Hide";
-    passwordToggle.setAttribute("aria-label", visible ? "Show password" : "Hide password");
-  });
 
-  [email, password].forEach(function(input){
-    input.addEventListener("input", function(){
-      error.textContent = "";
-      input.style.borderColor = "";
-    });
-  });
+                <!-- Portal Switch -->
 
-  form.addEventListener("submit", function(event){
-    event.preventDefault();
+                <div class="portal-switcher">
 
-    const role = selectedRole();
-    const emailValue = email.value.trim();
-    const passwordValue = password.value.trim();
+                    <button
+                        type="button"
+                        class="portal-btn active"
+                        data-portal="organizer"
+                    >
+                        Organizer
+                    </button>
 
-    if(!emailValue){
-      error.textContent = "Please enter your email address.";
-      email.focus();
-      return;
-    }
+                    <button
+                        type="button"
+                        class="portal-btn"
+                        data-portal="volunteer"
+                    >
+                        Volunteer
+                    </button>
 
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)){
-      error.textContent = "Please enter a valid email address.";
-      email.focus();
-      return;
-    }
+                </div>
 
-    if(!passwordValue){
-      error.textContent = "Please enter your password.";
-      password.focus();
-      return;
-    }
 
-    // Store lightweight front-end session data so the destination
-    // dashboard can display the logged-in email if it reads these values.
-    const session = {
-      email: emailValue,
-      role: role,
-      loggedIn: true,
-      loginTime: new Date().toISOString()
-    };
+                <!-- Portal Information -->
 
-    const storage = remember.checked ? localStorage : sessionStorage;
-    storage.setItem("stacklyUser", JSON.stringify(session));
+                <div class="portal-info">
 
-    button.classList.add("login-loading");
-    buttonText.textContent = "Opening your dashboard…";
+                    <div class="portal-icon" id="portalIcon">
+                        O
+                    </div>
 
-    setTimeout(function(){
-      window.location.href = routes[role];
-    }, 450);
-  });
+                    <div>
 
-  updateButton();
-})();
-</script>
+                        <strong id="portalTitle">
+                            Organizer Portal
+                        </strong>
+
+                        <p id="portalDescription">
+                            Manage programs, events, volunteers,
+                            applications and community impact.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Message -->
+
+                <div
+                    class="message"
+                    id="message"
+                    role="alert"
+                ></div>
+
+
+                <!-- Login Form -->
+
+                <form id="loginForm">
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="email"
+                        >
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                            <span class="input-icon">
+                                @
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="password"
+                        >
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Options -->
+
+                    <div class="form-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            <span>
+                                Remember me
+                            </span>
+
+                        </label>
+
+                        <button
+                            type="button"
+                            class="forgot"
+                            id="forgotPassword"
+                        >
+                            Forgot password?
+                        </button>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="loginButton"
+                    >
+                        Sign In as Organizer
+                    </button>
+
+                </form>
+
+
+                <!-- Register -->
+
+                <div class="register-text">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Create account
+                    </a>
+
+                </div>
+
+
+                <!-- Back Home -->
+
+                <div class="back-home">
+
+                    <a href="index.html">
+                        ← Back to Home
+                    </a>
+
+                </div>
+
+
+                <!-- Footer -->
+
+                <div class="auth-footer">
+
+                    © 2026 Stackly Volunteer Organization.
+                    All rights reserved.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script>
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const portalButtons =
+            document.querySelectorAll(".portal-btn");
+
+        const portalIcon =
+            document.getElementById("portalIcon");
+
+        const portalTitle =
+            document.getElementById("portalTitle");
+
+        const portalDescription =
+            document.getElementById("portalDescription");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const passwordToggle =
+            document.getElementById("passwordToggle");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const rememberInput =
+            document.getElementById("remember");
+
+        const message =
+            document.getElementById("message");
+
+        const forgotPassword =
+            document.getElementById("forgotPassword");
+
+
+        /* =========================================
+           CURRENT PORTAL
+        ========================================= */
+
+        let selectedPortal = "organizer";
+
+
+        /* =========================================
+           PORTAL DATA
+        ========================================= */
+
+        const portalData = {
+
+            organizer: {
+
+                icon: "O",
+
+                title: "Organizer Portal",
+
+                description:
+                    "Manage programs, events, volunteers, applications and community impact.",
+
+                button:
+                    "Sign In as Organizer"
+
+            },
+
+            volunteer: {
+
+                icon: "V",
+
+                title: "Volunteer Portal",
+
+                description:
+                    "Discover opportunities, manage applications and track your volunteering impact.",
+
+                button:
+                    "Sign In as Volunteer"
+
+            }
+
+        };
+
+
+        /* =========================================
+           PORTAL SWITCH
+        ========================================= */
+
+        portalButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                selectedPortal =
+                    button.dataset.portal;
+
+                portalButtons.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+                const data =
+                    portalData[selectedPortal];
+
+                portalIcon.textContent =
+                    data.icon;
+
+                portalTitle.textContent =
+                    data.title;
+
+                portalDescription.textContent =
+                    data.description;
+
+                loginButton.textContent =
+                    data.button;
+
+                hideMessage();
+
+            });
+
+        });
+
+
+        /* =========================================
+           PASSWORD SHOW / HIDE
+        ========================================= */
+
+        passwordToggle.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    passwordInput.type === "password"
+                ) {
+
+                    passwordInput.type = "text";
+
+                    passwordToggle.textContent =
+                        "Hide";
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    passwordToggle.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           MESSAGE FUNCTION
+        ========================================= */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            message.textContent = text;
+
+            message.className =
+                "message show " + type;
+
+        }
+
+
+        function hideMessage() {
+
+            message.textContent = "";
+
+            message.className =
+                "message";
+
+        }
+
+
+        /* =========================================
+           FORGOT PASSWORD
+        ========================================= */
+
+        forgotPassword.addEventListener(
+            "click",
+            () => {
+
+                const email =
+                    emailInput.value.trim();
+
+                if (!email) {
+
+                    showMessage(
+                        "Enter your email address first."
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+                showMessage(
+                    "Password reset instructions would be sent to " +
+                    email +
+                    ".",
+                    "success"
+                );
+
+            }
+        );
+
+
+        /* =========================================
+           LOGIN
+        ========================================= */
+
+        loginForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                hideMessage();
+
+                const email =
+                    emailInput.value.trim();
+
+                const password =
+                    passwordInput.value.trim();
+
+
+                /* Validate email */
+
+                if (!email) {
+
+                    showMessage(
+                        "Please enter your email address."
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                /* Validate password */
+
+                if (!password) {
+
+                    showMessage(
+                        "Please enter your password."
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+
+                }
+
+
+                /* Basic email validation */
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailPattern.test(email)) {
+
+                    showMessage(
+                        "Please enter a valid email address."
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   SAVE LOGIN DATA
+                ================================= */
+
+                localStorage.setItem(
+                    "stacklyEmail",
+                    email
+                );
+
+                localStorage.setItem(
+                    "stacklyPortal",
+                    selectedPortal
+                );
+
+
+                /* Remember email */
+
+                if (rememberInput.checked) {
+
+                    localStorage.setItem(
+                        "stacklyRememberEmail",
+                        email
+                    );
+
+                } else {
+
+                    localStorage.removeItem(
+                        "stacklyRememberEmail"
+                    );
+
+                }
+
+
+                /* =================================
+                   BUTTON STATE
+                ================================= */
+
+                loginButton.disabled = true;
+
+                loginButton.textContent =
+                    "Signing In...";
+
+
+                /* =================================
+                   ROUTING
+                ================================= */
+
+                setTimeout(() => {
+
+                    if (
+                        selectedPortal ===
+                        "organizer"
+                    ) {
+
+                        window.location.href =
+                            "admin-dashboard.html";
+
+                    } else {
+
+                        window.location.href =
+                            "client-dashboard.html";
+
+                    }
+
+                }, 700);
+
+            }
+        );
+
+
+        /* =========================================
+           LOAD REMEMBERED EMAIL
+        ========================================= */
+
+        const rememberedEmail =
+            localStorage.getItem(
+                "stacklyRememberEmail"
+            );
+
+        if (rememberedEmail) {
+
+            emailInput.value =
+                rememberedEmail;
+
+            rememberInput.checked =
+                true;
+
+        }
+
+
+        /* =========================================
+           ENTER KEY SUPPORT
+        ========================================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter" &&
+                    document.activeElement !==
+                    forgotPassword
+                ) {
+
+                    // Form handles submission
+                    // automatically.
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>

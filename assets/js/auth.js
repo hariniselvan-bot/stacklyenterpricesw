@@ -1,111 +1,137 @@
-
-/* ==========================================================================
-   STACKLY — auth.js
-   Demo authentication (localStorage) · validation · role selection
-   NOTE: demo only — no real credentials are transmitted or stored securely.
-   ========================================================================== */
+/* ============================================================
+   auth.js — demo frontend authentication (localStorage)
+   Keys: stacklyUser {name,email,phone,location,role,password}
+         stacklySession {email, role, name, ts}
+   ============================================================ */
 (function () {
   'use strict';
 
-  /* Password visibility toggles */
+  var USER_KEY = 'stacklyUser';
+  var SESSION_KEY = 'stacklySession';
+
+  function getUser() {
+    try { return JSON.parse(localStorage.getItem(USER_KEY)); } catch (e) { return null; }
+  }
+  function showAlert(el, msg, ok) {
+    if (!el) return;
+    el.textContent = '';
+    el.className = 'auth-alert show ' + (ok ? 'ok' : 'error');
+    el.appendChild(document.createTextNode(msg));
+  }
+
+  /* ---------- Role toggle ---------- */
+  var roleInput = document.getElementById('auth-role');
+  document.querySelectorAll('.role-toggle button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.role-toggle button').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      if (roleInput) roleInput.value = btn.getAttribute('data-role');
+    });
+  });
+
+  /* ---------- Password visibility ---------- */
   document.querySelectorAll('.pw-toggle').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var input = btn.closest('.control').querySelector('input');
+      var input = btn.closest('.pw-wrap').querySelector('input');
       var show = input.type === 'password';
       input.type = show ? 'text' : 'password';
-      btn.querySelector('span').textContent = show ? 'Hide' : 'Show';
+      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      btn.classList.toggle('on', show);
     });
   });
 
-  /* Role cards */
-  document.querySelectorAll('.role-card').forEach(function (card) {
-    card.addEventListener('click', function () {
-      document.querySelectorAll('.role-card').forEach(function (c) { c.classList.remove('on'); });
-      card.classList.add('on');
-      card.querySelector('input').checked = true;
-    });
-  });
-
-  function setErr(field, on) {
-    field.classList.toggle('error', on);
-    return !on;
-  }
-  function validEmail(v) { return /^\S+@\S+\.\S+$/.test(v); }
-
-  /* ---------- LOGIN ---------- */
-  var loginForm = document.querySelector('#loginForm');
-  if (loginForm) {
-    // Prefill demo credentials hint (visual only)
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = loginForm.querySelector('#email');
-      var pass = loginForm.querySelector('#password');
-      var ok = true;
-      ok = setErr(email.closest('.field'), !validEmail(email.value)) && ok;
-      ok = setErr(pass.closest('.field'), pass.value.length < 6) && ok;
-      if (!ok) return;
-      var role = loginForm.querySelector('input[name="role"]:checked');
-      role = role ? role.value : 'user';
-      var users = JSON.parse(localStorage.getItem('stackly_users') || '[]');
-      var known = users.some(function (u) { return u.email === email.value; });
-      if (!known) {
-        users.push({ name: email.value.split('@')[0], email: email.value, role: role });
-        localStorage.setItem('stackly_users', JSON.stringify(users));
-      }
-      sessionStorage.setItem('stackly_session', JSON.stringify({
-        email: email.value, role: role, name: email.value.split('@')[0]
-      }));
-      var box = document.querySelector('.auth-success');
-      if (box) {
-        loginForm.style.display = 'none';
-        document.querySelector('.auth-alt').style.display = 'none';
-        box.classList.add('show');
-        if (window.gsap) gsap.fromTo(box, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' });
-      }
-      setTimeout(function () {
-        window.location.href = role === 'admin' ? 'dashboard.html' : 'dashboard.html';
-      }, 1200);
+  /* ---------- Password strength ---------- */
+  var pw = document.getElementById('reg-password');
+  var meter = document.querySelector('.pw-meter');
+  var hint = document.querySelector('.pw-hint');
+  if (pw && meter) {
+    pw.addEventListener('input', function () {
+      var v = pw.value;
+      var s = 0;
+      if (v.length >= 8) s++;
+      if (/[A-Z]/.test(v) && /[a-z]/.test(v)) s++;
+      if (/\d/.test(v)) s++;
+      if (/[^A-Za-z0-9]/.test(v)) s++;
+      meter.setAttribute('data-strength', String(s));
+      if (hint) hint.textContent = ['Use 8+ characters.', 'Getting there — mix cases.', 'Good — add a symbol.', 'Strong password.', 'Excellent password.'][s];
     });
   }
 
-  /* ---------- REGISTER ---------- */
-  var regForm = document.querySelector('#registerForm');
+  /* ---------- Register ---------- */
+  var regForm = document.getElementById('register-form');
   if (regForm) {
     regForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = regForm.querySelector('#fullname');
-      var email = regForm.querySelector('#email');
-      var pass = regForm.querySelector('#password');
-      var confirm = regForm.querySelector('#confirm');
-      var terms = regForm.querySelector('#terms');
+      var alert = document.getElementById('auth-alert');
+      var name = document.getElementById('reg-name');
+      var email = document.getElementById('reg-email');
+      var phone = document.getElementById('reg-phone');
+      var loc = document.getElementById('reg-location');
+      var pass = document.getElementById('reg-password');
+      var pass2 = document.getElementById('reg-password2');
+      var terms = document.getElementById('reg-terms');
+      var role = roleInput ? roleInput.value : 'user';
+      var V = window.STACKLY.validate;
       var ok = true;
-      ok = setErr(name.closest('.field'), name.value.trim().length < 2) && ok;
-      ok = setErr(email.closest('.field'), !validEmail(email.value)) && ok;
-      ok = setErr(pass.closest('.field'), pass.value.length < 8) && ok;
-      ok = setErr(confirm.closest('.field'), confirm.value !== pass.value || confirm.value === '') && ok;
-      if (!terms.checked) {
-        ok = false;
-        if (window.showToast) showToast('Please accept the Terms & Conditions.');
-        terms.closest('.check').style.color = 'var(--primary)';
-      } else {
-        terms.closest('.check').style.color = '';
-      }
+
+      if (name.value.trim().length < 2) { V.setInvalid(name, 'Please enter your full name.'); ok = false; }
+      if (!V.EMAIL_RE.test(email.value.trim())) { V.setInvalid(email, 'Enter a valid email address.'); ok = false; }
+      if (!V.PHONE_RE.test(phone.value.trim())) { V.setInvalid(phone, 'Enter a valid phone number.'); ok = false; }
+      if (!loc.value.trim()) { V.setInvalid(loc, 'Please add your city or location.'); ok = false; }
+      if (pass.value.length < 8) { V.setInvalid(pass, 'Password must be at least 8 characters.'); ok = false; }
+      if (pass2.value !== pass.value || !pass2.value) { V.setInvalid(pass2, 'Passwords do not match.'); ok = false; }
+      if (!terms.checked) { showAlert(alert, 'Please accept the Terms & Conditions to continue.', false); ok = false; }
       if (!ok) return;
-      var role = regForm.querySelector('input[name="role"]:checked');
-      var users = JSON.parse(localStorage.getItem('stackly_users') || '[]');
-      users.push({ name: name.value.trim(), email: email.value, role: role ? role.value : 'user' });
-      localStorage.setItem('stackly_users', JSON.stringify(users));
-      var box = document.querySelector('.auth-success');
-      if (box) {
-        regForm.style.display = 'none';
-        document.querySelector('.auth-alt').style.display = 'none';
-        box.classList.add('show');
-        if (window.gsap) gsap.fromTo(box, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' });
-      }
-      setTimeout(function () { window.location.href = 'login.html'; }, 1400);
+
+      localStorage.setItem(USER_KEY, JSON.stringify({
+        name: name.value.trim(),
+        email: email.value.trim().toLowerCase(),
+        phone: phone.value.trim(),
+        location: loc.value.trim(),
+        role: role,
+        password: pass.value
+      }));
+      showAlert(alert, 'Account created. Redirecting you to sign in…', true);
+      setTimeout(function () { window.location.href = 'login.html'; }, 1200);
     });
-    regForm.querySelectorAll('input').forEach(function (f) {
-      f.addEventListener('input', function () { f.closest('.field').classList.remove('error'); });
+  }
+
+  /* ---------- Login ---------- */
+  var loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var alert = document.getElementById('auth-alert');
+      var email = document.getElementById('login-email');
+      var pass = document.getElementById('login-password');
+      var remember = document.getElementById('login-remember');
+      var role = roleInput ? roleInput.value : 'user';
+      var V = window.STACKLY.validate;
+
+      if (!V.EMAIL_RE.test(email.value.trim())) { V.setInvalid(email, 'Enter a valid email address.'); return; }
+      if (!pass.value) { V.setInvalid(pass, 'Please enter your password.'); return; }
+
+      var user = getUser();
+      if (!user) {
+        // Demo fallback: accept any valid email, create a profile on the fly
+        user = { name: email.value.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); }), email: email.value.trim().toLowerCase(), role: role };
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+      }
+      if (user.email !== email.value.trim().toLowerCase()) {
+        showAlert(alert, 'No account found for this email. Try registering first.', false);
+        return;
+      }
+      user.role = role;
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+
+      var session = { name: user.name, email: user.email, role: role, ts: Date.now() };
+      (remember && remember.checked ? localStorage : sessionStorage);
+      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+
+      showAlert(alert, 'Welcome back, ' + user.name.split(' ')[0] + '. Signing you in…', true);
+      setTimeout(function () {
+        window.location.href = role === 'admin' ? 'seller-dashboard.html' : 'dashboard.html';
+      }, 900);
     });
   }
 })();

@@ -1,1224 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog & Insights — Stackly</title>
-<meta name="description" content="Editorial thinking on enterprise AI, automation, cloud, analytics and leadership from the Stackly team.">
-<link rel="icon" type="image/webp" href="assets/img/logo.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/responsive.css">
-<link rel="stylesheet" href="assets/css/animations.css">
-
-<style id="stackly-blog-page-css">
-/* =========================================================
-   STACKLY BLOG PAGE — ISOLATED LAYOUT
-   Every selector is scoped to .stackly-blog-page so it cannot
-   collide with Product/About/Services page classes.
-   ========================================================= */
-
-.stackly-blog-page{
-  --blog-red:#A71930;
-  --blog-red-dark:#741020;
-  --blog-gold:#C8A04A;
-  --blog-ink:#17171b;
-  --blog-muted:#68686f;
-  --blog-line:rgba(23,23,27,.12);
-  --blog-soft:#f7f5f2;
-  overflow-x:hidden;
-}
-
-/* Featured article */
-.stackly-blog-page .blog-featured-post{
-  display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-  min-height:510px;
-  overflow:hidden;
-  border:1px solid var(--blog-line);
-  border-radius:28px;
-  background:#fff;
-  box-shadow:0 22px 70px rgba(20,20,24,.09);
-}
-.stackly-blog-page .blog-featured-media{
-  position:relative;
-  min-height:510px;
-  overflow:hidden;
-  background:#1c1114;
-}
-.stackly-blog-page .blog-featured-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(116,16,32,.06),rgba(200,160,74,.16));
-  pointer-events:none;
-}
-.stackly-blog-page .blog-featured-media img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  transition:transform .8s cubic-bezier(.2,.7,.2,1);
-}
-.stackly-blog-page .blog-featured-post:hover .blog-featured-media img{
-  transform:scale(1.035);
-}
-.stackly-blog-page .blog-featured-body{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:clamp(34px,5vw,70px);
-}
-.stackly-blog-page .blog-featured-body h2{
-  max-width:620px;
-  margin:12px 0 18px;
-  line-height:1.08;
-}
-.stackly-blog-page .blog-featured-body > p{
-  max-width:600px;
-}
-.stackly-blog-page .blog-post-meta{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:9px;
-  color:var(--blog-muted);
-  font-size:.82rem;
-}
-.stackly-blog-page .blog-featured-body .blog-post-meta{
-  margin-top:4px;
-}
-
-/* Filter toolbar — deliberately a different visual treatment */
-.stackly-blog-page .blog-filter-toolbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  margin:68px 0 30px;
-  padding:16px;
-  border:1px solid var(--blog-line);
-  border-radius:18px;
-  background:rgba(255,255,255,.92);
-  box-shadow:0 10px 35px rgba(20,20,24,.05);
-  position:sticky;
-  top:82px;
-  z-index:8;
-  backdrop-filter:blur(14px);
-}
-.stackly-blog-page .blog-category-filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.stackly-blog-page .blog-filter-chip{
-  appearance:none;
-  border:1px solid transparent;
-  border-radius:999px;
-  background:transparent;
-  color:var(--blog-muted);
-  padding:10px 15px;
-  font:600 .78rem/1 Inter,sans-serif;
-  cursor:pointer;
-  transition:all .22s ease;
-}
-.stackly-blog-page .blog-filter-chip:hover{
-  color:var(--blog-red);
-  background:rgba(167,25,48,.06);
-}
-.stackly-blog-page .blog-filter-chip.on{
-  color:#fff;
-  background:var(--blog-red);
-  box-shadow:0 7px 18px rgba(167,25,48,.2);
-}
-.stackly-blog-page .blog-article-search{
-  flex:0 1 270px;
-  min-width:220px;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  padding:11px 14px;
-  border:1px solid var(--blog-line);
-  border-radius:12px;
-  background:#fff;
-}
-.stackly-blog-page .blog-article-search svg{
-  width:18px;
-  height:18px;
-  flex:0 0 auto;
-  opacity:.6;
-}
-.stackly-blog-page .blog-article-search input{
-  width:100%;
-  min-width:0;
-  border:0;
-  outline:0;
-  background:transparent;
-  font:500 .84rem/1.2 Inter,sans-serif;
-  color:var(--blog-ink);
-}
-
-/* Article grid */
-.stackly-blog-page .blog-article-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:26px;
-  align-items:stretch;
-}
-.stackly-blog-page .blog-article-card{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  border:1px solid var(--blog-line);
-  border-radius:22px;
-  background:#fff;
-  box-shadow:0 10px 32px rgba(20,20,24,.055);
-  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
-}
-.stackly-blog-page .blog-article-card:hover{
-  transform:translateY(-7px);
-  border-color:rgba(167,25,48,.22);
-  box-shadow:0 20px 46px rgba(20,20,24,.11);
-}
-.stackly-blog-page .blog-article-card.is-hidden{
-  display:none !important;
-}
-.stackly-blog-page .blog-article-thumb{
-  position:relative;
-  aspect-ratio:16 / 9;
-  overflow:hidden;
-  background:#eee;
-}
-.stackly-blog-page .blog-article-thumb img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  transition:transform .65s cubic-bezier(.2,.7,.2,1);
-}
-.stackly-blog-page .blog-article-card:hover .blog-article-thumb img{
-  transform:scale(1.055);
-}
-.stackly-blog-page .blog-article-category{
-  position:absolute;
-  left:14px;
-  bottom:14px;
-  max-width:calc(100% - 28px);
-  padding:7px 10px;
-  border-radius:999px;
-  background:rgba(18,18,20,.84);
-  color:#fff;
-  font:600 .68rem/1 Inter,sans-serif;
-  letter-spacing:.02em;
-  backdrop-filter:blur(8px);
-}
-.stackly-blog-page .blog-article-body{
-  display:flex;
-  flex:1;
-  flex-direction:column;
-  padding:24px;
-}
-.stackly-blog-page .blog-article-body h3{
-  margin:10px 0 11px;
-  font-size:1.12rem;
-  line-height:1.25;
-}
-.stackly-blog-page .blog-article-body h3 a{
-  color:inherit;
-  text-decoration:none;
-}
-.stackly-blog-page .blog-article-body > p{
-  margin:0;
-  color:var(--blog-muted);
-  font-size:.9rem;
-  line-height:1.7;
-}
-.stackly-blog-page .blog-read-link{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  margin-top:auto;
-  padding-top:20px;
-  color:var(--blog-red);
-  font:700 .78rem/1 Inter,sans-serif;
-  text-decoration:none;
-}
-.stackly-blog-page .blog-read-link svg{
-  transition:transform .22s ease;
-}
-.stackly-blog-page .blog-read-link:hover svg{
-  transform:translateX(4px);
-}
-
-/* Load more */
-.stackly-blog-page .blog-load-more-wrap{
-  text-align:center;
-}
-.stackly-blog-page .blog-load-more-spacing{
-  margin-top:40px;
-}
-
-/* Local reveal animation. Initial state never affects layout height. */
-.stackly-blog-page .blog-local-reveal{
-  opacity:0;
-  transform:translateY(28px);
-  transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);
-}
-.stackly-blog-page .blog-local-reveal.blog-revealed{
-  opacity:1;
-  transform:none;
-}
-
-/* Search/filter empty state */
-.stackly-blog-page .blog-empty-state{
-  grid-column:1 / -1;
-  padding:60px 24px;
-  border:1px dashed var(--blog-line);
-  border-radius:20px;
-  text-align:center;
-  color:var(--blog-muted);
-  background:var(--blog-soft);
-}
-
-/* Responsive */
-@media (max-width:1100px){
-  .stackly-blog-page .blog-article-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-  .stackly-blog-page .blog-featured-post{
-    grid-template-columns:1fr 1fr;
-  }
-}
-@media (max-width:820px){
-  .stackly-blog-page .blog-filter-toolbar{
-    position:relative;
-    top:auto;
-    align-items:stretch;
-    flex-direction:column;
-  }
-  .stackly-blog-page .blog-article-search{
-    flex-basis:auto;
-    width:100%;
-  }
-}
-@media (max-width:700px){
-  .stackly-blog-page .blog-featured-post{
-    grid-template-columns:1fr;
-    border-radius:20px;
-  }
-  .stackly-blog-page .blog-featured-media{
-    min-height:300px;
-    aspect-ratio:16 / 10;
-  }
-  .stackly-blog-page .blog-featured-body{
-    padding:30px 24px 34px;
-  }
-  .stackly-blog-page .blog-article-grid{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-  .stackly-blog-page .blog-filter-toolbar{
-    margin-top:44px;
-    padding:12px;
-  }
-  .stackly-blog-page .blog-category-filters{
-    overflow-x:auto;
-    flex-wrap:nowrap;
-    padding-bottom:3px;
-    scrollbar-width:none;
-  }
-  .stackly-blog-page .blog-category-filters::-webkit-scrollbar{
-    display:none;
-  }
-  .stackly-blog-page .blog-filter-chip{
-    flex:0 0 auto;
-    white-space:nowrap;
-  }
-}
-@media (max-width:430px){
-  .stackly-blog-page .blog-featured-media{
-    min-height:230px;
-  }
-  .stackly-blog-page .blog-featured-body{
-    padding:24px 20px 28px;
-  }
-  .stackly-blog-page .blog-article-body{
-    padding:20px;
-  }
-  .stackly-blog-page .blog-article-thumb{
-    aspect-ratio:15 / 9;
-  }
-}
-@media (prefers-reduced-motion:reduce){
-  .stackly-blog-page .blog-local-reveal,
-  .stackly-blog-page .blog-article-card,
-  .stackly-blog-page .blog-featured-media img,
-  .stackly-blog-page .blog-article-thumb img{
-    transition:none !important;
-  }
-}
-</style>
-
-
-<style id="stackly-blog-mobile-menu-isolated">
-/* =========================================================
-   STACKLY BLOG — ISOLATED MOBILE MENU
-   Deliberately uses unique classes so navigation.js and the
-   other pages cannot interfere with this menu.
-   ========================================================= */
-@media (max-width: 767px){
-
-  body:has(.stk-blog-menu.is-open){
-    overflow:hidden !important;
-    touch-action:none;
-  }
-
-  .site-header{
-    z-index:10020 !important;
-  }
-
-  .stk-blog-trigger{
-    position:relative;
-    z-index:10031;
-    display:flex !important;
-    flex:0 0 44px;
-    width:44px;
-    height:44px;
-    align-items:center;
-    justify-content:center;
-    padding:0;
-    border:0;
-    border-radius:12px;
-    background:rgba(255,255,255,.94);
-    color:#8d1228;
-    box-shadow:0 8px 22px rgba(44,24,18,.10);
-    cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
-  }
-
-  .stk-blog-trigger span{
-    position:absolute;
-    width:20px;
-    height:2px;
-    border-radius:10px;
-    background:#8d1228;
-    transition:transform .28s ease, opacity .2s ease, top .28s ease;
-  }
-
-  .stk-blog-trigger span:nth-child(1){top:14px}
-  .stk-blog-trigger span:nth-child(2){top:21px}
-  .stk-blog-trigger span:nth-child(3){top:28px}
-
-  .stk-blog-trigger.is-open span:nth-child(1){
-    top:21px;
-    transform:rotate(45deg);
-  }
-  .stk-blog-trigger.is-open span:nth-child(2){opacity:0}
-  .stk-blog-trigger.is-open span:nth-child(3){
-    top:21px;
-    transform:rotate(-45deg);
-  }
-
-  .stk-blog-menu{
-    position:fixed !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    padding:14px 12px !important;
-    box-sizing:border-box;
-    display:block !important;
-    z-index:10040 !important;
-    background:rgba(31,18,15,.28);
-    backdrop-filter:blur(9px);
-    -webkit-backdrop-filter:blur(9px);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:opacity .25s ease, visibility 0s linear .42s;
-  }
-
-  .stk-blog-menu.is-open{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transition:opacity .25s ease, visibility 0s linear 0s;
-  }
-
-  .stk-blog-menu-card{
-    position:relative;
-    width:100%;
-    height:100%;
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    padding:22px 18px 20px;
-    border:1px solid rgba(141,18,40,.13);
-    border-radius:20px;
-    background:
-      radial-gradient(circle at 88% 10%,rgba(200,160,74,.14),transparent 30%),
-      linear-gradient(145deg,#fffdf8 0%,#f8f1e7 58%,#f5eee6 100%);
-    isolation:isolate;
-    box-shadow:0 24px 70px rgba(44,24,18,.25);
-    transform:translateY(22px) scale(.985);
-    transition:transform .42s cubic-bezier(.22,.8,.2,1);
-  }
-
-  .stk-blog-menu.is-open .stk-blog-menu-card{
-    transform:translateY(0) scale(1);
-  }
-
-  .stk-blog-menu-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex:0 0 auto;
-    margin-bottom:18px;
-  }
-
-  .stk-blog-menu-brand{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    width:max-content;
-    color:#741020 !important;
-    text-decoration:none !important;
-  }
-
-  .stk-blog-menu-mark{
-    width:38px;
-    height:38px;
-    flex:0 0 38px;
-  }
-
-  .stk-blog-menu-brand > span{
-    font-family:Fraunces,serif;
-    font-size:23px;
-    font-weight:600;
-    letter-spacing:-.03em;
-  }
-
-  .stk-blog-menu-close{
-    position:relative;
-    flex:0 0 44px;
-    width:44px;
-    height:44px;
-    padding:0;
-    border:1px solid rgba(116,16,32,.12);
-    border-radius:13px;
-    background:rgba(255,255,255,.86);
-    box-shadow:0 8px 22px rgba(44,24,18,.09);
-    cursor:pointer;
-  }
-
-  .stk-blog-menu-close span{
-    position:absolute;
-    left:12px;
-    top:20px;
-    width:20px;
-    height:2px;
-    border-radius:10px;
-    background:#a71930;
-  }
-
-  .stk-blog-menu-close span:first-child{transform:rotate(45deg)}
-  .stk-blog-menu-close span:last-child{transform:rotate(-45deg)}
-
-  .stk-blog-menu-nav{
-    display:flex !important;
-    flex:1 1 auto;
-    min-height:0;
-    flex-direction:column;
-    justify-content:center;
-    gap:5px !important;
-    margin:0 !important;
-    padding:0 !important;
-  }
-
-  .stk-blog-menu-nav a{
-    position:relative;
-    display:flex !important;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
-    min-height:52px;
-    box-sizing:border-box;
-    padding:12px 13px !important;
-    border:1px solid transparent;
-    border-radius:12px;
-    color:#2a211e !important;
-    background:transparent;
-    font-family:Inter,sans-serif;
-    font-size:16px !important;
-    font-weight:600;
-    letter-spacing:-.01em;
-    text-decoration:none !important;
-    transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease;
-  }
-
-  .stk-blog-menu-nav a > span{
-    color:#a71930;
-    font-size:18px;
-    font-weight:500;
-    opacity:.72;
-    transition:transform .2s ease;
-  }
-
-  .stk-blog-menu-nav a:hover,
-  .stk-blog-menu-nav a:focus-visible{
-    color:#8d1228 !important;
-    background:rgba(167,25,48,.07);
-    border-color:rgba(167,25,48,.10);
-    transform:translateX(3px);
-    outline:none;
-  }
-
-  .stk-blog-menu-nav a:hover > span,
-  .stk-blog-menu-nav a:focus-visible > span{
-    transform:translateX(3px);
-  }
-
-  .stk-blog-menu-nav a.is-active{
-    color:#a71930 !important;
-    font-weight:700;
-    background:rgba(167,25,48,.08);
-    border-color:rgba(167,25,48,.12);
-    transform:translateX(3px);
-  }
-
-  .stk-blog-menu-nav a.is-active::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:50%;
-    width:4px;
-    height:24px;
-    border-radius:10px;
-    transform:translateY(-50%);
-    background:linear-gradient(180deg,#a71930,#c8a04a);
-  }
-
-  .stk-blog-menu-actions{
-    display:grid !important;
-    grid-template-columns:1fr 1fr;
-    gap:10px !important;
-    flex:0 0 auto;
-    margin:18px 0 0 !important;
-    padding-top:16px;
-    border-top:1px solid rgba(116,16,32,.10);
-  }
-
-  .stk-blog-menu-actions a{
-    min-height:48px;
-    box-sizing:border-box;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    padding:11px 10px;
-    font:700 13px/1 Inter,sans-serif;
-    text-decoration:none;
-  }
-
-  .stk-blog-demo-btn{
-    gap:8px;
-    color:#fff !important;
-    background:#a71930;
-    box-shadow:0 9px 22px rgba(167,25,48,.18);
-  }
-
-  .stk-blog-demo-btn span{
-    font-size:17px;
-    line-height:1;
-    font-weight:500;
-  }
-
-  .stk-blog-sign-btn{
-    color:#741020 !important;
-    background:rgba(255,255,255,.72);
-    border:1px solid rgba(116,16,32,.18);
-  }
-
-  .stk-blog-menu-foot{
-    flex:0 0 auto;
-    margin-top:14px;
-    text-align:center;
-    color:rgba(42,33,30,.48);
-    font:500 10px/1.4 Inter,sans-serif;
-    letter-spacing:.04em;
-  }
-}
-
-@media (max-width:390px){
-  .stk-blog-menu{
-    padding:10px 9px !important;
-  }
-
-  .stk-blog-menu-card{
-    padding:18px 15px 16px;
-    border-radius:18px;
-  }
-
-  .stk-blog-menu-head{
-    margin-bottom:16px;
-  }
-
-  .stk-blog-menu-mark{
-    width:34px;
-    height:34px;
-    flex-basis:34px;
-  }
-
-  .stk-blog-menu-brand > span{
-    font-size:21px;
-  }
-
-  .stk-blog-menu-nav a{
-    min-height:47px;
-    padding:10px 11px !important;
-    font-size:15px !important;
-  }
-
-  .stk-blog-menu-actions{
-    margin-top:12px !important;
-    padding-top:12px;
-  }
-
-  .stk-blog-menu-actions a{
-    min-height:45px;
-    font-size:12px;
-  }
-
-  .stk-blog-menu-foot{
-    margin-top:10px;
-    font-size:9px;
-  }
-}
-
-@media (min-width:768px){
-  .stk-blog-trigger{
-    display:none !important;
-  }
-  .stk-blog-menu{
-    display:none !important;
-  }
-}
-</style>
-
-
-<style id="stackly-blog-menu-final-layer-fix">
-@media (max-width:767px){
-  body:has(.stk-blog-menu.is-open) .site-header{
-    pointer-events:none !important;
-  }
-
-  body:has(.stk-blog-menu.is-open) .stk-blog-menu{
-    z-index:10040 !important;
-  }
-
-  body:has(.stk-blog-menu.is-open) .stk-blog-menu-card{
-    position:relative;
-    z-index:10041;
-  }
-}
-</style>
-
-
-<style id="stackly-logo-webp-fix">
-  /* Match the About page logo treatment exactly */
-  .stackly-logo-webp{
-    display:block !important;
-    width:38px !important;
-    height:38px !important;
-    flex:0 0 38px !important;
-    object-fit:contain !important;
-    object-position:center !important;
-    filter:
-      brightness(0)
-      saturate(100%)
-      invert(17%)
-      sepia(78%)
-      saturate(2544%)
-      hue-rotate(340deg)
-      brightness(83%)
-      contrast(99%);
-  }
-  .pl-logo .stackly-logo-webp{
-    width:34px !important;
-    height:34px !important;
-    flex-basis:34px !important;
-  }
-  .brand .stackly-logo-webp,
-  .mm-brand .stackly-logo-webp,
-  .stk-blog-menu-mark.stackly-logo-webp{
-    width:38px !important;
-    height:38px !important;
-    flex-basis:38px !important;
-  }
-  @media (max-width:390px){
-    .mm-brand .stackly-logo-webp,
-    .stk-blog-menu-mark.stackly-logo-webp{
-      width:34px !important;
-      height:34px !important;
-      flex-basis:34px !important;
-    }
-  }
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackly Stories | Volunteer Blog</title>
+  <meta name="description" content="Field notes, volunteer voices, and impact stories from the Stackly community across India.">
+  <meta property="og:title" content="Stackly Stories | Volunteer Blog">
+  <meta property="og:description" content="Field notes, volunteer voices, and impact stories from the Stackly community across India.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/svg/stackly-symbol-lime.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
-<body class="stackly-blog-page">
-<a class="skip-link" href="#main">Skip to content</a>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 11-13h-7l0-7z"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2c2.8.3 4.9 1.7 5.5 4.8"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9A6 6 0 0 0 6.2 8.6 5 5 0 0 0 7 19h10.5z"/></symbol><symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5m6-5v5M6 7h12v4a6 6 0 0 1-12 0V7z"/><path d="M12 17v5"/></symbol><symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="2"/><rect x="17.5" y="13" width="4" height="6" rx="2"/><path d="M20 19a3 3 0 0 1-3 3h-3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2L2 8l10 6 10-6-10-6z"/><path d="M2 14l10 6 10-6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z"/><path d="M14 2v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87 1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></symbol><symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.5 12.5 0 0 1 21.5 2.5c0 2.7-.8 7.5-5.6 10.5a22 22 0 0 1-3.9 2z"/><path d="M9 12H4s.6-3.3 2-4.5c1.6-1.5 4 0 4 0M15 12v5s3.3-.6 4.5-2c1.5-1.6 0-4 0-4"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 7h13v10H1zM14 10h4l3 3v4h-7V10z"/><circle cx="5.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol><symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8L12 2z" fill="currentColor" stroke="none"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M22 7l-10 7L2 7"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.7 2.05z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2.5"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-cart2" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-dollar" viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 2 2.7 5 3.5 5 1.5 5 3.5-2.2 3-5 3-5-1-5-3"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 1 0-4h14v4"/><path d="M4 7v12a2 2 0 0 0 2 2h14V7"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor" stroke="none"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M8 2v4M16 2v4M3 9h18"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></symbol></svg>
-<div class="preloader" aria-hidden="true">
-  <div class="pl-ring">
-    <svg viewBox="0 0 100 100">
-      <defs><linearGradient id="plGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#A71930"/><stop offset="1" stop-color="#C8A04A"/></linearGradient></defs>
-      <circle class="ring-track" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
-      <circle class="ring-fill" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
-    </svg>
-    <div class="pl-logo"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"></div>
-  </div>
-  <div class="pl-bar"><span></span></div>
-  <div class="pl-num">00</div>
-</div>
-
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
-    <nav aria-label="Primary">
-      <ul class="main-nav">
-        <li><a href="index.html" class="nav-home">Home</a></li>
-        <li>
-          <a href="product.html">Products <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
-        </li>
-        <li>
-          <a href="services.html">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
-        </li>
-        <li>
-          <a href="blog.html">Resources <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
-        </li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact </a></li>
-      </ul>
-    </nav>
-    <div class="header-actions">
-      <button class="lang-select" aria-label="Change language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-globe"/></svg><b>EN</b><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></button>
-      <a href="login.html" class="btn btn-primary btn-sm"><span>Request a Demo</span><svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      <button class="stk-blog-trigger" type="button" aria-label="Open menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+<body>
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pre-inner">
+      <div class="pre-logo"><img src="assets/img/impact/logo.webp" alt="Stackly logo"></div>
+      <div class="pre-word"><strong>Stackly</strong><small>Volunteer Organization</small></div>
+      <div class="pre-bar"><i></i></div>
+      <div class="pre-count">0%</div>
     </div>
   </div>
-</header>
-<div class="stk-blog-menu" aria-label="Mobile navigation" aria-hidden="true">
-  <div class="stk-blog-menu-card">
-    <div class="stk-blog-menu-head">
-      <a href="index.html" class="stk-blog-menu-brand" aria-label="Stackly home">
-        <img class="stk-blog-menu-mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true">
-        <span>Stackly</span>
+
+  <!-- Page transition -->
+  <div class="page-transition" aria-hidden="true"><img src="assets/img/impact/logo.webp" alt="Stackly logo">
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-bar">
+      <a class="brand" href="index.html" aria-label="Stackly — home">
+        <span class="brand-mark"><img src="assets/img/impact/logo.webp" alt="Stackly logo"></span>
+        <span class="brand-text">
+          <span class="brand-name"><img src="assets/img/impact/logo STAC.webp" alt="Stackly"></span>
+          <span class="brand-tag">Volunteer Organization</span>
+        </span>
       </a>
 
-      <button class="stk-blog-menu-close" type="button" aria-label="Close menu">
-        <span></span><span></span>
-      </button>
-    </div>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-main">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="has-dropdown">
+            <a class="nav-link" href="service.html" aria-haspopup="true" aria-expanded="false">Programs
+              <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="service.html#community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.2.2 3.9 1.6 4.4 4"/></svg>Community Development</a></li>
+              <li><a href="service.html#environment"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 9 12 4 20 4c0 9-5 15-14 15"/><path d="M5 19c2-5 5.5-8.5 10-10.5"/></svg>Environmental Care</a></li>
+              <li><a href="service.html#education"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L2.5 8.5 12 13l9.5-4.5L12 4z"/><path d="M6.5 10.5V15c0 1.7 2.5 3 5.5 3s5.5-1.3 5.5-3v-4.5"/><path d="M21.5 8.5V13"/></svg>Education</a></li>
+              <li><a href="service.html#healthcare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>Healthcare</a></li>
+              <li><a href="service.html#food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v7c0 1.5 1 2.5 2.5 2.5S10 11.5 10 10V3"/><path d="M7.5 3v18"/><path d="M17 3c-1.8 1.5-2.8 4-2.8 6.8 0 1.8 1 2.7 2.8 2.7V21"/></svg>Food Support</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+            <a class="nav-link" href="involved.html" aria-haspopup="true" aria-expanded="false">Get Involved
+              <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="register.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.5-8.9C1 8 3 5 6.3 5c2.1 0 3.7 1.1 4.5 2.7.8-1.6 2.4-2.7 4.5-2.7C18.6 5 21 8 20.6 11.1 19.5 15.4 12 20 12 20z"/></svg>Volunteer</a></li>
+              <li><a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-6.5-4-8.5-7.9C2.2 9 4 6.3 6.8 6.3c1.9 0 3.3 1 4 2.4.7-1.4 2.1-2.4 4-2.4 2.8 0 4.6 2.7 3.3 5.8"/><path d="M12 20l7-3.5c.8-.4 1.2-1.3.8-2.1-.4-.9-1.5-1.2-2.4-.8L14 15"/></svg>Donate</a></li>
+              <li><a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/></svg>Partner With Us</a></li>
+              <li><a href="involved.html#events"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>Events</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link" href="blog.html">Stories</a></li>
+          <li><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
 
-    <nav class="stk-blog-menu-nav" aria-label="Mobile primary navigation">
-      <a href="index.html">Home<span aria-hidden="true">→</span></a>
-      <a href="product.html">Products<span aria-hidden="true">→</span></a>
-      <a href="services.html">Solutions<span aria-hidden="true">→</span></a>
-      <a href="blog.html" class="is-active" aria-current="page">Resources<span aria-hidden="true">→</span></a>
-      <a href="pricing.html">Pricing<span aria-hidden="true">→</span></a>
-      <a href="about.html">About Us<span aria-hidden="true">→</span></a>
-      <a href="contact.html">Contact<span aria-hidden="true">→</span></a>
+      <div class="header-right">
+        <a class="header-call" href="tel:+919845012345">
+          <span class="call-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l1.5 4.5L8 10c1 2.5 3 4.5 5.5 5.5l1.5-2.5L19.5 14v4c0 1-1 2-2 1.8C10 19 5 14 4.2 6.5 4 5.5 4.5 4 5 4z"/></svg></span>
+          <span class="call-txt"><small>Call Us</small><strong>+91 98450 12345</strong></span>
+        </a>
+        <a class="btn btn-lime btn-sm" href="login.html" data-cursor="go">Become a Volunteer
+          <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <nav>
+      <ul>
+        <li><a class="m-link" href="index.html">Home <span class="m-num">01</span></a></li>
+        <li><a class="m-link" href="about.html">About Us <span class="m-num">02</span></a></li>
+        <li>
+          <a class="m-link" href="service.html">Programs <span class="m-num">03</span></a>
+          <div class="m-sub">
+            <a href="service.html#community">Community</a>
+            <a href="service.html#environment">Environment</a>
+            <a href="service.html#education">Education</a>
+            <a href="service.html#healthcare">Healthcare</a>
+            <a href="service.html#food">Food Support</a>
+          </div>
+        </li>
+        <li>
+          <a class="m-link" href="register.html">Get Involved <span class="m-num">04</span></a>
+          <div class="m-sub">
+            <a href="involved.html#volunteer">Volunteer</a>
+            <a href="involved.html#donate">Donate</a>
+            <a href="involved.html#partner">Partner</a>
+            <a href="involved.html#events">Events</a>
+          </div>
+        </li>
+        <li><a class="m-link" href="blog.html">Stories <span class="m-num">05</span></a></li>
+        <li><a class="m-link" href="contact.html">Contact <span class="m-num">06</span></a></li>
+      </ul>
     </nav>
-
-    <div class="stk-blog-menu-actions">
-      <a href="login.html" class="stk-blog-demo-btn">Request a Demo<span aria-hidden="true">→</span></a>
-      <a href="register.html" class="stk-blog-sign-btn">Sign In</a>
+    <div class="m-cta">
+      <a class="btn btn-lime" href="register.html">Become a Volunteer
+        <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+      </a>
+      <a class="link-arrow light" href="login.html">Sign In
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
-
-    <div class="stk-blog-menu-foot">&copy; <span data-year>2026</span> Stackly Enterprise. All rights reserved.</div>
+    <div class="m-contact">
+      <span>Talk to our volunteer team</span>
+      <a href="mailto:hello@stackly.org">hello@stackly.org</a>
+      <a href="tel:+919845012345">+91 98450 12345</a>
+    </div>
   </div>
-</div>
-<div class="search-overlay" role="dialog" aria-label="Search Stackly">
-  <button class="icon-btn so-close" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></button>
-  <input type="text" placeholder="Search Stackly..." aria-label="Search query">
-  <p class="so-hint">Try &ldquo;pricing&rdquo;, &ldquo;dashboard&rdquo; or &ldquo;security&rdquo;</p>
-  <div class="search-results"></div>
-</div>
 
+  <main id="main">
 
-<main id="main">
-  <section class="page-hero">
-    <div class="container" data-hero-particles="10">
-      <span class="eyebrow">Blog &amp; Insights</span>
-      <h1>Ideas That Move<br><span class="accent">Business Forward</span></h1>
-      <p class="lead">Editorial thinking on enterprise technology, automation and leadership — from the team building Stackly.</p>
-      <div class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Blog</span></div>
-    </div>
-  </section>
+    <section class="page-hero" aria-label="Stackly Stories">
+      <div class="page-hero-inner">
+        <div class="ph-bg"><img src="assets/img/remote/photo-1529156069898-49953e39b3ac.webp" alt="Volunteers sharing a joyful moment together" fetchpriority="high"></div>
+        <div class="ph-content">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><i></i><span>Stories</span></nav>
+          <h1>Stories that inspire<br><em>action.</em></h1>
+          <p>Field notes, volunteer voices, and impact explainers from the Stackly community.</p>
+        </div>
+      </div>
+    </section>
 
-  <section class="section white">
+    <section class="section" aria-label="All stories">
+      <div class="container">
+        <div class="blog-toolbar" data-aos="fade-up">
+          <div class="blog-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+            <input type="search" id="blog-search-input" placeholder="Search stories…" aria-label="Search stories">
+          </div>
+          <div class="blog-chips" role="group" aria-label="Filter by category">
+            <button class="chip active" data-cat="all" type="button">All</button>
+            <button class="chip" data-cat="community" type="button">Community</button>
+            <button class="chip" data-cat="environment" type="button">Environment</button>
+            <button class="chip" data-cat="education" type="button">Education</button>
+            <button class="chip" data-cat="volunteering" type="button">Volunteering</button>
+            <button class="chip" data-cat="impact" type="button">Impact</button>
+            <button class="chip" data-cat="events" type="button">Events</button>
+          </div>
+        </div>
+
+        <article class="blog-featured" data-aos="fade-up">
+          <div class="bf-media"><img src="assets/img/remote/photo-1488521787991-ed7bbaae773c.webp" alt="A volunteer's hand holding a child's hand" loading="lazy"></div>
+          <div class="bf-body">
+            <div class="post-meta"><span class="cat">Featured</span><time>Sep 18, 2026</time></div>
+            <h2>Ten years, ten thousand volunteers, one muddy Sunday that started it all</h2>
+            <p>On our tenth anniversary, founder Meera Krishnan looks back at the lake clean-up that became a movement — and forward to the hundred cities ahead.</p>
+            <a class="link-arrow light" href="404.html">Read the Anniversary Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
+        <div class="blog-grid" id="blog-grid">
+          <article class="post-card" data-category="community">
+            <div class="post-media"><img src="assets/img/remote/photo-1470071459604-3b5ec3a7fe05.webp" alt="Restored lake surrounded by green hills" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Community</span><time>Sep 12, 2026</time></div>
+              <h3><a href="404.html" class="u-line">A lake breathes again in Madipakkam</a></h3>
+              <p>Two hundred volunteers, six weekends, one lake. How a neighbourhood bund became a living classroom.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="environment">
+            <div class="post-media"><img src="assets/img/remote/photo-1542601906990-b4d3fb778b09.webp" alt="Seedling being planted in soil" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Environment</span><time>Sep 05, 2026</time></div>
+              <h3><a href="404.html" class="u-line">48,000 trees later: what actually survives</a></h3>
+              <p>Planting is the easy part. Our geo-tagging and two-year care rosters push survival past 80%.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="education">
+            <div class="post-media"><img src="assets/img/remote/photo-1497633762265-9d179a990aa6.webp" alt="Stack of well-worn books" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Education</span><time>Aug 28, 2026</time></div>
+              <h3><a href="404.html" class="u-line">The first graduate of Karuvadikuppam</a></h3>
+              <p>Meena's village had never sent a girl to college. Her mentors tell the story of the year that changed that.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="volunteering">
+            <div class="post-media"><img src="assets/img/remote/photo-1500382017468-9049fed747ef.webp" alt="Golden sunrise over an open field" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Volunteering</span><time>Aug 20, 2026</time></div>
+              <h3><a href="404.html" class="u-line">Why I volunteer before sunrise</a></h3>
+              <p>A night-shift nurse, a 5 a.m. kitchen crew, and the quiet logic of giving time you don't have.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="impact">
+            <div class="post-media"><img src="assets/img/remote/photo-1469571486292-0ba58a3f068b.webp" alt="Volunteers jumping in celebration" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Impact</span><time>Aug 11, 2026</time></div>
+              <h3><a href="404.html" class="u-line">Reading an impact report like a volunteer</a></h3>
+              <p>Hours, outcomes, survival rates — a plain-language guide to what our numbers really mean.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="events">
+            <div class="post-media"><img src="assets/img/remote/photo-1593113646773-028c64a8f1b8.webp" alt="Relief kits stacked and ready" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Events</span><time>Aug 02, 2026</time></div>
+              <h3><a href="404.html" class="u-line">Inside a rapid-response drill</a></h3>
+              <p>Ninety minutes, one mock flood zone, forty certified volunteers. Here's how relief training works.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="community">
+            <div class="post-media"><img src="assets/img/remote/photo-1593113598332-cd288d649433.webp" alt="Volunteer packing fresh food parcels" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Community</span><time>Jul 24, 2026</time></div>
+              <h3><a href="404.html" class="u-line">The kitchen that became a commons</a></h3>
+              <p>A weekly food drive in Bengaluru slowly turned into a library, a clinic desk, and a job board.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="education">
+            <div class="post-media"><img src="assets/img/remote/photo-1503676260728-1c00da094a0b.webp" alt="Student studying with books and laptop" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Education</span><time>Jul 15, 2026</time></div>
+              <h3><a href="404.html" class="u-line">Mentoring over video calls actually works</a></h3>
+              <p>Our remote mentorship cohort grew 3x this year. Coordinators share what makes it stick.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="post-card" data-category="environment">
+            <div class="post-media"><img src="assets/img/remote/photo-1509099836639-18ba1795216d.webp" alt="Volunteers at a clean-up drive" loading="lazy"></div>
+            <div class="post-body">
+              <div class="post-meta"><span class="cat">Environment</span><time>Jul 06, 2026</time></div>
+              <h3><a href="404.html" class="u-line">Beach math: 4 tonnes in 4 hours</a></h3>
+              <p>A coastal clean-up by the numbers — and why segregation on-site matters more than the haul.</p>
+              <a class="link-arrow" href="404.html" style="font-size:14px;align-self:flex-start">Read Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+        </div>
+        <p class="blog-empty">No stories match your search yet — try another word or category.</p>
+        <div class="blog-more">
+          <button class="btn btn-dark" id="load-more" type="button">Load More Stories <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg></span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="blog-cta">
+      <div class="cta-band-inner">
+        <div>
+          <h2 id="blog-cta" data-aos="fade-up">The next story<br><em>could be yours.</em></h2>
+          <p data-aos="fade-up">Volunteers who join us write the best chapters. Start yours this weekend.</p>
+        </div>
+        <div class="cta-actions" data-aos="fade-up">
+          <a class="btn btn-lime" href="register.html" data-cursor="go">Become a Volunteer <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
-      <article class="blog-featured-post blog-local-reveal">
-        <div class="blog-featured-media"><img src="assets/img/blog/blog-ai.webp" alt="Abstract AI processor artwork in cherry red and gold"></div>
-        <div class="blog-featured-body">
-          <span class="eyebrow">Featured · AI &amp; Enterprise</span>
-          <h2>The Quiet Rise of Agentic Workflows in the Enterprise</h2>
-          <p>Autonomous agents are moving from demos to production. Here's how leading organizations are governing, measuring and scaling AI workers inside real operations — without losing control.</p>
-          <div class="blog-post-meta" style="margin-bottom:24px"><span>Sep 12, 2026</span><span>&middot;</span><span>9 min read</span><span>&middot;</span><span>By Elena Vasquez</span></div>
-          <div><a href="blog.html" class="btn btn-primary"><span>Read the Feature</span><svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a></div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" aria-label="Stackly — home">
+            <span class="brand-mark"><img src="assets/img/impact/logo.webp" alt="Stackly logo"></span>
+            <span class="brand-text"><span class="brand-name"><img src="assets/img/impact/logo STAC.webp" alt="Stackly"></span><span class="brand-tag">Volunteer Organization</span></span>
+          </a>
+          <p>Building stronger communities through people, purpose, and meaningful action.</p>
+          <div class="footer-contact">
+            <a href="mailto:hello@stackly.org"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>hello@stackly.org</a>
+            <a href="tel:+919845012345"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l1.5 4.5L8 10c1 2.5 3 4.5 5.5 5.5l1.5-2.5L19.5 14v4c0 1-1 2-2 1.8C10 19 5 14 4.2 6.5 4 5.5 4.5 4 5 4z"/></svg>+91 98450 12345</a>
+          </div>
         </div>
-      </article>
-
-      <div class="blog-filter-toolbar blog-local-reveal">
-        <div class="blog-category-filters">
-          <button class="blog-filter-chip on" data-filter="all">All</button>
-          <button class="blog-filter-chip" data-filter="ai">AI &amp; Enterprise</button>
-          <button class="blog-filter-chip" data-filter="automation">Automation</button>
-          <button class="blog-filter-chip" data-filter="cloud">Cloud</button>
-          <button class="blog-filter-chip" data-filter="analytics">Analytics</button>
-          <button class="blog-filter-chip" data-filter="leadership">Leadership</button>
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="service.html">Programs</a></li>
+            <li><a href="involved.html">Get Involved</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
-        <div class="blog-article-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-search"/></svg><input type="text" placeholder="Search articles..." data-blog-search aria-label="Search articles"></div>
-      </div>
-
-      <div class="blog-article-grid">
-        <article class="blog-article-card blog-local-reveal" data-cat="automation">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-automation.webp" alt="Five Processes You Should Automate This Quarter" loading="lazy"><span class="blog-article-category">Business Automation</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Sep 8, 2026</span><span>&middot;</span><span>6 min read</span></div>
-        <h3><a href="blog.html">Five Processes You Should Automate This Quarter</a></h3>
-        <p>From purchase approvals to onboarding — the highest-ROI automation starting points we see across 500+ enterprises.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="leadership">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-security.webp" alt="Security Is a Product Feature, Not a Department" loading="lazy"><span class="blog-article-category">Enterprise Security</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Sep 2, 2026</span><span>&middot;</span><span>7 min read</span></div>
-        <h3><a href="blog.html">Security Is a Product Feature, Not a Department</a></h3>
-        <p>Why the best enterprise vendors treat compliance as UX — and how to evaluate it during procurement.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="cloud">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-cloud.webp" alt="Multi-Region Without the Multi-Headache" loading="lazy"><span class="blog-article-category">Cloud Technology</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Aug 26, 2026</span><span>&middot;</span><span>5 min read</span></div>
-        <h3><a href="blog.html">Multi-Region Without the Multi-Headache</a></h3>
-        <p>A practical architecture guide to resilient, multi-region deployments for mid-market platforms.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="analytics">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-analytics.webp" alt="Dashboards Decide Nothing. People Do." loading="lazy"><span class="blog-article-category">Business Intelligence</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Aug 19, 2026</span><span>&middot;</span><span>8 min read</span></div>
-        <h3><a href="blog.html">Dashboards Decide Nothing. People Do.</a></h3>
-        <p>Designing analytics that drive action — lessons from boardrooms where data actually changed the outcome.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="automation">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-digital.webp" alt="The 14-Week ERP Migration Playbook" loading="lazy"><span class="blog-article-category">Digital Transformation</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Aug 12, 2026</span><span>&middot;</span><span>6 min read</span></div>
-        <h3><a href="blog.html">The 14-Week ERP Migration Playbook</a></h3>
-        <p>How Meridian Stores moved 240 locations to a single platform without closing a single store for a day.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="leadership">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-leadership.webp" alt="Hiring Operators, Not Passengers" loading="lazy"><span class="blog-article-category">Leadership</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Aug 5, 2026</span><span>&middot;</span><span>4 min read</span></div>
-        <h3><a href="blog.html">Hiring Operators, Not Passengers</a></h3>
-        <p>What we look for in enterprise software teams — and why attitude beats pedigree at Stackly.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="ai">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-ai.webp" alt="From Copilots to Colleagues: AI in 2026" loading="lazy"><span class="blog-article-category">AI &amp; Enterprise</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Jul 29, 2026</span><span>&middot;</span><span>9 min read</span></div>
-        <h3><a href="blog.html">From Copilots to Colleagues: AI in 2026</a></h3>
-        <p>Beyond chat windows — how AI agents are quietly taking over operational workflows.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="automation">
-      <div class="blog-article-thumb"><img src="assets/img/industries/manufacturing.webp" alt="The Connected Factory Is a Data Factory" loading="lazy"><span class="blog-article-category">Business Automation</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Jul 22, 2026</span><span>&middot;</span><span>6 min read</span></div>
-        <h3><a href="blog.html">The Connected Factory Is a Data Factory</a></h3>
-        <p>Why smart manufacturers treat every machine as a sensor and every shift as a dataset.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-        <article class="blog-article-card blog-local-reveal" data-cat="cloud">
-      <div class="blog-article-thumb"><img src="assets/img/blog/blog-cloud.webp" alt="FinOps for Mid-Market Teams" loading="lazy"><span class="blog-article-category">Cloud Technology</span></div>
-      <div class="blog-article-body">
-        <div class="blog-post-meta"><span>Jul 15, 2026</span><span>&middot;</span><span>5 min read</span></div>
-        <h3><a href="blog.html">FinOps for Mid-Market Teams</a></h3>
-        <p>Cloud cost discipline without an army of analysts — the metrics that actually matter.</p>
-        <a href="blog.html" class="blog-read-link">Read Article <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      </div>
-    </article>
-      </div>
-      <div class="blog-load-more-wrap blog-load-more-spacing blog-local-reveal"><button class="btn btn-outline" data-load-more>Load More Articles</button></div>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
-    <p class="footer-statement">Technology that moves <span class="accent">business</span> forward.</p>
-    <div class="footer-grid">
-      <div class="footer-col footer-about">
-        <h5>Stackly</h5>
-        <p>The all-in-one enterprise platform for operations, analytics and growth — trusted by 500+ businesses worldwide.</p>
-        <div class="social-row">
-          <a href="404.html" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.49 2.49 0 1 1 5 8.48a2.49 2.49 0 0 1-.02-4.98zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg></a>
-          <a href="404.html" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L6.5 3.9H4.7z"/></svg></a>
-          <a href="404.html" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.8c.2.9.9 1.6 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.8.4-4.8zM9.8 15.5v-7l6 3.5z"/></svg></a>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="404.html">Community Support</a></li>
+            <li><a href="404.html">Environment</a></li>
+            <li><a href="404.html">Education</a></li>
+            <li><a href="404.html">Healthcare</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="404.html">Volunteer</a></li>
+            <li><a href="404.html">Donate</a></li>
+            <li><a href="404.html">Partner With Us</a></li>
+            <li><a href="404.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="404.html">Stories</a></li>
+            <li><a href="404.html">Blog</a></li>
+            <li><a href="404.html">FAQ</a></li>
+            <li><a href="404.html">Impact Reports</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="404.html">Enterprise Suite</a></li><li><a href="404.html">Analytics Cloud</a></li><li><a href="404.html">Automation</a></li><li><a href="404.html">Integrations</a></li></ul></div>
-      <div class="footer-col"><h5>Company</h5>
-        <ul><li><a href="index.html">home</a></li><li><a href="product.html">products</a></li><li><a href="services.html">service</a></li><li><a href="pricing.html">pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">contact</a></li></ul></div>
-      <div class="footer-col"><h5>Resources</h5><ul><li><a href="404.html">Pricing</a></li><li><a href="404.html">FAQ</a></li><li><a href="404.html">Documentation</a></li><li><a href="404.html">Dashboard Demo</a></li></ul></div>
-      <div class="footer-col newsletter">
-        <h5>Stay Ahead</h5>
-        <p>Monthly insights on enterprise technology. No noise.</p>
-        <form class="newsletter-form" novalidate>
-          <input type="email" placeholder="Your work email" aria-label="Email address" required>
-          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-        </form>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Stackly Volunteer Organization. All Rights Reserved.</span>
+        <div class="social">
+          <a href="404.html" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="404.html" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 10.5V17"/><path d="M8 7.5v.01"/><path d="M12 17v-3.8c0-1.5 1.2-2.7 2.7-2.7s2.8 1.2 2.8 2.7V17"/></svg></a>
+          <a href="404.html" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.8v4.4L14.8 12l-4.3-2.2z" fill="currentColor" stroke="none"/></svg></a>
+          <a href="404.html" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8.5V7c0-.8.5-1.3 1.3-1.3H17V3h-2.5C11.9 3 10.5 4.6 10.5 7v1.5H8V12h2.5v9H14v-9h2.6l.4-3.5H14z"/></svg></a>
+        </div>
+        <div class="legal">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms &amp; Conditions</a>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; <span data-year>2025</span> Stackly Enterprise Software. All rights reserved.</p>
-      <div class="legal-links">
-        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a>
-      </div>
-    </div>
-  </div>
-</footer>
-<button class="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+  </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/navigation.js"></script>
-<script src="assets/js/animations.js"></script>
-<script src="assets/js/components.js"></script>
+  <button class="to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+  </button>
 
-
-
-
-
-
-<script id="stackly-blog-page-js">
-(function () {
-  'use strict';
-
-  function initStacklyBlogPage() {
-    var root = document.querySelector('.stackly-blog-page');
-    if (!root) return;
-
-    /* ---- Local reveal: never controls display/visibility of the layout ---- */
-    var revealItems = root.querySelectorAll('.blog-local-reveal');
-    if ('IntersectionObserver' in window) {
-      var revealObserver = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('blog-revealed');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
-
-      revealItems.forEach(function (el, index) {
-        el.style.transitionDelay = Math.min(index * 45, 260) + 'ms';
-        revealObserver.observe(el);
-      });
-
-      /* Safety fallback: no card is allowed to remain hidden. */
-      setTimeout(function () {
-        revealItems.forEach(function (el) {
-          el.classList.add('blog-revealed');
-        });
-      }, 1800);
-    } else {
-      revealItems.forEach(function (el) {
-        el.classList.add('blog-revealed');
-      });
-    }
-
-    /* ---- Category filtering ---- */
-    var cards = Array.prototype.slice.call(root.querySelectorAll('.blog-article-card'));
-    var chips = root.querySelectorAll('.blog-filter-chip');
-    var searchInput = root.querySelector('[data-blog-search]');
-    var grid = root.querySelector('.blog-article-grid');
-
-    var emptyState = document.createElement('div');
-    emptyState.className = 'blog-empty-state';
-    emptyState.textContent = 'No articles match your current filters.';
-    emptyState.hidden = true;
-    if (grid) grid.appendChild(emptyState);
-
-    var activeFilter = 'all';
-
-    function applyFilters() {
-      var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-      var visible = 0;
-
-      cards.forEach(function (card) {
-        var category = (card.getAttribute('data-cat') || '').toLowerCase();
-        var text = card.textContent.toLowerCase();
-        var matchesCategory = activeFilter === 'all' || category === activeFilter;
-        var matchesSearch = !query || text.indexOf(query) !== -1;
-
-        if (matchesCategory && matchesSearch) {
-          card.classList.remove('is-hidden');
-          visible++;
-        } else {
-          card.classList.add('is-hidden');
-        }
-      });
-
-      if (emptyState) emptyState.hidden = visible !== 0;
-    }
-
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        chips.forEach(function (item) { item.classList.remove('on'); });
-        chip.classList.add('on');
-        activeFilter = chip.getAttribute('data-filter') || 'all';
-        applyFilters();
-      });
-    });
-
-    if (searchInput) {
-      searchInput.addEventListener('input', applyFilters);
-    }
-
-    /* ---- Load More: current page has 9 articles, so reveal safely if future
-       cards are added with data-load-more-hidden="true". ---- */
-    var loadMore = root.querySelector('[data-load-more]');
-    if (loadMore) {
-      loadMore.addEventListener('click', function () {
-        var hiddenFuture = root.querySelectorAll('[data-load-more-hidden="true"]');
-        hiddenFuture.forEach(function (item) {
-          item.removeAttribute('data-load-more-hidden');
-          item.classList.remove('is-hidden');
-          item.classList.add('blog-revealed');
-        });
-        loadMore.closest('.blog-load-more-wrap').style.display = 'none';
-        applyFilters();
-      });
-    }
-
-    /* ---- Images: prevent broken/zero-height visual blocks ---- */
-    root.querySelectorAll('.blog-article-thumb img, .blog-featured-media img').forEach(function (img) {
-      img.addEventListener('error', function () {
-        img.style.opacity = '0';
-        img.parentElement.classList.add('blog-image-failed');
-      }, { once: true });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStacklyBlogPage, { once: true });
-  } else {
-    initStacklyBlogPage();
-  }
-})();
-</script>
-
-
-<script id="stackly-blog-mobile-menu-controller">
-(function(){
-  'use strict';
-
-  function initStacklyBlogMobileMenu(){
-    var trigger = document.querySelector('.stk-blog-trigger');
-    var menu = document.querySelector('.stk-blog-menu');
-    var closeButton = document.querySelector('.stk-blog-menu-close');
-
-    if(!trigger || !menu || !closeButton) return;
-
-    function openMenu(){
-      menu.classList.add('is-open');
-      menu.setAttribute('aria-hidden','false');
-      trigger.classList.add('is-open');
-      trigger.setAttribute('aria-expanded','true');
-      trigger.setAttribute('aria-label','Close menu');
-      document.documentElement.classList.add('stk-blog-menu-lock');
-      document.body.classList.add('stk-blog-menu-lock');
-    }
-
-    function closeMenu(){
-      menu.classList.remove('is-open');
-      menu.setAttribute('aria-hidden','true');
-      trigger.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded','false');
-      trigger.setAttribute('aria-label','Open menu');
-      document.documentElement.classList.remove('stk-blog-menu-lock');
-      document.body.classList.remove('stk-blog-menu-lock');
-    }
-
-    trigger.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      if(menu.classList.contains('is-open')) closeMenu();
-      else openMenu();
-    });
-
-    closeButton.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      closeMenu();
-    });
-
-    menu.addEventListener('click', function(e){
-      if(e.target === menu) closeMenu();
-    });
-
-    menu.querySelectorAll('.stk-blog-menu-nav a, .stk-blog-menu-brand, .stk-blog-menu-actions a')
-      .forEach(function(link){
-        link.addEventListener('click', function(){
-          closeMenu();
-        });
-      });
-
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && menu.classList.contains('is-open')){
-        closeMenu();
-      }
-    });
-
-    window.addEventListener('resize', function(){
-      if(window.innerWidth >= 768) closeMenu();
-    });
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initStacklyBlogMobileMenu, {once:true});
-  }else{
-    initStacklyBlogMobileMenu();
-  }
-})();
-</script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="assets/js/navigation.js" defer></script>
+  <script src="assets/js/animations.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/slider.js" defer></script>
+</body>
+</html>
 </body>
 </html>

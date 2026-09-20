@@ -1,1226 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Stackly — Enterprise Software, Beautifully Engineered</title>
-<meta name="description" content="The story, mission, values and leadership behind Stackly — the all-in-one enterprise platform trusted by 500+ businesses.">
-<link rel="icon" type="image/webp" href="assets/img/logo.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/responsive.css">
-<link rel="stylesheet" href="assets/css/animations.css">
-
-<style id="stackly-about-clean-css">
-/* =========================================================
-   STACKLY ABOUT PAGE — ISOLATED COMPONENT SYSTEM
-   Distinct visual treatment for Story / Mission / Values /
-   Leadership / Stats / Technology.
-   ========================================================= */
-
-.about-page {
-  --about-red: #A71930;
-  --about-red-deep: #741020;
-  --about-gold: #C8A04A;
-  --about-ink: #151515;
-  --about-muted: #6e6866;
-  --about-line: rgba(30, 20, 20, .10);
-}
-
-.about-page main {
-  width: 100%;
-  overflow: clip;
-}
-
-.about-page main > section {
-  position: relative;
-  isolation: isolate;
-}
-
-/* ---------- STORY: image + editorial copy ---------- */
-.about-page .about-story-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
-  align-items: center;
-  gap: clamp(42px, 7vw, 96px);
-}
-
-.about-page .about-story-media {
-  position: relative;
-  min-width: 0;
-}
-
-.about-page .about-story-media .main-img {
-  min-height: 430px;
-  border-radius: 28px;
-  overflow: hidden;
-  background: #f2ece9;
-  box-shadow: 0 28px 70px rgba(40, 20, 20, .14);
-}
-
-.about-page .about-story-media .main-img img {
-  width: 100%;
-  height: 100%;
-  min-height: 430px;
-  display: block;
-  object-fit: cover;
-}
-
-.about-page .about-story-float {
-  position: absolute;
-  right: -28px;
-  bottom: 28px;
-  width: min(310px, 72%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,.96);
-  border: 1px solid rgba(255,255,255,.9);
-  box-shadow: 0 22px 45px rgba(40,20,20,.18);
-  backdrop-filter: blur(14px);
-  z-index: 3;
-}
-
-.about-page .about-story-float .sf-num {
-  flex: 0 0 auto;
-  font: 600 26px/1 Fraunces, serif;
-  color: var(--about-red);
-}
-
-.about-page .about-story-float small {
-  color: #4e4846;
-  line-height: 1.45;
-}
-
-/* ---------- PURPOSE: deliberately different from values ---------- */
-.about-page .about-purpose-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.about-page .about-purpose-card {
-  position: relative;
-  min-width: 0;
-  min-height: 330px;
-  padding: clamp(28px, 4vw, 46px);
-  border-radius: 28px;
-  overflow: hidden;
-  border: 1px solid var(--about-line);
-  background:
-    radial-gradient(circle at 90% 0%, rgba(200,160,74,.16), transparent 32%),
-    #fff;
-  box-shadow: 0 18px 50px rgba(30,20,20,.07);
-}
-
-.about-page .about-purpose-card::after {
-  content: "";
-  position: absolute;
-  width: 170px;
-  height: 170px;
-  right: -70px;
-  bottom: -85px;
-  border-radius: 50%;
-  border: 1px solid rgba(167,25,48,.16);
-}
-
-.about-page .about-purpose-card.dark {
-  background:
-    radial-gradient(circle at 85% 10%, rgba(200,160,74,.22), transparent 28%),
-    linear-gradient(145deg, #171313, #430c18);
-  color: #fff;
-  border-color: rgba(255,255,255,.08);
-  box-shadow: 0 28px 65px rgba(40,10,15,.22);
-}
-
-.about-page .about-purpose-card.dark::after {
-  border-color: rgba(200,160,74,.22);
-}
-
-.about-page .about-purpose-card .m-ic {
-  width: 58px;
-  height: 58px;
-  display: grid;
-  place-items: center;
-  border-radius: 17px;
-  margin-bottom: 28px;
-  color: var(--about-red);
-  background: rgba(167,25,48,.09);
-  border: 1px solid rgba(167,25,48,.13);
-}
-
-.about-page .about-purpose-card.dark .m-ic {
-  color: var(--about-gold);
-  background: rgba(200,160,74,.11);
-  border-color: rgba(200,160,74,.18);
-}
-
-.about-page .about-purpose-card .m-ic svg {
-  width: 27px;
-  height: 27px;
-}
-
-.about-page .about-purpose-card h3 {
-  position: relative;
-  z-index: 1;
-  margin: 0 0 13px;
-  font-size: clamp(27px, 3vw, 38px);
-}
-
-.about-page .about-purpose-card p {
-  position: relative;
-  z-index: 1;
-  max-width: 560px;
-  margin: 0;
-  line-height: 1.75;
-  color: #625b59;
-}
-
-.about-page .about-purpose-card.dark p {
-  color: rgba(255,255,255,.72);
-}
-
-/* ---------- VALUES: four editorial tiles, not another 2-card grid ---------- */
-.about-page .about-values-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 16px;
-  border-top: 1px solid var(--about-line);
-  border-bottom: 1px solid var(--about-line);
-}
-
-.about-page .about-value-card {
-  position: relative;
-  min-width: 0;
-  padding: 34px 28px 38px;
-  border-right: 1px solid var(--about-line);
-  transition: transform .35s ease, background .35s ease;
-}
-
-.about-page .about-value-card:last-child {
-  border-right: 0;
-}
-
-.about-page .about-value-card:hover {
-  transform: translateY(-5px);
-  background: linear-gradient(180deg, rgba(167,25,48,.035), transparent);
-}
-
-.about-page .about-value-card .v-num {
-  display: block;
-  margin-bottom: 42px;
-  font: 600 13px/1 Inter, sans-serif;
-  letter-spacing: .16em;
-  color: var(--about-red);
-}
-
-.about-page .about-value-card h4 {
-  margin: 0 0 11px;
-  font: 600 clamp(21px, 2vw, 27px)/1.15 Fraunces, serif;
-  color: var(--about-ink);
-}
-
-.about-page .about-value-card p {
-  margin: 0;
-  color: var(--about-muted);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-/* ---------- LEADERSHIP: people cards ---------- */
-.about-page .about-leadership-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.about-page .about-leader-card {
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid var(--about-line);
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 12px 35px rgba(30,20,20,.055);
-  transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.about-page .about-leader-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 24px 55px rgba(30,20,20,.11);
-}
-
-.about-page .about-leader-photo {
-  width: 100%;
-  aspect-ratio: 1 / .86;
-  display: grid;
-  place-items: center;
-  margin-bottom: 18px;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.about-page .about-leader-photo.g1 { background: linear-gradient(145deg,#f0d9d9,#a71930); }
-.about-page .about-leader-photo.g2 { background: linear-gradient(145deg,#242424,#741020); }
-.about-page .about-leader-photo.g3 { background: linear-gradient(145deg,#eadfc9,#c8a04a); }
-.about-page .about-leader-photo.g4 { background: linear-gradient(145deg,#ddd7d5,#5b1c27); }
-
-.about-page .about-leader-photo .lp-init {
-  font: 500 clamp(30px, 4vw, 48px)/1 Fraunces, serif;
-  color: rgba(255,255,255,.92);
-  text-shadow: 0 8px 24px rgba(0,0,0,.18);
-}
-
-.about-page .about-leader-card b,
-.about-page .about-leader-card > span:not(.lp-init) {
-  display: block;
-  overflow-wrap: anywhere;
-}
-
-.about-page .about-leader-card b {
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
-.about-page .about-leader-card > span:not(.lp-init) {
-  color: #827a77;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-
-
-/* ---------- LEADERSHIP: real people images ---------- */
-.about-page .about-leader-photo {
-  position: relative;
-  isolation: isolate;
-  background: #f2ece9;
-}
-
-.about-page .about-leader-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent 55%, rgba(25,10,12,.16) 100%);
-}
-
-.about-page .about-leader-photo img {
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center top;
-  transform: scale(1.01);
-  transition: transform .55s cubic-bezier(.2,.7,.2,1), filter .4s ease;
-}
-
-.about-page .about-leader-card:hover .about-leader-photo img {
-  transform: scale(1.07);
-  filter: saturate(1.06) contrast(1.02);
-}
-
-.about-page .about-leader-photo.g1,
-.about-page .about-leader-photo.g2,
-.about-page .about-leader-photo.g3,
-.about-page .about-leader-photo.g4 {
-  background: #eee7e2;
-}
-
-@media (max-width:700px) {
-  .about-page .about-leader-photo img {
-    object-position: center 20%;
-  }
-}
-
-/* ---------- STATS: single premium strip ---------- */
-.about-page .about-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  background: #fff;
-  border: 1px solid var(--about-line);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 18px 50px rgba(30,20,20,.06);
-}
-
-.about-page .about-stat {
-  min-width: 0;
-  padding: 34px 22px;
-  text-align: center;
-  border-right: 1px solid var(--about-line);
-}
-
-.about-page .about-stat:last-child {
-  border-right: 0;
-}
-
-.about-page .about-stat .num {
-  font: 600 clamp(30px, 4vw, 50px)/1 Fraunces, serif;
-  color: var(--about-red);
-}
-
-.about-page .about-stat .lbl {
-  margin-top: 9px;
-  color: #77706d;
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-/* ---------- TECHNOLOGY: split editorial section ---------- */
-.about-page .about-tech-band {
-  display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-  align-items: center;
-  gap: clamp(38px, 7vw, 90px);
-}
-
-.about-page .about-tech-band > * {
-  min-width: 0;
-}
-
-.about-page .about-showcase {
-  min-height: 410px;
-  border-radius: 28px;
-  overflow: hidden;
-  background: #171313;
-  box-shadow: 0 28px 70px rgba(30,15,15,.17);
-}
-
-.about-page .about-showcase img {
-  width: 100%;
-  height: 100%;
-  min-height: 410px;
-  display: block;
-  object-fit: cover;
-}
-
-/* ---------- CTA ---------- */
-.about-page .cta-box {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.about-page .cta-box .cta-glow {
-  pointer-events: none;
-}
-
-/* ---------- visibility: content never depends on AOS ---------- */
-.about-page [data-aos],
-.about-page .about-reveal {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-}
-
-/* JS-controlled reveal starts only after JS adds the page class. */
-.about-page.js-about-reveal .about-reveal:not(.about-visible) {
-  opacity: 0 !important;
-  transform: translate3d(0, 28px, 0) !important;
-  transition: opacity .7s cubic-bezier(.2,.7,.2,1),
-              transform .7s cubic-bezier(.2,.7,.2,1);
-}
-
-.about-page.js-about-reveal .about-reveal.about-visible {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-@media (max-width: 980px) {
-  .about-page .about-story-grid,
-  .about-page .about-tech-band {
-    grid-template-columns: 1fr;
-  }
-
-  .about-page .about-purpose-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-page .about-values-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-page .about-value-card:nth-child(2) {
-    border-right: 0;
-  }
-
-  .about-page .about-value-card:nth-child(-n+2) {
-    border-bottom: 1px solid var(--about-line);
-  }
-
-  .about-page .about-leadership-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-page .about-stats-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-page .about-stat:nth-child(2) {
-    border-right: 0;
-  }
-
-  .about-page .about-stat:nth-child(-n+2) {
-    border-bottom: 1px solid var(--about-line);
-  }
-
-  .about-page .about-showcase,
-  .about-page .about-showcase img {
-    min-height: 360px;
-  }
-}
-
-@media (max-width: 700px) {
-  .about-page {
-    overflow-x: hidden;
-  }
-
-  .about-page .about-story-grid {
-    gap: 36px;
-  }
-
-  .about-page .about-story-media .main-img,
-  .about-page .about-story-media .main-img img {
-    min-height: 310px;
-  }
-
-  .about-page .about-story-float {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: calc(100% - 24px);
-    margin: -20px auto 0;
-  }
-
-  .about-page .about-purpose-grid,
-  .about-page .about-values-grid,
-  .about-page .about-leadership-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-page .about-purpose-card {
-    min-height: 0;
-  }
-
-  .about-page .about-values-grid {
-    border-bottom: 0;
-  }
-
-  .about-page .about-value-card,
-  .about-page .about-value-card:nth-child(2) {
-    border-right: 0;
-    border-bottom: 1px solid var(--about-line);
-  }
-
-  .about-page .about-value-card:last-child {
-    border-bottom: 0;
-  }
-
-  .about-page .about-value-card .v-num {
-    margin-bottom: 25px;
-  }
-
-  .about-page .about-leader-card {
-    display: grid;
-    grid-template-columns: 82px minmax(0,1fr);
-    column-gap: 15px;
-    align-items: center;
-  }
-
-  .about-page .about-leader-photo {
-    grid-row: span 2;
-    width: 82px;
-    height: 82px;
-    aspect-ratio: auto;
-    margin: 0;
-  }
-
-  .about-page .about-leader-card b {
-    align-self: end;
-  }
-
-  .about-page .about-leader-card > span:not(.lp-init) {
-    align-self: start;
-  }
-
-  .about-page .about-stats-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-page .about-stat {
-    padding: 25px 12px;
-  }
-
-  .about-page .about-showcase,
-  .about-page .about-showcase img {
-    min-height: 280px;
-  }
-}
-
-@media (max-width: 430px) {
-  .about-page .about-stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-page .about-stat,
-  .about-page .about-stat:nth-child(2) {
-    border-right: 0;
-    border-bottom: 1px solid var(--about-line);
-  }
-
-  .about-page .about-stat:last-child {
-    border-bottom: 0;
-  }
-
-  .about-page .about-leader-card {
-    grid-template-columns: 68px minmax(0,1fr);
-  }
-
-  .about-page .about-leader-photo {
-    width: 68px;
-    height: 68px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-page .about-reveal,
-  .about-page .about-reveal.about-visible,
-  .about-page .about-value-card,
-  .about-page .about-leader-card {
-    transition: none !important;
-    transform: none !important;
-  }
-}
-</style>
-
-
-
-<style id="stackly-mobile-menu-final-fix">
-/* =========================================================
-   STACKLY — ISOLATED MOBILE MENU
-   Deliberately uses unique class names so navigation.js or
-   other global hamburger styles cannot interfere with it.
-   ========================================================= */
-@media (max-width: 767px){
-  html,body{overflow-x:hidden}
-  body.stk-menu-open{overflow:hidden !important;touch-action:none}
-
-  .site-header{z-index:10020 !important}
-
-  .stk-mobile-trigger{
-    position:relative !important;display:flex !important;align-items:center !important;justify-content:center !important;
-    width:44px !important;height:44px !important;min-width:44px !important;flex:0 0 44px !important;
-    padding:0 !important;margin:0 !important;border:0 !important;border-radius:12px !important;
-    background:rgba(255,255,255,.94) !important;color:#8d1228 !important;
-    box-shadow:0 8px 22px rgba(44,24,18,.10) !important;cursor:pointer !important;
-    z-index:10040 !important;
-  }
-  .stk-mobile-trigger span{
-    position:absolute !important;left:12px !important;width:20px !important;height:2px !important;
-    border-radius:10px !important;background:#8d1228 !important;
-    transition:transform .28s ease,opacity .2s ease,top .28s ease !important;
-  }
-  .stk-mobile-trigger span:nth-child(1){top:14px !important}
-  .stk-mobile-trigger span:nth-child(2){top:21px !important}
-  .stk-mobile-trigger span:nth-child(3){top:28px !important}
-  .stk-mobile-trigger.is-open span:nth-child(1){top:21px !important;transform:rotate(45deg) !important}
-  .stk-mobile-trigger.is-open span:nth-child(2){opacity:0 !important}
-  .stk-mobile-trigger.is-open span:nth-child(3){top:21px !important;transform:rotate(-45deg) !important}
-
-  .stk-mobile-overlay{
-    position:fixed !important;inset:0 !important;z-index:10005 !important;
-    background:rgba(31,18,15,.28) !important;
-    backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;
-    opacity:0 !important;visibility:hidden !important;pointer-events:none !important;
-    transition:opacity .28s ease,visibility 0s linear .42s !important;
-  }
-  body.stk-menu-open .stk-mobile-overlay{
-    opacity:1 !important;visibility:visible !important;pointer-events:auto !important;
-    transition:opacity .28s ease,visibility 0s linear 0s !important;
-  }
-
-  .stk-mobile-panel{
-    position:fixed !important;
-    top:28px !important;right:20px !important;bottom:18px !important;left:30px !important;
-    width:auto !important;height:auto !important;max-height:none !important;
-    margin:0 !important;padding:14px 18px 16px !important;box-sizing:border-box !important;
-    display:flex !important;flex-direction:column !important;overflow:hidden !important;
-    z-index:10030 !important;
-    background:
-      radial-gradient(circle at 85% 7%,rgba(200,160,74,.13),transparent 25%),
-      linear-gradient(145deg,#fffdf9 0%,#f7f1e9 58%,#f2ece6 100%) !important;
-    border:1px solid rgba(116,16,32,.12) !important;border-radius:4px !important;
-    box-shadow:0 24px 70px rgba(44,24,18,.22) !important;
-    transform:translate3d(0,110%,0) !important;
-    opacity:0 !important;visibility:hidden !important;pointer-events:none !important;
-    transition:transform .42s cubic-bezier(.22,.8,.2,1),opacity .25s ease,visibility 0s linear .42s !important;
-  }
-  body.stk-menu-open .stk-mobile-panel{
-    transform:translate3d(0,0,0) !important;opacity:1 !important;
-    visibility:visible !important;pointer-events:auto !important;
-    transition:transform .42s cubic-bezier(.22,.8,.2,1),opacity .25s ease,visibility 0s linear 0s !important;
-  }
-
-  .stk-mobile-close{
-    position:absolute !important;top:13px !important;right:15px !important;
-    width:45px !important;height:45px !important;padding:0 !important;
-    display:flex !important;align-items:center !important;justify-content:center !important;
-    border:1px solid rgba(116,16,32,.10) !important;border-radius:14px !important;
-    background:rgba(255,255,255,.86) !important;color:#a71930 !important;
-    box-shadow:0 7px 20px rgba(44,24,18,.10) !important;cursor:pointer !important;
-    z-index:3 !important;
-  }
-  .stk-mobile-close span{
-    position:absolute !important;width:19px !important;height:2px !important;
-    border-radius:10px !important;background:#a71930 !important;
-  }
-  .stk-mobile-close span:first-child{transform:rotate(45deg) !important}
-  .stk-mobile-close span:last-child{transform:rotate(-45deg) !important}
-
-  .stk-mobile-panel .mm-brand{
-    display:flex !important;align-items:center !important;gap:9px !important;
-    flex:0 0 auto !important;width:max-content !important;
-    margin:2px 0 25px !important;padding:0 !important;
-    color:#741020 !important;text-decoration:none !important;
-  }
-  .stk-mobile-panel .mm-brand .mark{width:38px !important;height:38px !important;flex:0 0 38px !important}
-  .stk-mobile-panel .mm-brand .wordmark{
-    font-family:Fraunces,serif !important;font-size:23px !important;font-weight:600 !important;
-    letter-spacing:-.03em !important;color:#741020 !important;
-  }
-
-  .stk-mobile-panel nav{
-    display:flex !important;flex:1 1 auto !important;flex-direction:column !important;
-    justify-content:center !important;gap:5px !important;min-height:0 !important;
-    margin:0 !important;padding:0 !important;
-  }
-  .stk-mobile-panel nav a{
-    position:relative !important;display:flex !important;align-items:center !important;justify-content:space-between !important;
-    width:100% !important;min-height:52px !important;padding:12px 13px !important;box-sizing:border-box !important;
-    border:1px solid transparent !important;border-radius:12px !important;
-    color:#2a211e !important;background:transparent !important;
-    font-family:Inter,sans-serif !important;font-size:16px !important;font-weight:600 !important;
-    letter-spacing:-.01em !important;text-decoration:none !important;
-    transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease !important;
-  }
-  .stk-mobile-panel nav a::after{
-    content:"→" !important;color:#a71930 !important;font-size:18px !important;font-weight:500 !important;
-    opacity:.72 !important;transition:transform .2s ease !important;
-  }
-  .stk-mobile-panel nav a:active,.stk-mobile-panel nav a:focus-visible{
-    color:#8d1228 !important;background:rgba(167,25,48,.07) !important;
-    border-color:rgba(167,25,48,.10) !important;outline:none !important;
-  }
-  .stk-mobile-panel nav a.active{
-    color:#a71930 !important;font-weight:700 !important;
-    background:rgba(167,25,48,.08) !important;border-color:rgba(167,25,48,.12) !important;
-  }
-  .stk-mobile-panel nav a.active::before{
-    content:"" !important;position:absolute !important;left:0 !important;top:50% !important;
-    width:4px !important;height:24px !important;border-radius:10px !important;
-    transform:translateY(-50%) !important;background:linear-gradient(180deg,#a71930,#c8a04a) !important;
-  }
-
-  .stk-mobile-panel .mm-actions{
-    display:grid !important;grid-template-columns:1fr 1fr !important;gap:10px !important;
-    flex:0 0 auto !important;margin:18px 0 0 !important;padding:16px 0 0 !important;
-    border-top:1px solid rgba(116,16,32,.10) !important;
-  }
-  .stk-mobile-panel .mm-actions .btn{
-    width:100% !important;min-height:48px !important;padding:11px 10px !important;
-    justify-content:center !important;border-radius:12px !important;font-size:13px !important;
-  }
-  .stk-mobile-panel .mm-actions .btn-primary{
-    background:#a71930 !important;color:#fff !important;border-color:#a71930 !important;
-  }
-  .stk-mobile-panel .mm-actions .btn-outline{
-    background:rgba(255,255,255,.65) !important;border-color:rgba(116,16,32,.20) !important;color:#741020 !important;
-  }
-  .stk-mobile-panel .mm-foot{
-    flex:0 0 auto !important;margin-top:14px !important;text-align:center !important;
-    color:rgba(42,33,30,.48) !important;font:500 10px/1.4 Inter,sans-serif !important;
-    letter-spacing:.04em !important;
-  }
-  body.stk-menu-open > main,body.stk-menu-open > footer,body.stk-menu-open > .to-top{
-    pointer-events:none !important;
-  }
-}
-
-@media (max-width:390px){
-  .stk-mobile-panel{top:10px !important;right:9px !important;bottom:10px !important;left:9px !important;padding:18px 15px 16px !important;border-radius:4px !important}
-  .stk-mobile-close{top:12px !important;right:12px !important;width:43px !important;height:43px !important}
-  .stk-mobile-panel .mm-brand{margin-bottom:16px !important}
-  .stk-mobile-panel .mm-brand .mark{width:34px !important;height:34px !important;flex-basis:34px !important}
-  .stk-mobile-panel .mm-brand .wordmark{font-size:21px !important}
-  .stk-mobile-panel nav a{min-height:47px !important;padding:10px 11px !important;font-size:15px !important}
-  .stk-mobile-panel .mm-actions{margin-top:12px !important;padding-top:12px !important}
-  .stk-mobile-panel .mm-actions .btn{min-height:45px !important;font-size:12px !important}
-  .stk-mobile-panel .mm-foot{margin-top:10px !important;font-size:9px !important}
-}
-
-@media (min-width:768px){
-  .stk-mobile-trigger,.stk-mobile-panel,.stk-mobile-overlay{display:none !important}
-}
-</style>
-
-
-<style id="stackly-global-webp-logo">
-  /* Same WebP logo everywhere: preloader, desktop header, mobile menu and footer */
-  .stackly-logo-webp{
-    display:block !important;
-    width:38px !important;
-    height:38px !important;
-    flex:0 0 38px !important;
-    object-fit:contain !important;
-    object-position:center !important;
-    filter:
-      brightness(0)
-      saturate(100%)
-      invert(17%)
-      sepia(78%)
-      saturate(2544%)
-      hue-rotate(340deg)
-      brightness(83%)
-      contrast(99%);
-  }
-  .pl-logo .stackly-logo-webp{
-    width:34px !important;
-    height:34px !important;
-    flex-basis:34px !important;
-  }
-  .brand .stackly-logo-webp,
-  .mm-brand .stackly-logo-webp{
-    width:38px !important;
-    height:38px !important;
-    flex-basis:38px !important;
-  }
-  @media (max-width:390px){
-    .mm-brand .stackly-logo-webp{
-      width:34px !important;
-      height:34px !important;
-      flex-basis:34px !important;
-    }
-  }
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Stackly Volunteer Organization</title>
+  <meta name="description" content="The story, mission, values, and people behind Stackly — a volunteer organization building stronger communities across India.">
+  <meta property="og:title" content="About Us | Stackly Volunteer Organization">
+  <meta property="og:description" content="The story, mission, values, and people behind Stackly — a volunteer organization building stronger communities across India.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/svg/stackly-symbol-lime.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
-<body class="about-page">
-<a class="skip-link" href="#main">Skip to content</a>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 11-13h-7l0-7z"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 15.2c2.8.3 4.9 1.7 5.5 4.8"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9A6 6 0 0 0 6.2 8.6 5 5 0 0 0 7 19h10.5z"/></symbol><symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5m6-5v5M6 7h12v4a6 6 0 0 1-12 0V7z"/><path d="M12 17v5"/></symbol><symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="2"/><rect x="17.5" y="13" width="4" height="6" rx="2"/><path d="M20 19a3 3 0 0 1-3 3h-3"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2L2 8l10 6 10-6-10-6z"/><path d="M2 14l10 6 10-6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z"/><path d="M14 2v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87 1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></symbol><symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.5 12.5 0 0 1 21.5 2.5c0 2.7-.8 7.5-5.6 10.5a22 22 0 0 1-3.9 2z"/><path d="M9 12H4s.6-3.3 2-4.5c1.6-1.5 4 0 4 0M15 12v5s3.3-.6 4.5-2c1.5-1.6 0-4 0-4"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 7h13v10H1zM14 10h4l3 3v4h-7V10z"/><circle cx="5.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol><symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8L12 2z" fill="currentColor" stroke="none"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M22 7l-10 7L2 7"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.7 2.05z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2.5"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol><symbol id="i-cart2" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.7a2 2 0 0 0 2-1.6L21 7H6"/></symbol><symbol id="i-dollar" viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 2 2.7 5 3.5 5 1.5 5 3.5-2.2 3-5 3-5-1-5-3"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 1 0-4h14v4"/><path d="M4 7v12a2 2 0 0 0 2 2h14V7"/><circle cx="16.5" cy="14" r="1.3" fill="currentColor" stroke="none"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M8 2v4M16 2v4M3 9h18"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></symbol></svg>
-<div class="preloader" aria-hidden="true">
-  <div class="pl-ring">
-    <svg viewBox="0 0 100 100">
-      <defs><linearGradient id="plGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#A71930"/><stop offset="1" stop-color="#C8A04A"/></linearGradient></defs>
-      <circle class="ring-track" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
-      <circle class="ring-fill" cx="50" cy="50" r="46" fill="none" stroke-width="2.5"/>
-    </svg>
-    <div class="pl-logo"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"></div>
+<body>
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pre-inner">
+      <div class="pre-logo"><img src="assets/img/impact/logo.webp" alt="Stackly logo"></div>
+      <div class="pre-word"><strong>Stackly</strong><small>Volunteer Organization</small></div>
+      <div class="pre-bar"><i></i></div>
+      <div class="pre-count">0%</div>
+    </div>
   </div>
-  <div class="pl-bar"><span></span></div>
-  <div class="pl-num">00</div>
-</div>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
-    <nav aria-label="Primary">
-      <ul class="main-nav">
-        <li><a href="index.html" class="nav-home">Home</a></li>
+  <!-- Page transition -->
+  <div class="page-transition" aria-hidden="true"><img src="assets/img/impact/logo.webp" alt="Stackly logo">
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-bar">
+      <a class="brand" href="index.html" aria-label="Stackly — home">
+        <span class="brand-mark"><img src="assets/img/impact/logo.webp" alt="Stackly logo"></span>
+        <span class="brand-text">
+          <span class="brand-name"><img src="assets/img/impact/logo STAC.webp" alt="Stackly"></span>
+          <span class="brand-tag">Volunteer Organization</span>
+        </span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-main">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="has-dropdown">
+            <a class="nav-link" href="service.html" aria-haspopup="true" aria-expanded="false">Programs
+              <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="service.html#community"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.2.2 3.9 1.6 4.4 4"/></svg>Community Development</a></li>
+              <li><a href="service.html#environment"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 9 12 4 20 4c0 9-5 15-14 15"/><path d="M5 19c2-5 5.5-8.5 10-10.5"/></svg>Environmental Care</a></li>
+              <li><a href="service.html#education"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L2.5 8.5 12 13l9.5-4.5L12 4z"/><path d="M6.5 10.5V15c0 1.7 2.5 3 5.5 3s5.5-1.3 5.5-3v-4.5"/><path d="M21.5 8.5V13"/></svg>Education</a></li>
+              <li><a href="service.html#healthcare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>Healthcare</a></li>
+              <li><a href="service.html#food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v7c0 1.5 1 2.5 2.5 2.5S10 11.5 10 10V3"/><path d="M7.5 3v18"/><path d="M17 3c-1.8 1.5-2.8 4-2.8 6.8 0 1.8 1 2.7 2.8 2.7V21"/></svg>Food Support</a></li>
+            </ul>
+          </li>
+          <li class="has-dropdown">
+  <a class="nav-link" href="involved.html" aria-haspopup="true" aria-expanded="false">
+    Get Involved
+    <svg class="caret"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2.4"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </a>
+
+  <ul class="dropdown-menu">
+
+    <!-- Volunteer -->
+    <li>
+      <a href="involved.html#volunteer">
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <path d="M12 20s-7.5-4.6-9.5-8.9C1 8 3 5 6.3 5c2.1 0 3.7 1.1 4.5 2.7.8-1.6 2.4-2.7 4.5-2.7C18.6 5 21 8 20.6 11.1 19.5 15.4 12 20 12 20z"/>
+        </svg>
+        Volunteer
+      </a>
+    </li>
+
+    <!-- Donate -->
+    <li>
+      <a href="involved.html#donate">
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <path d="M12 20s-6.5-4-8.5-7.9C2.2 9 4 6.3 6.8 6.3c1.9 0 3.3 1 4 2.4.7-1.4 2.1-2.4 4-2.4 2.8 0 4.6 2.7 3.3 5.8"/>
+          <path d="M12 20l7-3.5c.8-.4 1.2-1.3.8-2.1-.4-.9-1.5-1.2-2.4-.8L14 15"/>
+        </svg>
+        Donate
+      </a>
+    </li>
+
+    <!-- Partner -->
+    <li>
+      <a href="involved.html#partner">
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <circle cx="12" cy="12" r="8.5"/>
+          <path d="M3.5 12h17"/>
+          <path d="M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5s1.3-6.2 3.8-8.5z"/>
+        </svg>
+        Partner With Us
+      </a>
+    </li>
+
+    <!-- Events -->
+    <li>
+      <a href="involved.html#events">
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <rect x="3.5" y="5" width="17" height="16" rx="3"/>
+          <path d="M3.5 10h17"/>
+          <path d="M8 3v4"/>
+          <path d="M16 3v4"/>
+        </svg>
+        Events
+      </a>
+    </li>
+
+  </ul>
+</li>
+          </li>
+          <li><a class="nav-link" href="blog.html">Stories</a></li>
+          <li><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-right">
+        <a class="header-call" href="tel:+919845012345">
+          <span class="call-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l1.5 4.5L8 10c1 2.5 3 4.5 5.5 5.5l1.5-2.5L19.5 14v4c0 1-1 2-2 1.8C10 19 5 14 4.2 6.5 4 5.5 4.5 4 5 4z"/></svg></span>
+          <span class="call-txt"><small>Call Us</small><strong>+91 98450 12345</strong></span>
+        </a>
+        <a class="btn btn-lime btn-sm" href="login.html" data-cursor="go">Become a Volunteer
+          <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <nav>
+      <ul>
+        <li><a class="m-link" href="index.html">Home <span class="m-num">01</span></a></li>
+        <li><a class="m-link" href="about.html">About Us <span class="m-num">02</span></a></li>
         <li>
-          <a href="product.html">Products <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+          <a class="m-link" href="service.html">Programs <span class="m-num">03</span></a>
+          <div class="m-sub">
+            <a href="service.html#community">Community</a>
+            <a href="service.html#environment">Environment</a>
+            <a href="service.html#education">Education</a>
+            <a href="service.html#healthcare">Healthcare</a>
+            <a href="service.html#food">Food Support</a>
+          </div>
         </li>
         <li>
-          <a href="services.html">Solutions <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
+          <a class="m-link" href="involved.html">Get Involved <span class="m-num">04</span></a>
+          <div class="m-sub">
+            <a href="involved.html#volunteer">Volunteer</a>
+            <a href="involved.html#donate">Donate</a>
+            <a href="involved.html#partner">Partner</a>
+            <a href="involved.html#events">Events</a>
+          </div>
         </li>
-        <li>
-          <a href="blog.html">Resources <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></a>
-        </li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact </a></li>
+        <li><a class="m-link" href="blog.html">Stories <span class="m-num">05</span></a></li>
+        <li><a class="m-link" href="contact.html">Contact <span class="m-num">06</span></a></li>
       </ul>
     </nav>
-    <div class="header-actions">
-      <button class="lang-select" aria-label="Change language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-globe"/></svg><b>EN</b><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-chevron"/></svg></button>
-      <a href="login.html" class="btn btn-primary btn-sm"><span>Request a Demo</span><svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-      <button class="stk-mobile-trigger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="m-cta">
+      <a class="btn btn-lime" href="register.html">Become a Volunteer
+        <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+      </a>
+      <a class="link-arrow light" href="login.html">Sign In
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="m-contact">
+      <span>Talk to our volunteer team</span>
+      <a href="mailto:hello@stackly.org">hello@stackly.org</a>
+      <a href="tel:+919845012345">+91 98450 12345</a>
     </div>
   </div>
-</header>
-<div class="stk-mobile-overlay" aria-hidden="true"></div>
-<div class="stk-mobile-panel" id="stkMobilePanel" aria-label="Mobile navigation" aria-hidden="true">
-  <button type="button" class="stk-mobile-close" aria-label="Close menu"><span></span><span></span></button>
-  <a href="index.html" class="brand mm-brand" aria-label="Stackly home">
-    <img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true">
-    <span class="wordmark">Stackly</span>
-  </a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="product.html">Products</a>
-    <a href="services.html">Solutions</a>
-    <a href="blog.html">Resources</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About Us</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <div class="mm-actions">
-    <a href="login.html" class="btn btn-primary"><span>Request a Demo</span><svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-    <a href="register.html" class="btn btn-outline">Sign In</a>
-  </div>
-  <div class="mm-foot">&copy; <span data-year>2025</span> Stackly Enterprise. All rights reserved.</div>
-</div>
-<div class="search-overlay role="dialog" aria-label="Search Stackly">
-  <button class="icon-btn so-close" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-plus"/></svg></button>
-  <input type="text" placeholder="Search Stackly..." aria-label="Search query">
-  <p class="so-hint">Try &ldquo;pricing&rdquo;, &ldquo;dashboard&rdquo; or &ldquo;security&rdquo;</p>
-  <div class="search-results"></div>
-</div>
 
+  <main id="main">
 
-<main id="main">
-  <section class="page-hero">
-    <div class="container" data-hero-particles="10">
-      <span class="eyebrow">About Stackly</span>
-      <h1>We Build the Systems<br>Behind <span class="accent">Ambitious Companies</span></h1>
-      <p class="lead">Founded by operators who were tired of enterprise software that gets in the way, Stackly exists to make powerful technology feel effortless.</p>
-      <div class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>About Us</span></div>
-    </div>
-  </section>
-
-  <section class="section white">
-    <div class="container">
-      <div class="about-story-grid">
-        <div class="about-story-media about-reveal">
-          <div class="main-img"><img src="assets/img/about/about-team.webp" alt="Stackly team collaborating in a modern office" loading="lazy"></div>
-          <div class="about-story-float"><span class="sf-num">2016</span><small>Founded with one belief: enterprise software should be beautiful.</small></div>
-        </div>
-        <div>
-          <span class="eyebrow">Our Story</span>
-          <h2 class="section-title">From a Spreadsheets Rebellion to a <span class="accent">Global Platform</span></h2>
-          <p class="lead" style="margin-bottom:18px">Stackly began when three operations leads at a multinational manufacturer discovered they were each maintaining the same customer data in different tools — and none of it matched.</p>
-          <p class="lead" style="margin-bottom:18px">What started as an internal dashboard became a mission: one platform where every team sees the same truth, acts on it instantly, and spends their energy on work that matters.</p>
-          <p class="lead">Today, Stackly powers 500+ businesses across 40 countries, processing over a billion workflow events a year — with the same obsession for craft we had on day one.</p>
+    <!-- Page hero -->
+    <section class="page-hero" aria-label="About Stackly">
+      <div class="page-hero-inner">
+        <div class="ph-bg"><img src="assets/img/about/about-community.webp" alt="Stackly volunteers planting a sapling together" fetchpriority="high"></div>
+        <div class="ph-content">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><i></i><span>About Us</span></nav>
+          <h1>People. Purpose.<br><em>Progress.</em></h1>
+          <p>Stackly is a volunteer organization built on one belief: stronger communities start with people who care.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="about-purpose-grid about-reveal">
-        <div class="about-purpose-card">
-          <div class="m-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-target"/></svg></div>
-          <h3>Our Mission</h3>
-          <p>To give every organization — from scrappy startup to global enterprise — the operational clarity of a world-class company, without the enterprise-software baggage.</p>
+    <!-- 01 Our Story -->
+    <section class="section" aria-labelledby="story-title">
+      <div class="container split">
+        <div class="split-copy">
+          <span class="sec-label" data-aos="fade-up">Our Story</span>
+          <h2 class="sec-title" id="story-title" data-aos="fade-up">It started with twelve people<br><em>and one muddy Sunday.</em></h2>
+          <p class="body-copy" data-aos="fade-up">In 2016, twelve neighbours in Chennai spent a Sunday cleaning a lake bund. They expected a one-off morning. Instead, they found waiting lists of people asking, "when is the next one?"</p>
+          <p class="body-copy" data-aos="fade-up">That question became Stackly. Today, more than ten thousand volunteers across forty cities run programs in community development, environment, education, healthcare, and relief — all coordinated, all measurable, all human.</p>
+          <p class="body-copy" data-aos="fade-up">We are still, at heart, that muddy Sunday: ordinary people, showing up, together.</p>
         </div>
-        <div class="about-purpose-card dark">
-          <div class="m-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-eye"/></svg></div>
-          <h3>Our Vision</h3>
-          <p>A world where technology disappears into the background — where leaders decide in seconds, teams move in harmony, and software feels less like a tool and more like a colleague.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section white">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow center">Core Values</span>
-        <h2 class="section-title">What We <span class="accent">Stand For</span></h2>
-      </div>
-      <div class="about-values-grid about-reveal" data-stagger>
-        <div class="about-value-card"><span class="v-num">01</span><h4>Craft Over Shortcut</h4><p>Every pixel and every query earns its place. We ship fewer things, done properly.</p></div>
-        <div class="about-value-card"><span class="v-num">02</span><h4>Truth in Data</h4><p>One source of truth, honestly presented. No vanity metrics, no dark patterns.</p></div>
-        <div class="about-value-card"><span class="v-num">03</span><h4>Customer Gravity</h4><p>Product decisions start in customer interviews, not conference rooms.</p></div>
-        <div class="about-value-card"><span class="v-num">04</span><h4>Calm Ambition</h4><p>We move fast without breaking trust — in our systems or in our word.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow center">Leadership</span>
-        <h2 class="section-title">The People Behind <span class="accent">the Platform</span></h2>
-      </div>
-      <div class="about-leadership-grid about-reveal" data-stagger>
-        <div class="about-leader-card">
-  <div class="about-leader-photo g1"><img src="assets/img/ppl4.webp" alt="Elena Vasquez, Co-Founder and CEO" loading="lazy"></div><b>Elena Vasquez</b><span>Co-Founder & CEO</span></div>
-        <div class="about-leader-card">
-  <div class="about-leader-photo g2"><img src="assets/img/ppl5.webp" alt="Marcus Keller, Co-Founder and CTO" loading="lazy"></div><b>Marcus Keller</b><span>Co-Founder & CTO</span></div>
-        <div class="about-leader-card">
-  <div class="about-leader-photo g3"><img src="assets/img/ppl6.webp" alt="Priya Nair, Chief Product Officer" loading="lazy"></div><b>Priya Nair</b><span>Chief Product Officer</span></div>
-        <div class="about-leader-card">
-  <div class="about-leader-photo g4"><img src="assets/img/ppl7.webp" alt="James Tanaka, Chief Revenue Officer" loading="lazy"></div><b>James Tanaka</b><span>Chief Revenue Officer</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section warm tight">
-    <div class="container">
-      <div class="about-stats-grid about-reveal" style="background:#fff">
-        <div class="about-stat"><div class="num"><span data-count="500">0</span><span class="suffix">+</span></div><div class="lbl">Businesses Worldwide</div></div>
-        <div class="about-stat"><div class="num"><span data-count="40">0</span></div><div class="lbl">Countries Served</div></div>
-        <div class="about-stat"><div class="num"><span data-count="1">0</span><span class="suffix">B+</span></div><div class="lbl">Workflow Events / Year</div></div>
-        <div class="about-stat"><div class="num"><span data-count="320">0</span><span class="suffix">+</span></div><div class="lbl">Stackly Employees</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section white">
-    <div class="container">
-      <div class="about-tech-band about-reveal">
-        <div>
-          <span class="eyebrow">Our Technology</span>
-          <h2 class="section-title">Engineered for the <span class="accent">Next Decade</span></h2>
-          <p class="lead">A cloud-native, API-first architecture with AI woven through every module — designed to scale gracefully from fifty users to fifty thousand.</p>
-          <div class="tech-list">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Multi-region failover</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Real-time event streaming</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>AI-assisted workflows</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Open REST API</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Zero-downtime deploys</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg>Edge caching network</span>
+        <div class="split-media" data-aos="fade-left">
+          <div class="img-reveal mask-reveal">
+            <img src="assets/img/remote/photo-1521737604893-d14cc237f11d.webp" alt="Stackly volunteer team joining hands" loading="lazy">
+          </div>
+          <div class="float-card float-soft">
+            <span class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.2.2 3.9 1.6 4.4 4"/></svg></span>
+            <div><strong>10,000+ volunteers</strong><small>and every one started with a single day</small></div>
           </div>
         </div>
-        <div class="about-showcase"><img src="assets/img/about/about-innovation.webp" alt="Bright modern architectural space reflecting Stackly's design philosophy" loading="lazy"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section cta-section">
+    <!-- 02 Mission / 03 Vision -->
+    <section class="section" id="mission" style="padding-top:20px" aria-label="Mission and vision">
+      <div class="container mv-grid" data-reveal-group>
+        <div class="mv-card dark">
+          <span class="mv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>
+          <h3>Our Mission</h3>
+          <p>To connect willing people with meaningful work — making volunteering simple, structured, and deeply human, so that every hour given turns into visible change.</p>
+        </div>
+        <div class="mv-card lime">
+          <span class="mv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <h3>Our Vision</h3>
+          <p>Communities where nobody waits for help to arrive — because neighbours, students, and professionals already stand ready to give their time and skills.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Values -->
+    <section class="section" style="padding-top:20px" aria-labelledby="values-title">
+      <div class="container">
+        <div class="sec-head center">
+          <span class="sec-label" data-aos="fade-up">Our Values</span>
+          <h2 class="sec-title" id="values-title" data-aos="fade-up">What we stand for,<br><em>every single day.</em></h2>
+        </div>
+        <div class="values-grid" data-reveal-group>
+          <div class="value-card"><span class="v-num">01</span><h3>People First</h3><p>Communities lead; we listen. Every program starts from a real, stated need.</p></div>
+          <div class="value-card"><span class="v-num">02</span><h3>Show Up</h3><p>Consistency beats intensity. Small, regular acts outlast grand gestures.</p></div>
+          <div class="value-card"><span class="v-num">03</span><h3>Radical Transparency</h3><p>Hours, funds, and outcomes are tracked and shared — trust is earned in the open.</p></div>
+          <div class="value-card"><span class="v-num">04</span><h3>Grow Together</h3><p>Volunteers gain skills and confidence while communities gain support. Everyone rises.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Community -->
+    <section class="section-frame why section section-dark" aria-labelledby="community-title">
+      <div class="container">
+        <div class="sec-head center">
+          <span class="sec-label light" data-aos="fade-up">Our Community</span>
+          <h2 class="sec-title" id="community-title" data-aos="fade-up">Students, professionals,<br><em class="lime">retirees, neighbours.</em></h2>
+          <p class="sec-sub" data-aos="fade-up">Stackly volunteers come from everywhere. What they share is the decision to show up.</p>
+        </div>
+        <div class="why-grid" data-reveal-group>
+          <div class="glass-card"><div class="gc-top"><span class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8.5" cy="8" r="3.2"/><path d="M3 19.5c.7-3.3 2.9-5 5.5-5s4.8 1.7 5.5 5"/><circle cx="16.5" cy="9" r="2.6"/><path d="M15.2 14.7c2.3.2 4 1.7 4.6 4.3"/></svg></span><span class="gc-num">38%</span></div><h3>Students</h3><p>College volunteers bring energy, ideas, and weekend hours to events and mentorship.</p></div>
+          <div class="glass-card"><div class="gc-top"><span class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="7" width="16" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/></svg></span><span class="gc-num">41%</span></div><h3>Professionals</h3><p>Working people contribute skills — teaching, design, logistics, first aid, and more.</p></div>
+          <div class="glass-card"><div class="gc-top"><span class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7.5-4.6-9.5-8.9C1 8 3 5 6.3 5c2.1 0 3.7 1.1 4.5 2.7.8-1.6 2.4-2.7 4.5-2.7C18.6 5 21 8 20.6 11.1 19.5 15.4 12 20 12 20z"/></svg></span><span class="gc-num">14%</span></div><h3>Families</h3><p>Parents and children join family-friendly drives, growing the habit of giving early.</p></div>
+          <div class="glass-card"><div class="gc-top"><span class="gc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4l1.7 4.8L18.5 10l-4.8 1.7L12 16.5l-1.7-4.8L5.5 10l4.8-1.2L12 4z"/></svg></span><span class="gc-num">7%</span></div><h3>Seniors</h3><p>Retired mentors anchor our education programs with patience and life experience.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Impact -->
+    <section class="section-frame impact section section-dark" id="impact" aria-labelledby="about-impact-title" style="margin-top:40px">
+      <div class="container">
+        <div class="sec-head center">
+          <span class="sec-label light" data-aos="fade-up">Our Impact</span>
+          <h2 class="sec-title" id="about-impact-title" data-aos="fade-up">Change you can<br><em class="lime">count.</em></h2>
+        </div>
+        <div class="impact-grid" data-reveal-group>
+          <div class="impact-stat"><div class="impact-big"><span data-count="10">0</span><span class="suffix">K+</span></div><div class="impact-cap">Volunteers</div></div>
+          <div class="impact-stat"><div class="impact-big"><span data-count="150">0</span><span class="suffix">+</span></div><div class="impact-cap">Projects</div></div>
+          <div class="impact-stat"><div class="impact-big"><span data-count="25">0</span><span class="suffix">K+</span></div><div class="impact-cap">People Reached</div></div>
+          <div class="impact-stat"><div class="impact-big"><span data-count="40">0</span><span class="suffix">+</span></div><div class="impact-cap">Communities</div></div>
+          <div class="impact-stat"><div class="impact-big"><span data-count="500">0</span><span class="suffix">K+</span></div><div class="impact-cap">Volunteer Hours</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Team -->
+    <section class="section" id="team" aria-labelledby="team-title">
+      <div class="container">
+        <div class="sec-head center">
+          <span class="sec-label" data-aos="fade-up">Our Team</span>
+          <h2 class="sec-title" id="team-title" data-aos="fade-up">The people behind<br><em>the people.</em></h2>
+        </div>
+        <div class="team-grid" data-reveal-group>
+          <article class="team-card">
+            <div class="team-photo"><img src="assets/img/remote/photo-1573497019940-1c28c88b4f3e.webp" alt="Portrait of Meera Krishnan" loading="lazy"></div>
+            <div class="team-info"><h3>Meera Krishnan</h3><small>Founder / Director</small><p>Started Stackly with twelve neighbours and a lake. Still joins plantation drives every month.</p></div>
+          </article>
+          <article class="team-card">
+            <div class="team-photo"><img src="assets/img/remote/photo-1507003211169-0a1dd7228f2d.webp" alt="Portrait of Arjun Nair" loading="lazy"></div>
+            <div class="team-info"><h3>Arjun Nair</h3><small>Community Lead</small><p>Builds the local coordinator network that keeps forty cities moving in step.</p></div>
+          </article>
+          <article class="team-card">
+            <div class="team-photo"><img src="assets/img/remote/photo-1438761681033-6461ffad8d80.webp" alt="Portrait of Sofia D'Souza" loading="lazy"></div>
+            <div class="team-info"><h3>Sofia D&rsquo;Souza</h3><small>Volunteer Coordinator</small><p>Matches every new volunteer to the right team — usually within seventy-two hours.</p></div>
+          </article>
+          <article class="team-card">
+            <div class="team-photo"><img src="assets/img/remote/photo-1500648767791-00dcc994a43e.webp" alt="Portrait of Kabir Rao" loading="lazy"></div>
+            <div class="team-info"><h3>Kabir Rao</h3><small>Program Manager</small><p>Designs programs that are safe, measurable, and worth a volunteer&rsquo;s Saturday.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 CTA -->
+    <section class="cta-band" aria-labelledby="about-cta-title">
+      <div class="cta-band-inner">
+        <div>
+          <h2 id="about-cta-title" data-aos="fade-up">Come see what a few<br><em>hours can do.</em></h2>
+          <p data-aos="fade-up">Join the next orientation — online or at a community near you.</p>
+        </div>
+        <div class="cta-actions" data-aos="fade-up">
+          <a class="btn btn-lime" href="register.html" data-cursor="go">Become a Volunteer <span class="btn-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
-      <div class="cta-box about-reveal">
-        <span class="cta-glow"></span>
-        <span class="eyebrow center" style="justify-content:center">Join the Mission</span>
-        <h2>Want to Build the Future<br><span class="gold-i">With Us?</span></h2>
-        <p>We're hiring across engineering, design and customer success. Or see the platform in action first.</p>
-        <div class="cta-actions">
-          <a href="contact.html" class="btn btn-gold"><span>View Open Roles</span><svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
-          <a href="dashboard.html" class="btn btn-white">Explore the Platform</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" aria-label="Stackly — home">
+            <span class="brand-mark"><img src="assets/img/impact/logo.webp" alt="Stackly logo"></span>
+            <span class="brand-text"><span class="brand-name"><img src="assets/img/impact/logo STAC.webp" alt="Stackly"></span><span class="brand-tag">Volunteer Organization</span></span>
+          </a>
+          <p>Building stronger communities through people, purpose, and meaningful action.</p>
+          <div class="footer-contact">
+            <a href="mailto:hello@stackly.org"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>hello@stackly.org</a>
+            <a href="tel:+919845012345"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l1.5 4.5L8 10c1 2.5 3 4.5 5.5 5.5l1.5-2.5L19.5 14v4c0 1-1 2-2 1.8C10 19 5 14 4.2 6.5 4 5.5 4.5 4 5 4z"/></svg>+91 98450 12345</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="service.html">Programs</a></li>
+            <li><a href="involved.html">Get Involved</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="404.html">Community Support</a></li>
+            <li><a href="404.html">Environment</a></li>
+            <li><a href="404.html">Education</a></li>
+            <li><a href="404.html">Healthcare</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="404.html">Volunteer</a></li>
+            <li><a href="404.html">Donate</a></li>
+            <li><a href="404.html">Partner With Us</a></li>
+            <li><a href="404.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="404.html">Stories</a></li>
+            <li><a href="404.html">Blog</a></li>
+            <li><a href="404.html">FAQ</a></li>
+            <li><a href="404.html">Impact Reports</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Stackly Volunteer Organization. All Rights Reserved.</span>
+        <div class="social">
+          <a href="404.html" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="404.html" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 10.5V17"/><path d="M8 7.5v.01"/><path d="M12 17v-3.8c0-1.5 1.2-2.7 2.7-2.7s2.8 1.2 2.8 2.7V17"/></svg></a>
+          <a href="404.html" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.8v4.4L14.8 12l-4.3-2.2z" fill="currentColor" stroke="none"/></svg></a>
+          <a href="404.html" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8.5V7c0-.8.5-1.3 1.3-1.3H17V3h-2.5C11.9 3 10.5 4.6 10.5 7v1.5H8V12h2.5v9H14v-9h2.6l.4-3.5H14z"/></svg></a>
+        </div>
+        <div class="legal">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms &amp; Conditions</a>
         </div>
       </div>
     </div>
-  </section>
-</main>
+  </footer>
 
-<footer class="site-footer">
-  <div class="container">
-    <a href="index.html" class="brand" aria-label="Stackly home"><img class="mark stackly-logo-webp" src="assets/img/logo.webp" alt="Stackly" aria-hidden="true"><span class="wordmark">Stackly</span></a>
-    <p class="footer-statement">Technology that moves <span class="accent">business</span> forward.</p>
-    <div class="footer-grid">
-      <div class="footer-col footer-about">
-        <h5>Stackly</h5>
-        <p>The all-in-one enterprise platform for operations, analytics and growth — trusted by 500+ businesses worldwide.</p>
-        <div class="social-row">
-          <a href="404.html" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.49 2.49 0 1 1 5 8.48a2.49 2.49 0 0 1-.02-4.98zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg></a>
-          <a href="404.html" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1 2h6.5l4.4 5.9zm-1.1 18h1.7L6.5 3.9H4.7z"/></svg></a>
-          <a href="404.html" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.8c.2.9.9 1.6 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.8.4-4.8zM9.8 15.5v-7l6 3.5z"/></svg></a>
-        </div>
-      </div>
-      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="404.html">Enterprise Suite</a></li><li><a href="404.html">Analytics Cloud</a></li><li><a href="404.html">Automation</a></li><li><a href="404.html">Integrations</a></li></ul></div>
-      <div class="footer-col"><h5>Company</h5>
-        <ul><li><a href="home.html">home</a></li><li><a href="product.html">products</a></li><li><a href="services.html">service</a></li><li><a href="pricing.html">pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">contact</a></li></ul></div>
-      <div class="footer-col"><h5>Resources</h5><ul><li><a href="404.html">Pricing</a></li><li><a href="404.html">FAQ</a></li><li><a href="404.html">Documentation</a></li><li><a href="404.html">Dashboard Demo</a></li></ul></div>
-      <div class="footer-col newsletter">
-        <h5>Stay Ahead</h5>
-        <p>Monthly insights on enterprise technology. No noise.</p>
-        <form class="newsletter-form" novalidate>
-          <input type="email" placeholder="Your work email" aria-label="Email address" required>
-          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-        </form>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; <span data-year>2025</span> Stackly Enterprise Software. All rights reserved.</p>
-      <div class="legal-links">
-        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a>
-      </div>
-    </div>
-  </div>
-</footer>
-<button class="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+  <button class="to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+  </button>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/navigation.js"></script>
-<script src="assets/js/animations.js"></script>
-<script src="assets/js/components.js"></script>
-
-<script>if(window.AOS)AOS.init({duration:900,easing:'ease-out-cubic',once:true,offset:70});</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-    link.addEventListener('click', function () {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 0);
-      }
-
-      var mobileMenu = document.querySelector('.stk-mobile-panel');
-      var hamburger = document.querySelector('.stk-mobile-trigger');
-      if (document.body.classList.contains('stk-menu-open')) {
-        document.body.classList.remove('stk-menu-open');
-      }
-      if (mobileMenu) mobileMenu.setAttribute('aria-hidden', 'true');
-      if (hamburger) {
-        hamburger.classList.remove('is-open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'Open menu');
-      }
-    });
-  });
-});
-</script>
-
-<script id="stackly-about-clean-js">
-(function () {
-  'use strict';
-
-  function initAboutPage() {
-    var page = document.body;
-    if (!page || !page.classList.contains('about-page')) return;
-
-    var items = Array.prototype.slice.call(
-      document.querySelectorAll('.about-page .about-reveal')
-    );
-
-    if (!items.length) return;
-
-    if (!('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('about-visible'); });
-      return;
-    }
-
-    page.classList.add('js-about-reveal');
-
-    var observer = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('about-visible');
-        obs.unobserve(entry.target);
-      });
-    }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -7% 0px'
-    });
-
-    items.forEach(function (el) { observer.observe(el); });
-
-    // Safety fallback: never leave a section invisible because an observer
-    // was interrupted by a browser/layout change.
-    setTimeout(function () {
-      items.forEach(function (el) {
-        el.classList.add('about-visible');
-      });
-    }, 2200);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAboutPage);
-  } else {
-    initAboutPage();
-  }
-})();
-</script>
-
-
-
-<script id="stackly-isolated-mobile-menu">
-(function () {
-  'use strict';
-
-  function initStacklyMobileMenu() {
-    var trigger = document.querySelector('.stk-mobile-trigger');
-    var panel = document.querySelector('.stk-mobile-panel');
-    var overlay = document.querySelector('.stk-mobile-overlay');
-    var closeButton = document.querySelector('.stk-mobile-close');
-    if (!trigger || !panel || !overlay) return;
-
-    function setActiveNav() {
-      var current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-      panel.querySelectorAll('nav a').forEach(function (link) {
-        var href = (link.getAttribute('href') || '').split('#')[0].split('/').pop().toLowerCase();
-        var active = href === current || (current === '' && href === 'index.html');
-        link.classList.toggle('active', active);
-        if (active) link.setAttribute('aria-current', 'page');
-        else link.removeAttribute('aria-current');
-      });
-    }
-
-    function openMenu() {
-      document.body.classList.add('stk-menu-open');
-      trigger.classList.add('is-open');
-      trigger.setAttribute('aria-expanded', 'true');
-      trigger.setAttribute('aria-label', 'Close menu');
-      panel.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeMenu() {
-      document.body.classList.remove('stk-menu-open');
-      trigger.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
-      trigger.setAttribute('aria-label', 'Open menu');
-      panel.setAttribute('aria-hidden', 'true');
-    }
-
-    function toggleMenu(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      }
-      if (document.body.classList.contains('stk-menu-open')) closeMenu();
-      else openMenu();
-    }
-
-    trigger.addEventListener('click', toggleMenu, true);
-    if (closeButton) closeButton.addEventListener('click', function (event) { toggleMenu(event); }, true);
-    overlay.addEventListener('click', function (event) {
-      event.preventDefault();
-      closeMenu();
-    });
-
-    panel.querySelectorAll('nav a, .mm-actions a, .mm-brand').forEach(function (link) {
-      link.addEventListener('click', function () {
-        closeMenu();
-      });
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && document.body.classList.contains('stk-menu-open')) {
-        closeMenu();
-      }
-    });
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth >= 768) closeMenu();
-    });
-
-    setActiveNav();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStacklyMobileMenu);
-  } else {
-    initStacklyMobileMenu();
-  }
-})();
-</script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="assets/js/navigation.js" defer></script>
+  <script src="assets/js/animations.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  
+</body>
+</html>
 </body>
 </html>

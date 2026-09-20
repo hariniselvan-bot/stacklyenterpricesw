@@ -1,67 +1,50 @@
-# STACKLY — Enterprise Software Website
+# Stackly — Volunteer Organization
 
-A complete, premium enterprise SaaS marketing site + product dashboards, built with
-**pure HTML5 + CSS3 + Vanilla JavaScript**. No frameworks. Animations via GSAP,
-ScrollTrigger and AOS (CDN only).
+A premium, fully responsive website for **Stackly Volunteer Organization** —
+"Stronger Communities, Brighter Tomorrows."
 
-## Quick Start
-
-Open `index.html` in a browser, or serve the folder:
-
-```bash
-npx serve .            # or
-python3 -m http.server 8000
-```
+Built with **HTML5 + CSS3 + pure Vanilla JavaScript**, enhanced with
+**GSAP / ScrollTrigger** and **AOS** (CDN). No frameworks, no build step.
 
 ## Pages
 
-| Page | Description |
+| File | Purpose |
 |---|---|
-| `index.html` | Homepage: cinematic hero, product dashboard, industries, automation flow, case study, testimonials, pricing, FAQ, CTA |
-| `about.html` | Story, mission/vision, values, leadership, stats, technology |
-| `services.html` | 9 service modules + 5-phase delivery process timeline |
-| `blog.html` | Featured article, category filters, live search, load more |
-| `pricing.html` | Monthly/annual toggle, full comparison table, FAQ |
-| `faq.html` | 6 categorized sections + live search |
-| `contact.html` | Validated contact form + animated success state |
-| `login.html` | Demo auth with User/Admin role selection |
-| `register.html` | Full validation, terms checkbox, redirect to login |
-| `dashboard.html` | Enterprise dashboard: charts, donut, tasks, activity, tables |
-| `seller-dashboard.html` | Seller view: sales, orders, inventory, profile |
-| `404.html` | Animated 404 with `history.back()` support |
+| `index.html` | Homepage — hero, partners marquee, about, programs, why, steps, causes, impact, stories slider, events, ways to support, FAQ, final CTA |
+| `about.html` | Story, mission, vision, values, community, impact, team |
+| `service.html` | All nine volunteer programs with impact stats and roles |
+| `blog.html` | Stackly Stories — search, category filters, load more |
+| `contact.html` | Contact cards + validated form with animated success state |
+| `login.html` | Split-screen sign in with User/Admin role selection |
+| `register.html` | Registration with password strength + match validation |
+| `dashboard.html` | Volunteer dashboard (hours, programs, events, certificates, messages, profile) |
+| `seller-dashboard.html` | Organization admin dashboard (volunteers, applications, donations, canvas charts) |
+| `404.html` | Animated not-found page (`Go Back` uses `window.history.back()`) |
 
-## Demo Authentication
+## Demo authentication (frontend only)
 
-Login/Register are **front-end demos only** (localStorage/sessionStorage).
-Any email + password (min 6 chars) signs you in. No real credentials are used
-or transmitted. Uncomment the redirect lines in `assets/js/dashboard.js` to
-enforce a hard auth gate.
+- Register stores the profile in `localStorage` (`stacklyUser`).
+- Login creates a session (`stacklySession`) and redirects:
+  - **User** → `dashboard.html`
+  - **Admin** → `seller-dashboard.html`
+- Dashboards read the session (name, email, role) and redirect to
+  `login.html` when signed out. **Logout** clears the session.
+- First visit with no account? Signing in with any valid email creates a
+  demo profile on the fly.
 
 ## Structure
 
 ```
-STACKLY/
-├── *.html (12 pages)
-├── assets/
-│   ├── css/   style.css · responsive.css · animations.css · dashboard.css · auth.css
-│   ├── js/    main.js · navigation.js · animations.js · auth.js · dashboard.js · components.js
-│   ├── svg/   logo, hero lines, waves, patterns, icons, illustrations
-│   └── img/   hero · about · industries · blog · dashboard · cta (optimized WebP)
-└── README.md
+assets/
+  css/  style.css · responsive.css · animations.css · auth.css · dashboard.css
+  js/   main.js · navigation.js · animations.js · slider.js · forms.js · auth.js · dashboard.js
+  img/  hero/ about/ programs/ blog/ team/ events/ impact/ dashboard/
+  svg/  stackly-logo.svg · stackly-symbol.svg · stackly-wordmark.svg · icons.svg · decorative.svg · …
 ```
-
-## Design System
-
-- Ivory `#FBFAF7` / White surfaces, charcoal `#171717` type
-- Cherry red `#A71930` accent, burgundy `#5E0B18`, gold `#C8A04A` highlights
-- Fraunces (editorial serif) + Inter (UI sans)
-- CSS variables in `:root` — change the brand in one place
 
 ## Notes
 
-- Imagery: royalty-free sourced photography, optimized to WebP.
-  Replace with licensed brand assets before production use.
-- All charts are hand-rolled SVG drawn by vanilla JS (no chart library).
-- Responsive from 320px to 4K; mobile nav, swipe-free layouts, no horizontal overflow.
-- Accessibility: semantic landmarks, ARIA labels, keyboard-operable menus,
-  visible focus states, `prefers-reduced-motion` respected.
+- Colors: forest `#102B22`, deep `#173D2F`, lime `#C9F45A`, light lime `#DFFF91`, background `#F7F8F3`.
+- Fonts: Manrope (sans) + Playfair Display italic (accent) via Google Fonts.
+- Respects `prefers-reduced-motion`; custom cursor is desktop-only.
+- Photography: key visuals generated in-house; card imagery from Unsplash CDN.
